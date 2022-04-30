@@ -19,7 +19,7 @@ class ViewController: UIViewController {
         tableView.dataSource = self
         tableView.delegate = self
         // Do any additional setup after loading the view.
-        networkingClient.makeDataRequest {
+        networkingClient.makeDataRequest(serviceName: .native) {
             DispatchQueue.main.async {
                 self.tableView.reloadData()
 
