@@ -24,39 +24,48 @@ class NetworkClient {
         
         switch serviceName {
         case .AF:
-            AF.request(requestURL, method: .get, headers: headers.toHeader()).validate().responseDecodable(of: Result.self) { (response) in
-                guard let result: Result = response.value else {
-                    print(response.debugDescription)
-                    return
-                }
-                self.processResult(result: result)
+            makeAFDataRequest(headers: headers.toHeader()) {
                 completion()
             }
+            
         case .native:
-                let request = NSMutableURLRequest(url: NSURL(string: requestURL)! as URL,
-                                                        cachePolicy: .useProtocolCachePolicy,
-                                                    timeoutInterval: 10.0)
-                request.httpMethod = "GET"
-                request.allHTTPHeaderFields = headers
-
-                let session = URLSession.shared
-                let dataTask = session.dataTask(with: request as URLRequest, completionHandler: { (data, response, error) -> Void in
-                    if (error != nil) {
-                        print(error ?? "Error while fetching data")
-                    } else {
-                        do {
-                            let result = try JSONDecoder().decode(Result.self, from: data!)
-                            self.processResult(result: result)
-                            completion()
-                        } catch {
-                            print(error)
-                        }
-                    }
-                })
-                dataTask.resume()
+            makeNativeDataRequest(headers: headers.toHeader()) {
+                completion()
+            }
         }
+    }
+    
+    func makeAFDataRequest(headers: HTTPHeaders, completion: @escaping () -> ()) {
+        AF.request(requestURL, method: .get, headers: headers).validate().responseDecodable(of: Result.self) { (response) in
+            guard let result: Result = response.value else {
+                print(response.debugDescription)
+                return
+            }
+            self.processResult(result: result)
+            completion()
+        }
+    }
+    
+    func makeNativeDataRequest(headers: HTTPHeaders, completion: @escaping () -> ()) {
+        var request = URLRequest(url: URL(string: requestURL)!)
+        request.headers = headers
+        request.httpMethod = "GET"
         
-       
+        let session = URLSession.shared
+        let dataTask = session.dataTask(with: request as URLRequest, completionHandler: { (data, response, error) -> Void in
+            if (error != nil) {
+                print(error ?? "Error while fetching data")
+            } else {
+                do {
+                    let result = try JSONDecoder().decode(Result.self, from: data!)
+                    self.processResult(result: result)
+                    completion()
+                } catch {
+                    print(error)
+                }
+            }
+        })
+        dataTask.resume()
     }
     
     func processResult(result: Result) {
@@ -72,6 +81,5 @@ class NetworkClient {
             let team = Team(name: teamName, logo: teamLogoURL)
             NetworkClient.teams.append(team)
         }
-}
-
+    }
 }
