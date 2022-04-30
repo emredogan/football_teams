@@ -36,7 +36,7 @@ extension ViewController : UITableViewDelegate, UITableViewDataSource {
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: "football_cell", for: indexPath) as! FootballCell
         let currentTeam = NetworkClient.teams[indexPath.row]
-        cell.setupCell(name: currentTeam.name, url: currentTeam.logo, imageService: .native)
+        cell.setupCell(name: currentTeam.name, url: currentTeam.logo, imageService: .AF)
         return cell
     }
 }

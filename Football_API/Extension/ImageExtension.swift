@@ -7,11 +7,13 @@
 
 import Foundation
 import UIKit
+import Kingfisher
+import Alamofire
 
 extension UIImageView {
 
     
-        func imageFromServerURL(_ URLString: String, placeHolder: UIImage?) {
+        func imageFromServerURLNative(_ URLString: String, placeHolder: UIImage?) {
 
         self.image = nil
         //If imageurl's imagename has space then this line going to work for this
@@ -40,4 +42,25 @@ extension UIImageView {
             }).resume()
         }
     }
+    
+    func imageFromServerURLAF(url: String) {
+        AF.request( url,method: .get).response{ response in
+            print("Requesting image with AF")
+            switch response.result {
+            case .success(let responseData):
+                self.image = UIImage(data: responseData!, scale:1)
+                
+            case .failure(let error):
+                print("error--->",error)
+            }
+        }
+    }
+    
+    func imageFromServerURLKF(url: String) {
+        self.kf.setImage(with: URL(string: url))
+    }
+    
+    
+    
+    
 }

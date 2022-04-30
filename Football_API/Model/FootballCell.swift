@@ -6,8 +6,7 @@
 //
 
 import UIKit
-
-
+import Alamofire
 
 class FootballCell: UITableViewCell {
     @IBOutlet weak var footballLogo: UIImageView!
@@ -19,14 +18,16 @@ class FootballCell: UITableViewCell {
         footballTeamName.text = name
         switch imageService {
         case .native:
-            footballLogo.imageFromServerURL(url, placeHolder: nil)
+            footballLogo.imageFromServerURLNative(url, placeHolder: nil)
         case .kf:
-            footballLogo.kf.setImage(with: URL(string: url))
+            footballLogo.imageFromServerURLKF(url: url)
+        case .AF:
+            footballLogo.imageFromServerURLAF(url: url)
         }
     }
     
 }
 
 enum Service {
-    case native, kf
+    case native, kf, AF
 }
