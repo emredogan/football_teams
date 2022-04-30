@@ -19,7 +19,7 @@ class ViewController: UIViewController {
         tableView.dataSource = self
         tableView.delegate = self
         // Do any additional setup after loading the view.
-        networkingClient.makeDataRequest(serviceName: .native) {
+        networkingClient.makeDataRequest(serviceName: .AF) {
             DispatchQueue.main.async {
                 self.tableView.reloadData()
 
@@ -39,7 +39,5 @@ extension ViewController : UITableViewDelegate, UITableViewDataSource {
         cell.setupCell(name: currentTeam.name, url: currentTeam.logo, imageService: .native)
         return cell
     }
-    
-    
 }
 

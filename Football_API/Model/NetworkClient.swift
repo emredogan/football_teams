@@ -29,25 +29,7 @@ class NetworkClient {
                     return
                 }
                 
-                
-                let response = result.response
-                let league = response[0].league
-                let standings = league.standings
-                let standing = standings[0]
-                
-                for teamInfo in standing {
-                    let teamName = teamInfo.team.name
-                    let teamLogoURL = teamInfo.team.logo
-                    let team = Team(name: teamName, logo: teamLogoURL)
-                    NetworkClient.teams.append(team)
-
-                }
-                
-                print("Alamofire data count")
-
-                
-                print(NetworkClient.teams.count)
-                
+                self.processResult(result: result)
                 completion()
                 
         }
@@ -72,19 +54,7 @@ class NetworkClient {
                 } else {
                     do {
                         let result = try JSONDecoder().decode(Result.self, from: data!)
-                        let response = result.response
-                        let league = response[0].league
-                        let standings = league.standings
-                        let standing = standings[0]
-                        
-                        
-                        for teamInfo in standing {
-                            let teamName = teamInfo.team.name
-                            let teamLogoURL = teamInfo.team.logo
-                            let team = Team(name: teamName, logo: teamLogoURL)
-                            NetworkClient.teams.append(team)
-
-                        }
+                        self.processResult(result: result)
                         
                         completion()
              
@@ -99,6 +69,22 @@ class NetworkClient {
 
             dataTask.resume()
             
+        }
+    }
+    
+    func processResult(result: Result) {
+        
+        let response = result.response
+        let league = response[0].league
+        let standings = league.standings
+        let standing = standings[0]
+        
+        for teamInfo in standing {
+            let teamName = teamInfo.team.name
+            let teamLogoURL = teamInfo.team.logo
+            let team = Team(name: teamName, logo: teamLogoURL)
+            NetworkClient.teams.append(team)
+
         }
     }
 }
