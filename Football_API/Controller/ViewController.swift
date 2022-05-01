@@ -12,6 +12,8 @@ import Kingfisher
 class ViewController: UIViewController {
     @IBOutlet weak var tableView: UITableView!
     let networkingClient = NetworkService()
+    
+    private var teams = [Team]()
 
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -19,24 +21,30 @@ class ViewController: UIViewController {
         tableView.dataSource = self
         tableView.delegate = self
         // Do any additional setup after loading the view.
-        networkingClient.makeDataRequest(serviceName: .native) {
-            DispatchQueue.main.async {
-                self.tableView.reloadData()
-
+        networkingClient.makeDataRequest(serviceName: .native) { result in
+            switch result {
+            case .success(let teams):
+                self.teams = teams
+                DispatchQueue.main.async {
+                    self.tableView.reloadData()
+                }
+            case .failure(let error):
+                print("ERROR - Getting data from the network client ", error)
             }
+            
         }
     }
 }
 
 extension ViewController : UITableViewDelegate, UITableViewDataSource {
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return NetworkService.teams.count
+        return teams.count
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: "football_cell", for: indexPath) as! FootballCell
-        let currentTeam = NetworkService.teams[indexPath.row]
-        cell.setupCell(name: currentTeam.name, url: currentTeam.logo, imageService: .AF)
+        let currentTeam = teams[indexPath.row]
+        cell.setupCell(name: currentTeam.name, url: currentTeam.logo, imageService: .kf)
         return cell
     }
 }

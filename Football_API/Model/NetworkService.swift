@@ -13,20 +13,20 @@ enum RequestService {
 }
 
 class NetworkService {
-    static var teams = [Team]()
     private var requestURL = "https://api-football-v1.p.rapidapi.com/v3/standings?season=2020&league=39"
     
     var keys: NSDictionary?
     
+    typealias CompletionHandlerTeams = (Result<[Team], Error>) -> Void // To make the code more readable we put an alias here.
     
-    func makeDataRequest(serviceName: RequestService, completion: @escaping () -> ()) {
+    func makeDataRequest(serviceName: RequestService, completion: @escaping CompletionHandlerTeams) {
         if let path = Bundle.main.path(forResource: "Keys", ofType: "plist") {
             keys = NSDictionary(contentsOfFile: path)
         }
         
         if let dict = keys {
-                let host = dict["X-RapidAPI-Host"] as! String
-                let key = dict["X-RapidAPI-Key"] as! String
+            let host = dict["X-RapidAPI-Host"] as! String
+            let key = dict["X-RapidAPI-Key"] as! String
             
             let headers = [
                 "X-RapidAPI-Host": host,
@@ -35,33 +35,44 @@ class NetworkService {
             
             switch serviceName {
             case .AF:
-                makeAFDataRequest(headers: headers.toHeader()) {
-                    completion()
+                makeAFDataRequest(headers: headers.toHeader()) {result in
+                    
+                    switch result {
+                    case .success(let teams):
+                        completion(.success(teams))
+                    case .failure(let error):
+                        print("ERROR - Getting data from the network client ", error)
+                    }
                 }
                 
             case .native:
-                makeNativeDataRequest(headers: headers.toHeader()) {
-                    completion()
+                makeNativeDataRequest(headers: headers.toHeader()) { result in
+                    
+                    switch result {
+                    case .success(let teams):
+                        completion(.success(teams))
+                    case .failure(let error):
+                        print("ERROR - Getting data from the network client ", error)
+                    }
                 }
             }
-            }
-        
+        }
         
         
     }
     
-    func makeAFDataRequest(headers: HTTPHeaders, completion: @escaping () -> ()) {
-        AF.request(requestURL, method: .get, headers: headers).validate().responseDecodable(of: Result.self) { (response) in
-            guard let result: Result = response.value else {
+    func makeAFDataRequest(headers: HTTPHeaders, completion: @escaping CompletionHandlerTeams) {
+        AF.request(requestURL, method: .get, headers: headers).validate().responseDecodable(of: JsonResult.self) { (response) in
+            guard let result: JsonResult = response.value else {
                 print(response.debugDescription)
                 return
             }
-            self.processResult(result: result)
-            completion()
+            let teams = self.processResult(result: result)
+            completion(.success(teams))
         }
     }
     
-    func makeNativeDataRequest(headers: HTTPHeaders, completion: @escaping () -> ()) {
+    func makeNativeDataRequest(headers: HTTPHeaders, completion: @escaping CompletionHandlerTeams) {
         var request = URLRequest(url: URL(string: requestURL)!)
         request.headers = headers
         request.httpMethod = "GET"
@@ -72,9 +83,9 @@ class NetworkService {
                 print(error ?? "Error while fetching data")
             } else {
                 do {
-                    let result = try JSONDecoder().decode(Result.self, from: data!)
-                    self.processResult(result: result)
-                    completion()
+                    let result = try JSONDecoder().decode(JsonResult.self, from: data!)
+                    let teams = self.processResult(result: result)
+                    completion(.success(teams))
                 } catch {
                     print(error)
                 }
@@ -83,7 +94,9 @@ class NetworkService {
         dataTask.resume()
     }
     
-    func processResult(result: Result) {
+    func processResult(result: JsonResult) ->[Team]  {
+        
+        var teams = [Team]()
         
         let response = result.response
         let league = response[0].league
@@ -94,7 +107,8 @@ class NetworkService {
             let teamName = teamInfo.team.name
             let teamLogoURL = teamInfo.team.logo
             let team = Team(name: teamName, logo: teamLogoURL)
-            NetworkService.teams.append(team)
+            teams.append(team)
         }
+        return teams
     }
 }

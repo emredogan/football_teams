@@ -7,7 +7,7 @@
 
 import Foundation
 
-struct Result: Decodable {
+struct JsonResult: Decodable {
     let get: String
     let results: Int
     let response: [Response]
