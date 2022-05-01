@@ -7,26 +7,26 @@
 
 import Foundation
 
-struct JsonResult: Decodable {
+struct JsonResult: Codable {
     let get: String
     let results: Int
     let response: [Response]
 }
 
-struct Response : Decodable {
+struct Response : Codable {
     let league : League
 }
 
-struct League: Decodable {
+struct League: Codable {
     let name: String
     let standings : [[Standings]]
 }
 
-struct Standings : Decodable {
+struct Standings : Codable {
     let team: Team
 }
 
-struct Team : Decodable {
+struct Team : Codable {
     let name: String
     let logo: String
 }

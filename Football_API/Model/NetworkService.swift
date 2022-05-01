@@ -12,8 +12,13 @@ enum RequestService {
     case AF, native
 }
 
+enum MyErrors: Error {
+    case networkError
+    case outOfStock
+}
+
 class NetworkService {
-    private var requestURL = "https://api-football-v1.p.rapidapi.com/v3/standings?season=2020&league=39"
+    private var requestURL = "asdadhttps://api-football-v1.p.rapidapi.com/v3/standings?season=2020&league=39asdsa"
     
     
     typealias CompletionHandlerTeams = (Result<[Team], Error>) -> Void // To make the code more readable we put an alias here.
@@ -29,7 +34,8 @@ class NetworkService {
                 case .success(let teams):
                     completion(.success(teams))
                 case .failure(let error):
-                    print("ERROR - Getting data from the network client ", error)
+                    print("ERROR - FAILED NETWORK SERVICE", error)
+                    completion(.failure(MyErrors.networkError))
                 }
             }
             
@@ -40,7 +46,7 @@ class NetworkService {
                 case .success(let teams):
                     completion(.success(teams))
                 case .failure(let error):
-                    print("ERROR - Getting data from the network client ", error)
+                    print("ERROR - FAILED NETWORK SERVICE ", error)
                 }
                 
             }
@@ -52,6 +58,7 @@ class NetworkService {
     func makeAFDataRequest(headers: HTTPHeaders, completion: @escaping CompletionHandlerTeams) {
         AF.request(requestURL, method: .get, headers: headers).validate().responseDecodable(of: JsonResult.self) { (response) in
             guard let result: JsonResult = response.value else {
+                completion(.failure(MyErrors.networkError))
                 print(response.debugDescription)
                 return
             }
