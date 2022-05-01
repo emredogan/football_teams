@@ -16,23 +16,38 @@ class NetworkClient {
     static var teams = [Team]()
     private var requestURL = "https://api-football-v1.p.rapidapi.com/v3/standings?season=2020&league=39"
     
+    var keys: NSDictionary?
+    
+    
     func makeDataRequest(serviceName: RequestService, completion: @escaping () -> ()) {
-        let headers = [
-            "X-RapidAPI-Host": "api-football-v1.p.rapidapi.com",
-            "X-RapidAPI-Key": "144d8f8935msh73e730b7fa245cfp1ea48ajsn45c6ef3f9585"
-        ]
-        
-        switch serviceName {
-        case .AF:
-            makeAFDataRequest(headers: headers.toHeader()) {
-                completion()
-            }
-            
-        case .native:
-            makeNativeDataRequest(headers: headers.toHeader()) {
-                completion()
-            }
+        if let path = Bundle.main.path(forResource: "Keys", ofType: "plist") {
+            keys = NSDictionary(contentsOfFile: path)
         }
+        
+        if let dict = keys {
+                let host = dict["X-RapidAPI-Host"] as! String
+                let key = dict["X-RapidAPI-Key"] as! String
+            
+            let headers = [
+                "X-RapidAPI-Host": host,
+                "X-RapidAPI-Key": key
+            ]
+            
+            switch serviceName {
+            case .AF:
+                makeAFDataRequest(headers: headers.toHeader()) {
+                    completion()
+                }
+                
+            case .native:
+                makeNativeDataRequest(headers: headers.toHeader()) {
+                    completion()
+                }
+            }
+            }
+        
+        
+        
     }
     
     func makeAFDataRequest(headers: HTTPHeaders, completion: @escaping () -> ()) {

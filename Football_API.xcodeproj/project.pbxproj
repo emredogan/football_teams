@@ -20,6 +20,7 @@
 		634A0A672812D4E5009BEB6D /* FootballCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 634A0A662812D4E5009BEB6D /* FootballCell.swift */; };
 		639CB086281D3A37006E7575 /* Alamofire in Frameworks */ = {isa = PBXBuildFile; productRef = 639CB085281D3A37006E7575 /* Alamofire */; };
 		639CB088281D5D0E006E7575 /* HTTPHeaderExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 639CB087281D5D0E006E7575 /* HTTPHeaderExtension.swift */; };
+		63D2F983281E876700990303 /* Keys.plist in Resources */ = {isa = PBXBuildFile; fileRef = 63D2F982281E876700990303 /* Keys.plist */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -37,6 +38,7 @@
 		634A0A642812D463009BEB6D /* ImageExtension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ImageExtension.swift; sourceTree = "<group>"; };
 		634A0A662812D4E5009BEB6D /* FootballCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FootballCell.swift; sourceTree = "<group>"; };
 		639CB087281D5D0E006E7575 /* HTTPHeaderExtension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HTTPHeaderExtension.swift; sourceTree = "<group>"; };
+		63D2F982281E876700990303 /* Keys.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Keys.plist; sourceTree = "<group>"; };
 		714DFB1FEE1782F1CBBF5530 /* Pods_Football_API.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_Football_API.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		D33834ADAC9F2EF2DC444FED /* Pods-Football_API.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Football_API.debug.xcconfig"; path = "Target Support Files/Pods-Football_API/Pods-Football_API.debug.xcconfig"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
@@ -101,6 +103,7 @@
 				634A0A23281197BB009BEB6D /* Assets.xcassets */,
 				634A0A25281197BB009BEB6D /* LaunchScreen.storyboard */,
 				634A0A28281197BB009BEB6D /* Info.plist */,
+				63D2F982281E876700990303 /* Keys.plist */,
 			);
 			path = Football_API;
 			sourceTree = "<group>";
@@ -206,6 +209,7 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				63D2F983281E876700990303 /* Keys.plist in Resources */,
 				634A0A27281197BB009BEB6D /* LaunchScreen.storyboard in Resources */,
 				634A0A24281197BB009BEB6D /* Assets.xcassets in Resources */,
 				634A0A22281197B5009BEB6D /* Main.storyboard in Resources */,
