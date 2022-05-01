@@ -14,8 +14,8 @@
 		634A0A22281197B5009BEB6D /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 634A0A20281197B5009BEB6D /* Main.storyboard */; };
 		634A0A24281197BB009BEB6D /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 634A0A23281197BB009BEB6D /* Assets.xcassets */; };
 		634A0A27281197BB009BEB6D /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 634A0A25281197BB009BEB6D /* LaunchScreen.storyboard */; };
-		634A0A32281199B7009BEB6D /* NetworkClient.swift in Sources */ = {isa = PBXBuildFile; fileRef = 634A0A31281199B7009BEB6D /* NetworkClient.swift */; };
-		634A0A362811A3CA009BEB6D /* Result.swift in Sources */ = {isa = PBXBuildFile; fileRef = 634A0A352811A3CA009BEB6D /* Result.swift */; };
+		634A0A32281199B7009BEB6D /* NetworkService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 634A0A31281199B7009BEB6D /* NetworkService.swift */; };
+		634A0A362811A3CA009BEB6D /* ResultStructs.swift in Sources */ = {isa = PBXBuildFile; fileRef = 634A0A352811A3CA009BEB6D /* ResultStructs.swift */; };
 		634A0A652812D463009BEB6D /* ImageExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 634A0A642812D463009BEB6D /* ImageExtension.swift */; };
 		634A0A672812D4E5009BEB6D /* FootballCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 634A0A662812D4E5009BEB6D /* FootballCell.swift */; };
 		639CB086281D3A37006E7575 /* Alamofire in Frameworks */ = {isa = PBXBuildFile; productRef = 639CB085281D3A37006E7575 /* Alamofire */; };
@@ -33,8 +33,8 @@
 		634A0A23281197BB009BEB6D /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		634A0A26281197BB009BEB6D /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		634A0A28281197BB009BEB6D /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
-		634A0A31281199B7009BEB6D /* NetworkClient.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NetworkClient.swift; sourceTree = "<group>"; };
-		634A0A352811A3CA009BEB6D /* Result.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Result.swift; sourceTree = "<group>"; };
+		634A0A31281199B7009BEB6D /* NetworkService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NetworkService.swift; sourceTree = "<group>"; };
+		634A0A352811A3CA009BEB6D /* ResultStructs.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ResultStructs.swift; sourceTree = "<group>"; };
 		634A0A642812D463009BEB6D /* ImageExtension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ImageExtension.swift; sourceTree = "<group>"; };
 		634A0A662812D4E5009BEB6D /* FootballCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FootballCell.swift; sourceTree = "<group>"; };
 		639CB087281D5D0E006E7575 /* HTTPHeaderExtension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HTTPHeaderExtension.swift; sourceTree = "<group>"; };
@@ -111,8 +111,8 @@
 		634A0A2E28119986009BEB6D /* Model */ = {
 			isa = PBXGroup;
 			children = (
-				634A0A31281199B7009BEB6D /* NetworkClient.swift */,
-				634A0A352811A3CA009BEB6D /* Result.swift */,
+				634A0A31281199B7009BEB6D /* NetworkService.swift */,
+				634A0A352811A3CA009BEB6D /* ResultStructs.swift */,
 				634A0A662812D4E5009BEB6D /* FootballCell.swift */,
 			);
 			path = Model;
@@ -265,13 +265,13 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				634A0A362811A3CA009BEB6D /* Result.swift in Sources */,
+				634A0A362811A3CA009BEB6D /* ResultStructs.swift in Sources */,
 				634A0A652812D463009BEB6D /* ImageExtension.swift in Sources */,
 				639CB088281D5D0E006E7575 /* HTTPHeaderExtension.swift in Sources */,
 				634A0A1F281197B5009BEB6D /* ViewController.swift in Sources */,
 				634A0A1B281197B5009BEB6D /* AppDelegate.swift in Sources */,
 				634A0A1D281197B5009BEB6D /* SceneDelegate.swift in Sources */,
-				634A0A32281199B7009BEB6D /* NetworkClient.swift in Sources */,
+				634A0A32281199B7009BEB6D /* NetworkService.swift in Sources */,
 				634A0A672812D4E5009BEB6D /* FootballCell.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

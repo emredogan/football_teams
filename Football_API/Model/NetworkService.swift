@@ -12,7 +12,7 @@ enum RequestService {
     case AF, native
 }
 
-class NetworkClient {
+class NetworkService {
     static var teams = [Team]()
     private var requestURL = "https://api-football-v1.p.rapidapi.com/v3/standings?season=2020&league=39"
     
@@ -94,7 +94,7 @@ class NetworkClient {
             let teamName = teamInfo.team.name
             let teamLogoURL = teamInfo.team.logo
             let team = Team(name: teamName, logo: teamLogoURL)
-            NetworkClient.teams.append(team)
+            NetworkService.teams.append(team)
         }
     }
 }
