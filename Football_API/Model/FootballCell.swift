@@ -10,22 +10,19 @@ import Alamofire
 
 class FootballCell: UITableViewCell {
     @IBOutlet weak var footballLogo: UIImageView!
-    
     @IBOutlet weak var footballTeamName: UILabel!
-    
     
     func setupCell(name: String, url: String, imageService: Service) {
         footballTeamName.text = name
         switch imageService {
         case .native:
-            footballLogo.imageFromServerURLNative(url, placeHolder: nil)
+            footballLogo.imageFromServerURL(url, service: .native)
         case .kf:
-            footballLogo.imageFromServerURLKF(url: url)
+            footballLogo.imageFromServerURL(url, service: .KF)
         case .AF:
-            footballLogo.imageFromServerURLAF(url: url)
+            footballLogo.imageFromServerURL(url, service: .AF)
         }
     }
-    
 }
 
 enum Service {

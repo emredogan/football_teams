@@ -10,57 +10,51 @@ import UIKit
 import Kingfisher
 import Alamofire
 
+enum ImageService {
+    case native, AF, KF
+}
+
 extension UIImageView {
-
     
-        func imageFromServerURLNative(_ URLString: String, placeHolder: UIImage?) {
-
-        self.image = nil
+    func imageFromServerURL(_ urlString: String, service: ImageService) {
         //If imageurl's imagename has space then this line going to work for this
-        let imageServerUrl = URLString.addingPercentEncoding(withAllowedCharacters: .urlQueryAllowed) ?? ""
-        
+        let imageServerUrl = urlString.addingPercentEncoding(withAllowedCharacters: .urlQueryAllowed) ?? urlString
 
-        if let url = URL(string: imageServerUrl) {
-            URLSession.shared.dataTask(with: url, completionHandler: { (data, response, error) in
-
-                //print("RESPONSE FROM API: \(response)")
-                if error != nil {
-                    print("ERROR LOADING IMAGES FROM URL: ", error!)
-                    DispatchQueue.main.async {
-                        self.image = placeHolder
+        switch service {
+        case .native:
+            
+            if let url = URL(string: imageServerUrl) {
+                URLSession.shared.dataTask(with: url, completionHandler: { (data, response, error) in
+                    
+                    if error != nil {
+                        DispatchQueue.main.async {
+                            // TO - DO
+                            self.image = nil
+                        }
+                        return
                     }
-                    return
-                }
-                DispatchQueue.main.async {
-                    if let data = data {
-                        if let downloadedImage = UIImage(data: data) {
-                       
-                            self.image = downloadedImage
+                    DispatchQueue.main.async {
+                        if let data = data {
+                            if let downloadedImage = UIImage(data: data) {
+                                self.image = downloadedImage
+                            }
                         }
                     }
-                }
-            }).resume()
-        }
-    }
-    
-    func imageFromServerURLAF(url: String) {
-        AF.request( url,method: .get).response{ response in
-            print("Requesting image with AF")
-            switch response.result {
-            case .success(let responseData):
-                self.image = UIImage(data: responseData!, scale:1)
-                
-            case .failure(let error):
-                print("error--->",error)
+                }).resume()
             }
+        case .AF:
+            AF.request(imageServerUrl,method: .get).response{ response in
+                switch response.result {
+                case .success(let responseData):
+                    self.image = UIImage(data: responseData!, scale:1)
+                    
+                case .failure(let error):
+                    print("error--->",error)
+                }
+            }
+        case .KF:
+            self.kf.setImage(with: URL(string: imageServerUrl))
         }
     }
-    
-    func imageFromServerURLKF(url: String) {
-        self.kf.setImage(with: URL(string: url))
-    }
-    
-    
-    
     
 }
