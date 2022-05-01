@@ -6,5 +6,7 @@
 	<string>api-football-v1.p.rapidapi.com</string>
 	<key>X-RapidAPI-Key</key>
 	<string>144d8f8935msh73e730b7fa245cfp1ea48ajsn45c6ef3f9585</string>
+	<key>test</key>
+	<string>test</string>
 </dict>
 </plist>
