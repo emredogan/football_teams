@@ -15,46 +15,34 @@ enum RequestService {
 class NetworkService {
     private var requestURL = "https://api-football-v1.p.rapidapi.com/v3/standings?season=2020&league=39"
     
-    var keys: NSDictionary?
     
     typealias CompletionHandlerTeams = (Result<[Team], Error>) -> Void // To make the code more readable we put an alias here.
     
     func makeDataRequest(serviceName: RequestService, completion: @escaping CompletionHandlerTeams) {
-        if let path = Bundle.main.path(forResource: "Keys", ofType: "plist") {
-            keys = NSDictionary(contentsOfFile: path)
-        }
+        let headers = grabKeyHeaders()
         
-        if let dict = keys {
-            let host = dict["X-RapidAPI-Host"] as! String
-            let key = dict["X-RapidAPI-Key"] as! String
+        switch serviceName {
+        case .AF:
+            makeAFDataRequest(headers: headers.toHeader()) {result in
+                
+                switch result {
+                case .success(let teams):
+                    completion(.success(teams))
+                case .failure(let error):
+                    print("ERROR - Getting data from the network client ", error)
+                }
+            }
             
-            let headers = [
-                "X-RapidAPI-Host": host,
-                "X-RapidAPI-Key": key
-            ]
-            
-            switch serviceName {
-            case .AF:
-                makeAFDataRequest(headers: headers.toHeader()) {result in
-                    
-                    switch result {
-                    case .success(let teams):
-                        completion(.success(teams))
-                    case .failure(let error):
-                        print("ERROR - Getting data from the network client ", error)
-                    }
+        case .native:
+            makeNativeDataRequest(headers: headers.toHeader()) { result in
+                
+                switch result {
+                case .success(let teams):
+                    completion(.success(teams))
+                case .failure(let error):
+                    print("ERROR - Getting data from the network client ", error)
                 }
                 
-            case .native:
-                makeNativeDataRequest(headers: headers.toHeader()) { result in
-                    
-                    switch result {
-                    case .success(let teams):
-                        completion(.success(teams))
-                    case .failure(let error):
-                        print("ERROR - Getting data from the network client ", error)
-                    }
-                }
             }
         }
         
@@ -110,5 +98,27 @@ class NetworkService {
             teams.append(team)
         }
         return teams
+    }
+    
+    func grabKeyHeaders() -> [String : String] {
+        var keys: NSDictionary?
+        var headers = [String: String]()
+        
+        if let path = Bundle.main.path(forResource: "Keys", ofType: "plist") {
+            keys = NSDictionary(contentsOfFile: path)
+        }
+        
+        if let dict = keys {
+            let host = dict["X-RapidAPI-Host"] as! String
+            let key = dict["X-RapidAPI-Key"] as! String
+            
+            let myHeaders = [
+                "X-RapidAPI-Host": host,
+                "X-RapidAPI-Key": key
+            ]
+            
+            headers = myHeaders
+        }
+        return headers
     }
 }
