@@ -16,58 +16,69 @@
                         <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="150" estimatedRowHeight="-1" sectionHeaderHeight="-1" estimatedSectionHeaderHeight="-1" sectionFooterHeight="-1" estimatedSectionFooterHeight="-1" translatesAutoresizingMaskIntoConstraints="NO" id="4gf-xZ-rmD">
-                                <rect key="frame" x="0.0" y="44" width="414" height="818"/>
-                                <color key="backgroundColor" systemColor="systemBackgroundColor"/>
-                                <prototypes>
-                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" indentationWidth="10" reuseIdentifier="football_cell" id="BfD-0A-z99" customClass="FootballCell" customModule="Football_API" customModuleProvider="target">
-                                        <rect key="frame" x="0.0" y="44.5" width="414" height="150"/>
-                                        <autoresizingMask key="autoresizingMask"/>
-                                        <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" preservesSuperviewLayoutMargins="YES" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="BfD-0A-z99" id="Z3r-Vl-z4M">
-                                            <rect key="frame" x="0.0" y="0.0" width="414" height="150"/>
-                                            <autoresizingMask key="autoresizingMask"/>
-                                            <subviews>
-                                                <stackView opaque="NO" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="3eU-mO-q9G">
-                                                    <rect key="frame" x="20" y="11" width="374" height="128"/>
+                            <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" translatesAutoresizingMaskIntoConstraints="NO" id="66X-br-Aaw">
+                                <rect key="frame" x="0.0" y="44" width="414" height="852"/>
+                                <subviews>
+                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Premier League Teams" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="fav-gj-PRg">
+                                        <rect key="frame" x="0.0" y="0.0" width="414" height="33"/>
+                                        <fontDescription key="fontDescription" name="HelveticaNeue" family="Helvetica Neue" pointSize="28"/>
+                                        <nil key="textColor"/>
+                                        <nil key="highlightedColor"/>
+                                    </label>
+                                    <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="150" estimatedRowHeight="-1" sectionHeaderHeight="-1" estimatedSectionHeaderHeight="-1" sectionFooterHeight="-1" estimatedSectionFooterHeight="-1" translatesAutoresizingMaskIntoConstraints="NO" id="4gf-xZ-rmD">
+                                        <rect key="frame" x="0.0" y="33" width="414" height="819"/>
+                                        <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                                        <prototypes>
+                                            <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" indentationWidth="10" reuseIdentifier="football_cell" id="BfD-0A-z99" customClass="FootballCell" customModule="Football_API" customModuleProvider="target">
+                                                <rect key="frame" x="0.0" y="44.5" width="414" height="150"/>
+                                                <autoresizingMask key="autoresizingMask"/>
+                                                <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" preservesSuperviewLayoutMargins="YES" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="BfD-0A-z99" id="Z3r-Vl-z4M">
+                                                    <rect key="frame" x="0.0" y="0.0" width="414" height="150"/>
+                                                    <autoresizingMask key="autoresizingMask"/>
                                                     <subviews>
-                                                        <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="PBc-rb-gfM">
-                                                            <rect key="frame" x="0.0" y="0.0" width="75" height="128"/>
-                                                            <constraints>
-                                                                <constraint firstAttribute="width" constant="75" id="W9n-o9-LUK"/>
-                                                                <constraint firstAttribute="height" constant="75" id="qgT-gv-tRG"/>
-                                                            </constraints>
-                                                        </imageView>
-                                                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="GaR-eL-zhO">
-                                                            <rect key="frame" x="75" y="0.0" width="299" height="128"/>
-                                                            <fontDescription key="fontDescription" type="system" pointSize="17"/>
-                                                            <nil key="textColor"/>
-                                                            <nil key="highlightedColor"/>
-                                                        </label>
+                                                        <stackView opaque="NO" contentMode="scaleToFill" spacing="20" translatesAutoresizingMaskIntoConstraints="NO" id="3eU-mO-q9G">
+                                                            <rect key="frame" x="20" y="11" width="374" height="128"/>
+                                                            <subviews>
+                                                                <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="PBc-rb-gfM">
+                                                                    <rect key="frame" x="0.0" y="0.0" width="75" height="128"/>
+                                                                    <constraints>
+                                                                        <constraint firstAttribute="width" constant="75" id="W9n-o9-LUK"/>
+                                                                        <constraint firstAttribute="height" constant="75" id="qgT-gv-tRG"/>
+                                                                    </constraints>
+                                                                </imageView>
+                                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="GaR-eL-zhO">
+                                                                    <rect key="frame" x="95" y="0.0" width="279" height="128"/>
+                                                                    <fontDescription key="fontDescription" name="HelveticaNeue" family="Helvetica Neue" pointSize="21"/>
+                                                                    <nil key="textColor"/>
+                                                                    <nil key="highlightedColor"/>
+                                                                </label>
+                                                            </subviews>
+                                                        </stackView>
                                                     </subviews>
-                                                </stackView>
-                                            </subviews>
-                                            <constraints>
-                                                <constraint firstItem="3eU-mO-q9G" firstAttribute="leading" secondItem="Z3r-Vl-z4M" secondAttribute="leadingMargin" id="uTI-cO-UqO"/>
-                                                <constraint firstItem="3eU-mO-q9G" firstAttribute="top" secondItem="Z3r-Vl-z4M" secondAttribute="topMargin" id="vpk-Wh-8zJ"/>
-                                                <constraint firstAttribute="bottomMargin" secondItem="3eU-mO-q9G" secondAttribute="bottom" id="w5N-2I-IeI"/>
-                                                <constraint firstAttribute="trailingMargin" secondItem="3eU-mO-q9G" secondAttribute="trailing" id="wEl-Aj-KQP"/>
-                                            </constraints>
-                                        </tableViewCellContentView>
-                                        <connections>
-                                            <outlet property="footballLogo" destination="PBc-rb-gfM" id="gzh-eQ-ZwC"/>
-                                            <outlet property="footballTeamName" destination="GaR-eL-zhO" id="5QB-lA-2MW"/>
-                                        </connections>
-                                    </tableViewCell>
-                                </prototypes>
-                            </tableView>
+                                                    <constraints>
+                                                        <constraint firstItem="3eU-mO-q9G" firstAttribute="leading" secondItem="Z3r-Vl-z4M" secondAttribute="leadingMargin" id="uTI-cO-UqO"/>
+                                                        <constraint firstItem="3eU-mO-q9G" firstAttribute="top" secondItem="Z3r-Vl-z4M" secondAttribute="topMargin" id="vpk-Wh-8zJ"/>
+                                                        <constraint firstAttribute="bottomMargin" secondItem="3eU-mO-q9G" secondAttribute="bottom" id="w5N-2I-IeI"/>
+                                                        <constraint firstAttribute="trailingMargin" secondItem="3eU-mO-q9G" secondAttribute="trailing" id="wEl-Aj-KQP"/>
+                                                    </constraints>
+                                                </tableViewCellContentView>
+                                                <connections>
+                                                    <outlet property="footballLogo" destination="PBc-rb-gfM" id="gzh-eQ-ZwC"/>
+                                                    <outlet property="footballTeamName" destination="GaR-eL-zhO" id="5QB-lA-2MW"/>
+                                                </connections>
+                                            </tableViewCell>
+                                        </prototypes>
+                                    </tableView>
+                                </subviews>
+                            </stackView>
                         </subviews>
                         <viewLayoutGuide key="safeArea" id="6Tk-OE-BBY"/>
                         <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                         <constraints>
-                            <constraint firstItem="4gf-xZ-rmD" firstAttribute="top" secondItem="6Tk-OE-BBY" secondAttribute="top" id="N1e-HM-To0"/>
-                            <constraint firstItem="6Tk-OE-BBY" firstAttribute="trailing" secondItem="4gf-xZ-rmD" secondAttribute="trailing" id="NMG-oF-EYU"/>
-                            <constraint firstItem="6Tk-OE-BBY" firstAttribute="bottom" secondItem="4gf-xZ-rmD" secondAttribute="bottom" id="jfs-Kd-U61"/>
-                            <constraint firstItem="4gf-xZ-rmD" firstAttribute="leading" secondItem="6Tk-OE-BBY" secondAttribute="leading" id="nAB-FN-uTn"/>
+                            <constraint firstAttribute="bottom" secondItem="66X-br-Aaw" secondAttribute="bottom" id="18j-ao-pFe"/>
+                            <constraint firstItem="66X-br-Aaw" firstAttribute="leading" secondItem="6Tk-OE-BBY" secondAttribute="leading" id="ERP-GR-95o"/>
+                            <constraint firstItem="66X-br-Aaw" firstAttribute="top" secondItem="6Tk-OE-BBY" secondAttribute="top" id="O5P-0t-b2H"/>
+                            <constraint firstAttribute="trailing" secondItem="66X-br-Aaw" secondAttribute="trailing" id="wfY-K4-ezf"/>
                         </constraints>
                     </view>
                     <connections>
