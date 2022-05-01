@@ -19,9 +19,9 @@ class ViewController: UIViewController {
     private var teams = [Team]()
     private let fireDB = Firestore.firestore()
     
-    typealias CompletionHandlerTeams = (Result<[Team], Error>) -> Void // To make the code more readable we put an alias here.
-
-
+    
+    
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         tableView.tableFooterView = UIView()   // To hide the empty cells
@@ -33,30 +33,18 @@ class ViewController: UIViewController {
         networkingClient.makeDataRequest(serviceName: .AF) { result in
             switch result {
             case .success(let teams):
-                self.teams = teams
-                
-                
-                DispatchQueue.main.async {
-                    self.tableView.reloadData()
-                }
+                self.handleResult(result: teams)
             case .failure(let error):
-
-                self.getDataFromFirebase { result in
+                
+                self.networkingClient.getDataFromFirebase { result in
                     switch result {
                     case .success(let teams):
-                        self.teams = teams
-                        self.teams.sort(by: {$0.name < $1.name})
-
-                        
-                        
-                        DispatchQueue.main.async {
-                            self.tableView.reloadData()
-                        }
+                        self.handleResult(result: teams)
                     case .failure(let error): break
-
-                       
-
-
+                        
+                        
+                        
+                        
                     }
                 }
                 
@@ -65,59 +53,48 @@ class ViewController: UIViewController {
                 DispatchQueue.main.async {
                     self.tableView.reloadData()
                 }
-
-
+                
+                
             }
             
         }
     }
     
-    func getDataFromFirebase(completion: @escaping CompletionHandlerTeams) {
-        let db = Firestore.firestore()
-        db.collection("myTeams")
-            .getDocuments() { (querySnapshot, err) in
-                if let err = err {
-                    print("Error getting documents: \(err)")
-                    //completion(.failure(nil))
-                } else {
-                    print("PRINTING DOCS")
-                    for document in querySnapshot!.documents {
-                        print("\(document.documentID) => \(document.data())")
-                        let team = Team(name: document.data()["name"] as! String, logo: document.data()["logo"] as! String)
-
-                        self.teams.append(team)
-
-                    }
-                    
-                    completion(.success(self.teams))
-
-                }
+    func handleResult(result: [Team]) {
+        self.teams = result
+        teams.sort(by: {$0.name < $1.name})
+        
+        DispatchQueue.main.async {
+            self.tableView.reloadData()
         }
+        
     }
+    
+    
     
     // USED TO TEMPORARLY SAVE DATA IN FIREBASE STORE
     /*func writeData(teams: [Team]) {
-        print("WRITING DATA TO FIREBASE")
-        
-        for team in teams {
-            do { // 2
-                let team = team
-
-                try fireDB.collection("myTeams").document(randomString(length: 10)).setData(from: team)
-              } catch {
-                // handle the error here
-                  print("ERROR is saving to DB")
-              }
-        }
-        
-        
-        
-    }
-    
-    func randomString(length: Int) -> String {
-      let letters = "abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789"
-      return String((0..<length).map{ _ in letters.randomElement()! })
-    } */
+     print("WRITING DATA TO FIREBASE")
+     
+     for team in teams {
+     do { // 2
+     let team = team
+     
+     try fireDB.collection("myTeams").document(randomString(length: 10)).setData(from: team)
+     } catch {
+     // handle the error here
+     print("ERROR is saving to DB")
+     }
+     }
+     
+     
+     
+     }
+     
+     func randomString(length: Int) -> String {
+     let letters = "abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789"
+     return String((0..<length).map{ _ in letters.randomElement()! })
+     } */
 }
 
 extension ViewController : UITableViewDelegate, UITableViewDataSource {

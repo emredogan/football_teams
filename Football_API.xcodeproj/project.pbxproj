@@ -22,6 +22,7 @@
 		639698C4281EC6E70001E73D /* FirebaseFirestore in Frameworks */ = {isa = PBXBuildFile; productRef = 639698C3281EC6E70001E73D /* FirebaseFirestore */; };
 		639698C6281EC6E70001E73D /* FirebaseFirestoreSwift-Beta in Frameworks */ = {isa = PBXBuildFile; productRef = 639698C5281EC6E70001E73D /* FirebaseFirestoreSwift-Beta */; };
 		639698C8281EC6E70001E73D /* FirebaseFunctionsSwift-Beta in Frameworks */ = {isa = PBXBuildFile; productRef = 639698C7281EC6E70001E73D /* FirebaseFunctionsSwift-Beta */; };
+		639698CA281F2EDD0001E73D /* ErrorTypes.swift in Sources */ = {isa = PBXBuildFile; fileRef = 639698C9281F2EDD0001E73D /* ErrorTypes.swift */; };
 		639CB086281D3A37006E7575 /* Alamofire in Frameworks */ = {isa = PBXBuildFile; productRef = 639CB085281D3A37006E7575 /* Alamofire */; };
 		639CB088281D5D0E006E7575 /* HTTPHeaderExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 639CB087281D5D0E006E7575 /* HTTPHeaderExtension.swift */; };
 		63D2F983281E876700990303 /* Keys.plist in Resources */ = {isa = PBXBuildFile; fileRef = 63D2F982281E876700990303 /* Keys.plist */; };
@@ -42,6 +43,7 @@
 		634A0A642812D463009BEB6D /* ImageExtension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ImageExtension.swift; sourceTree = "<group>"; };
 		634A0A662812D4E5009BEB6D /* FootballCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FootballCell.swift; sourceTree = "<group>"; };
 		639698B9281EB7170001E73D /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
+		639698C9281F2EDD0001E73D /* ErrorTypes.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ErrorTypes.swift; sourceTree = "<group>"; };
 		639CB087281D5D0E006E7575 /* HTTPHeaderExtension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HTTPHeaderExtension.swift; sourceTree = "<group>"; };
 		63D2F982281E876700990303 /* Keys.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Keys.plist; sourceTree = "<group>"; };
 		714DFB1FEE1782F1CBBF5530 /* Pods_Football_API.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_Football_API.framework; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -148,6 +150,7 @@
 			children = (
 				634A0A642812D463009BEB6D /* ImageExtension.swift */,
 				639CB087281D5D0E006E7575 /* HTTPHeaderExtension.swift */,
+				639698C9281F2EDD0001E73D /* ErrorTypes.swift */,
 			);
 			path = Extension;
 			sourceTree = "<group>";
@@ -283,6 +286,7 @@
 				634A0A652812D463009BEB6D /* ImageExtension.swift in Sources */,
 				639CB088281D5D0E006E7575 /* HTTPHeaderExtension.swift in Sources */,
 				634A0A1F281197B5009BEB6D /* ViewController.swift in Sources */,
+				639698CA281F2EDD0001E73D /* ErrorTypes.swift in Sources */,
 				634A0A1B281197B5009BEB6D /* AppDelegate.swift in Sources */,
 				634A0A1D281197B5009BEB6D /* SceneDelegate.swift in Sources */,
 				634A0A32281199B7009BEB6D /* NetworkService.swift in Sources */,
