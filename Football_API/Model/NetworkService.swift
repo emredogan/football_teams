@@ -18,37 +18,22 @@ typealias CompletionHandlerTeams = (Result<[Team], Error>) -> Void // To make th
 class NetworkService {
     private var requestURL = "https://api-football-v1.p.rapidapi.com/v3/standings?season=2020&league=39"
     
-    
-    
     func makeDataRequest(serviceName: RequestService, completion: @escaping CompletionHandlerTeams) {
         let headers = grabKeyHeaders()
         
         switch serviceName {
         case .AF:
             makeAFDataRequest(headers: headers.toHeader()) {result in
-                
-                switch result {
-                case .success(let teams):
-                    completion(.success(teams))
-                case .failure(let error):
-                    completion(.failure(MyErrors.networkError(error.localizedDescription)))
-                }
+                self.deliverResult(result: result, completion: completion)
             }
             
         case .native:
             makeNativeDataRequest(headers: headers.toHeader()) { result in
-                
-                switch result {
-                case .success(let teams):
-                    completion(.success(teams))
-                case .failure(let error):
-                    completion(.failure(MyErrors.networkError(error.localizedDescription)))
-                }
+                self.deliverResult(result: result, completion: completion)
             }
         }
-        
-        
     }
+    
     
     func makeAFDataRequest(headers: HTTPHeaders, completion: @escaping CompletionHandlerTeams) {
         AF.request(requestURL, method: .get, headers: headers).validate().responseDecodable(of: JsonResult.self) { (response) in
@@ -99,6 +84,16 @@ class NetworkService {
             teams.append(team)
         }
         return teams
+    }
+    
+    func deliverResult(result:  Result<[Team], Error>, completion: CompletionHandlerTeams) {
+        switch result {
+        case .success(let teams):
+            completion(.success(teams))
+        case .failure(let error):
+            completion(.failure(MyErrors.networkError(error.localizedDescription)))
+        }
+        
     }
     
     func grabKeyHeaders() -> [String : String] {
