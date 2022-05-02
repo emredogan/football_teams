@@ -16,8 +16,8 @@
                         <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" translatesAutoresizingMaskIntoConstraints="NO" id="66X-br-Aaw">
-                                <rect key="frame" x="0.0" y="44" width="414" height="852"/>
+                            <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" spacing="20" translatesAutoresizingMaskIntoConstraints="NO" id="66X-br-Aaw">
+                                <rect key="frame" x="0.0" y="54" width="414" height="842"/>
                                 <subviews>
                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Premier League Teams" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="fav-gj-PRg">
                                         <rect key="frame" x="0.0" y="0.0" width="414" height="33"/>
@@ -26,7 +26,7 @@
                                         <nil key="highlightedColor"/>
                                     </label>
                                     <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="125" estimatedRowHeight="-1" sectionHeaderHeight="-1" estimatedSectionHeaderHeight="-1" sectionFooterHeight="-1" estimatedSectionFooterHeight="-1" translatesAutoresizingMaskIntoConstraints="NO" id="4gf-xZ-rmD">
-                                        <rect key="frame" x="0.0" y="33" width="414" height="819"/>
+                                        <rect key="frame" x="0.0" y="53" width="414" height="789"/>
                                         <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                                         <prototypes>
                                             <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" indentationWidth="10" reuseIdentifier="football_cell" id="BfD-0A-z99" customClass="FootballCell" customModule="Football_API" customModuleProvider="target">
@@ -77,7 +77,7 @@
                         <constraints>
                             <constraint firstAttribute="bottom" secondItem="66X-br-Aaw" secondAttribute="bottom" id="18j-ao-pFe"/>
                             <constraint firstItem="66X-br-Aaw" firstAttribute="leading" secondItem="6Tk-OE-BBY" secondAttribute="leading" id="ERP-GR-95o"/>
-                            <constraint firstItem="66X-br-Aaw" firstAttribute="top" secondItem="6Tk-OE-BBY" secondAttribute="top" id="O5P-0t-b2H"/>
+                            <constraint firstItem="66X-br-Aaw" firstAttribute="top" secondItem="6Tk-OE-BBY" secondAttribute="top" constant="10" id="O5P-0t-b2H"/>
                             <constraint firstAttribute="trailing" secondItem="66X-br-Aaw" secondAttribute="trailing" id="wfY-K4-ezf"/>
                         </constraints>
                     </view>

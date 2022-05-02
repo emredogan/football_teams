@@ -9,5 +9,6 @@ import Foundation
 
 enum MyErrors: Error {
     case networkError(String)
-    
+    case JsonDecodeError(String)
+    case FirebaseError(String)
 }

@@ -16,7 +16,7 @@ enum RequestService {
 typealias CompletionHandlerTeams = (Result<[Team], Error>) -> Void // To make the code more readable we put an alias here.
 
 class NetworkService {
-    private var requestURL = "asdadhttps://api-football-v1.p.rapidapi.com/v3/standings?season=2020&league=39asdsa"
+    private var requestURL = "https://api-football-v1.p.rapidapi.com/v3/standings?season=2020&league=39"
     
     
     
@@ -69,14 +69,14 @@ class NetworkService {
         let session = URLSession.shared
         let dataTask = session.dataTask(with: request as URLRequest, completionHandler: { (data, response, error) -> Void in
             if (error != nil) {
-                print(error ?? "Error while fetching data")
+                completion(.failure(MyErrors.networkError(error!.localizedDescription)))
             } else {
                 do {
                     let result = try JSONDecoder().decode(JsonResult.self, from: data!)
                     let teams = self.processResult(result: result)
                     completion(.success(teams))
                 } catch {
-                    print(error)
+                    completion(.failure(MyErrors.JsonDecodeError(error.localizedDescription)))
                 }
             }
         })
@@ -105,17 +105,20 @@ class NetworkService {
         var keys: NSDictionary?
         var headers = [String: String]()
         
+        let rapidAPIHost = "X-RapidAPI-Host"
+        let rapidAPIKey = "X-RapidAPI-Key"
+        
         if let path = Bundle.main.path(forResource: "Keys", ofType: "plist") {
             keys = NSDictionary(contentsOfFile: path)
         }
         
         if let dict = keys {
-            let host = dict["X-RapidAPI-Host"] as! String
-            let key = dict["X-RapidAPI-Key"] as! String
+            let host = dict[rapidAPIHost] as! String
+            let key = dict[rapidAPIKey] as! String
             
             let myHeaders = [
-                "X-RapidAPI-Host": host,
-                "X-RapidAPI-Key": key
+                rapidAPIHost: host,
+                rapidAPIKey: key
             ]
             
             headers = myHeaders
@@ -124,13 +127,16 @@ class NetworkService {
     }
     
     func getDataFromFirebase(completion: @escaping CompletionHandlerTeams) {
+        print("Getting data from Firebase")
+        let dbCollectionName = "myTeams"
+        
         let db = Firestore.firestore()
         var teams = [Team]()
         
-        db.collection("myTeams")
+        db.collection(dbCollectionName)
             .getDocuments() { (querySnapshot, err) in
                 if let err = err {
-                    completion(.failure(MyErrors.networkError(err.localizedDescription)))
+                    completion(.failure(MyErrors.FirebaseError(err.localizedDescription)))
                 } else {
                     for document in querySnapshot!.documents {
                         let nameFromDocument = document.data()["name"] as! String
