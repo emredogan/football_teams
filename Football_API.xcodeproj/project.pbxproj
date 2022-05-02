@@ -26,6 +26,7 @@
 		639CB086281D3A37006E7575 /* Alamofire in Frameworks */ = {isa = PBXBuildFile; productRef = 639CB085281D3A37006E7575 /* Alamofire */; };
 		639CB088281D5D0E006E7575 /* HTTPHeaderExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 639CB087281D5D0E006E7575 /* HTTPHeaderExtension.swift */; };
 		63D2F983281E876700990303 /* Keys.plist in Resources */ = {isa = PBXBuildFile; fileRef = 63D2F982281E876700990303 /* Keys.plist */; };
+		63E6C0542820362100643024 /* Hero.swift in Sources */ = {isa = PBXBuildFile; fileRef = 63E6C0532820362100643024 /* Hero.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -46,6 +47,7 @@
 		639698C9281F2EDD0001E73D /* ErrorTypes.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ErrorTypes.swift; sourceTree = "<group>"; };
 		639CB087281D5D0E006E7575 /* HTTPHeaderExtension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HTTPHeaderExtension.swift; sourceTree = "<group>"; };
 		63D2F982281E876700990303 /* Keys.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Keys.plist; sourceTree = "<group>"; };
+		63E6C0532820362100643024 /* Hero.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Hero.swift; sourceTree = "<group>"; };
 		714DFB1FEE1782F1CBBF5530 /* Pods_Football_API.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_Football_API.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		D33834ADAC9F2EF2DC444FED /* Pods-Football_API.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Football_API.debug.xcconfig"; path = "Target Support Files/Pods-Football_API/Pods-Football_API.debug.xcconfig"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
@@ -124,6 +126,7 @@
 			children = (
 				634A0A31281199B7009BEB6D /* NetworkService.swift */,
 				634A0A352811A3CA009BEB6D /* ResultStructs.swift */,
+				63E6C0532820362100643024 /* Hero.swift */,
 				634A0A662812D4E5009BEB6D /* FootballCell.swift */,
 			);
 			path = Model;
@@ -287,6 +290,7 @@
 				639CB088281D5D0E006E7575 /* HTTPHeaderExtension.swift in Sources */,
 				634A0A1F281197B5009BEB6D /* ViewController.swift in Sources */,
 				639698CA281F2EDD0001E73D /* ErrorTypes.swift in Sources */,
+				63E6C0542820362100643024 /* Hero.swift in Sources */,
 				634A0A1B281197B5009BEB6D /* AppDelegate.swift in Sources */,
 				634A0A1D281197B5009BEB6D /* SceneDelegate.swift in Sources */,
 				634A0A32281199B7009BEB6D /* NetworkService.swift in Sources */,

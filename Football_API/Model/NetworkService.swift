@@ -16,7 +16,31 @@ enum RequestService {
 typealias CompletionHandlerTeams = (Result<[Team], Error>) -> Void // To make the code more readable we put an alias here.
 
 class NetworkService {
-    private var requestURL = "https://api-football-v1.p.rapidapi.com/v3/standings?season=2020&league=39"
+    static var heroes = [Hero]()
+
+    private let requestURL = "https://api-football-v1.p.rapidapi.com/v3/standings?season=2020&league=39"
+    private let dotaUrl = "https://api.opendota.com/api/heroStats"
+    
+    func downloadJson(completed: @escaping () -> ()) {
+        let url = URL(string: "https://api.opendota.com/api/heroStats")
+        URLSession.shared.dataTask(with: url!) { [weak self] data, url, error in
+            if (error == nil) {
+                do {
+                    NetworkService.heroes = try JSONDecoder().decode([Hero].self, from: data!)
+                    // Since we will relod the collection view here, we need to run it in the main thread, otherwise we will get an error of:
+                    // UICollectionView.reloadData() must be used from main thread only
+                    DispatchQueue.main.async {
+                        completed()
+                    }
+                    
+                } catch  {
+                    print("ERROR ", error)
+                }
+                
+            }
+        }.resume()
+        
+    }
     
     func makeDataRequest(serviceName: RequestService, completion: @escaping CompletionHandlerTeams) {
         let headers = grabKeyHeaders()

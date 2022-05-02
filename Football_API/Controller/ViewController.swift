@@ -17,12 +17,23 @@ class ViewController: UIViewController {
     private var teams = [Team]()
     private let fireDB = Firestore.firestore()
     
+    private let shouldDownloadFootball = false
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         tableView.dataSource = self
         tableView.delegate = self
         tableView.tableFooterView = UIView()   // To hide the empty cells
-        downloadData()
+        
+        if(shouldDownloadFootball) {
+            downloadData()
+        } else {
+            networkingClient.downloadJson {
+                self.tableView.reloadData()
+            }
+        }
+        
+        
     }
     
     func downloadData() {
@@ -56,13 +67,26 @@ class ViewController: UIViewController {
 
 extension ViewController : UITableViewDelegate, UITableViewDataSource {
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return teams.count
+        if shouldDownloadFootball {
+            return teams.count
+        } else {
+            return NetworkService.heroes.count
+
+        }
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: "football_cell", for: indexPath) as! FootballCell
-        let currentTeam = teams[indexPath.row]
-        cell.setupCell(name: currentTeam.name, url: currentTeam.logo, imageService: .kf)
+        
+        if shouldDownloadFootball {
+            let currentTeam = teams[indexPath.row]
+            cell.setupCell(name: currentTeam.name, url: currentTeam.logo, imageService: .kf)
+        } else {
+            let currentHero = NetworkService.heroes[indexPath.row]
+            let heroImgURL = "https://api.opendota.com"+currentHero.img
+            cell.setupCell(name: currentHero.localized_name, url: heroImgURL, imageService: .kf)
+        }
+        
         return cell
     }
 }
