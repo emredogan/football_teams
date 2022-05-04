@@ -7,6 +7,8 @@ target 'Football_API' do
 
   # Pods for Football_API
   pod 'Kingfisher', '~> 7.0'
+pod 'IQKeyboardManager' #iOS8 and later
+
 
 
 end
