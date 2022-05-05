@@ -9,6 +9,7 @@ import Foundation
 import Alamofire
 import FirebaseFirestore
 
+// We have two possible ways to make network request
 enum RequestService {
     case AF, native
 }
