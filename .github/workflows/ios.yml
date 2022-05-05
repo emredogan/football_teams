@@ -2,10 +2,10 @@ name: iOS Test Workflow
 on:
   push:
     branches:
-      - master
+      - main
   pull_request:
     branches:
-      - master
+      - main
 jobs:
   build:
     name: Build and Test default scheme using iPhone/iPad simulator
