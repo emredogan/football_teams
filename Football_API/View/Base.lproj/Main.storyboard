@@ -11,13 +11,13 @@
         <!--View Controller-->
         <scene sceneID="tne-QT-ifu">
             <objects>
-                <viewController id="BYZ-38-t0r" customClass="ViewController" customModule="Football_API" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController storyboardIdentifier="ViewController" id="BYZ-38-t0r" customClass="ViewController" customModule="Football_API" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="8bC-Xf-vdC">
                         <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" spacing="20" translatesAutoresizingMaskIntoConstraints="NO" id="66X-br-Aaw">
-                                <rect key="frame" x="0.0" y="98" width="414" height="798"/>
+                                <rect key="frame" x="0.0" y="54" width="414" height="842"/>
                                 <subviews>
                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Premier League Teams" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="fav-gj-PRg">
                                         <rect key="frame" x="0.0" y="0.0" width="414" height="33"/>
@@ -26,7 +26,7 @@
                                         <nil key="highlightedColor"/>
                                     </label>
                                     <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="100" estimatedRowHeight="-1" sectionHeaderHeight="-1" estimatedSectionHeaderHeight="-1" sectionFooterHeight="-1" estimatedSectionFooterHeight="-1" translatesAutoresizingMaskIntoConstraints="NO" id="4gf-xZ-rmD">
-                                        <rect key="frame" x="0.0" y="53" width="414" height="745"/>
+                                        <rect key="frame" x="0.0" y="53" width="414" height="789"/>
                                         <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                                         <prototypes>
                                             <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" indentationWidth="10" reuseIdentifier="football_cell" id="BfD-0A-z99" customClass="FootballCell" customModule="Football_API" customModuleProvider="target">
@@ -125,7 +125,7 @@
                                                     <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="Password" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="yZy-si-hlo">
                                                         <rect key="frame" x="0.0" y="115" width="382" height="90"/>
                                                         <fontDescription key="fontDescription" type="system" pointSize="14"/>
-                                                        <textInputTraits key="textInputTraits"/>
+                                                        <textInputTraits key="textInputTraits" secureTextEntry="YES" textContentType="password"/>
                                                     </textField>
                                                 </subviews>
                                             </stackView>
@@ -145,7 +145,6 @@
                                                         </buttonConfiguration>
                                                         <connections>
                                                             <action selector="loginButtonClicked:" destination="qhA-Cu-5ML" eventType="touchUpInside" id="3L9-sm-oih"/>
-                                                            <segue destination="BYZ-38-t0r" kind="show" id="wrB-H2-58u"/>
                                                         </connections>
                                                     </button>
                                                 </subviews>
@@ -168,6 +167,8 @@
                     <connections>
                         <outlet property="getStartedStackView" destination="lyv-us-aog" id="D1V-89-3cf"/>
                         <outlet property="loginButton" destination="kyQ-Cl-gdW" id="Ff3-QM-Tm8"/>
+                        <outlet property="passwordTextView" destination="yZy-si-hlo" id="ON1-nT-OPV"/>
+                        <outlet property="userNameTextView" destination="dQ4-lz-ELu" id="D7R-od-qIu"/>
                         <outlet property="welcomeAnimationView" destination="JHz-Ay-qJX" id="goC-HB-3ih"/>
                     </connections>
                 </viewController>

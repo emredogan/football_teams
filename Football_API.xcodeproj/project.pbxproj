@@ -8,6 +8,8 @@
 
 /* Begin PBXBuildFile section */
 		159434981A5316A8A535FBC0 /* Pods_Football_API.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 714DFB1FEE1782F1CBBF5530 /* Pods_Football_API.framework */; };
+		630752B4282445A0007E2687 /* Football_APITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 630752B3282445A0007E2687 /* Football_APITests.swift */; };
+		630752BB282445EA007E2687 /* VerificationServiceTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 630752BA282445EA007E2687 /* VerificationServiceTests.swift */; };
 		631898862821C56A0098AC3A /* Lottie in Frameworks */ = {isa = PBXBuildFile; productRef = 631898852821C56A0098AC3A /* Lottie */; };
 		63189888282252CE0098AC3A /* WelcomeViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 63189887282252CD0098AC3A /* WelcomeViewController.swift */; };
 		634A0A1B281197B5009BEB6D /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 634A0A1A281197B5009BEB6D /* AppDelegate.swift */; };
@@ -27,11 +29,25 @@
 		639698CA281F2EDD0001E73D /* ErrorTypes.swift in Sources */ = {isa = PBXBuildFile; fileRef = 639698C9281F2EDD0001E73D /* ErrorTypes.swift */; };
 		639CB086281D3A37006E7575 /* Alamofire in Frameworks */ = {isa = PBXBuildFile; productRef = 639CB085281D3A37006E7575 /* Alamofire */; };
 		639CB088281D5D0E006E7575 /* HTTPHeaderExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 639CB087281D5D0E006E7575 /* HTTPHeaderExtension.swift */; };
+		63CDFDC928243035004B34C7 /* VerificationService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 63CDFDC828243035004B34C7 /* VerificationService.swift */; };
 		63D2F983281E876700990303 /* Keys.plist in Resources */ = {isa = PBXBuildFile; fileRef = 63D2F982281E876700990303 /* Keys.plist */; };
 /* End PBXBuildFile section */
 
+/* Begin PBXContainerItemProxy section */
+		630752B5282445A0007E2687 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 634A0A0F281197B5009BEB6D /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = 634A0A16281197B5009BEB6D;
+			remoteInfo = Football_API;
+		};
+/* End PBXContainerItemProxy section */
+
 /* Begin PBXFileReference section */
 		0B6B049EB8FAEB9BC71C0223 /* Pods-Football_API.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Football_API.release.xcconfig"; path = "Target Support Files/Pods-Football_API/Pods-Football_API.release.xcconfig"; sourceTree = "<group>"; };
+		630752B1282445A0007E2687 /* Football_APITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = Football_APITests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
+		630752B3282445A0007E2687 /* Football_APITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Football_APITests.swift; sourceTree = "<group>"; };
+		630752BA282445EA007E2687 /* VerificationServiceTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VerificationServiceTests.swift; sourceTree = "<group>"; };
 		63189887282252CD0098AC3A /* WelcomeViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WelcomeViewController.swift; sourceTree = "<group>"; };
 		634A0A17281197B5009BEB6D /* Football_API.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Football_API.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		634A0A1A281197B5009BEB6D /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
@@ -48,12 +64,20 @@
 		639698B9281EB7170001E73D /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
 		639698C9281F2EDD0001E73D /* ErrorTypes.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ErrorTypes.swift; sourceTree = "<group>"; };
 		639CB087281D5D0E006E7575 /* HTTPHeaderExtension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HTTPHeaderExtension.swift; sourceTree = "<group>"; };
+		63CDFDC828243035004B34C7 /* VerificationService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VerificationService.swift; sourceTree = "<group>"; };
 		63D2F982281E876700990303 /* Keys.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Keys.plist; sourceTree = "<group>"; };
 		714DFB1FEE1782F1CBBF5530 /* Pods_Football_API.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_Football_API.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		D33834ADAC9F2EF2DC444FED /* Pods-Football_API.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Football_API.debug.xcconfig"; path = "Target Support Files/Pods-Football_API/Pods-Football_API.debug.xcconfig"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
+		630752AE282445A0007E2687 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 		634A0A14281197B5009BEB6D /* Frameworks */ = {
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
@@ -87,10 +111,20 @@
 			path = Pods;
 			sourceTree = "<group>";
 		};
+		630752B2282445A0007E2687 /* Football_APITests */ = {
+			isa = PBXGroup;
+			children = (
+				630752B3282445A0007E2687 /* Football_APITests.swift */,
+				630752BA282445EA007E2687 /* VerificationServiceTests.swift */,
+			);
+			path = Football_APITests;
+			sourceTree = "<group>";
+		};
 		634A0A0E281197B5009BEB6D = {
 			isa = PBXGroup;
 			children = (
 				634A0A19281197B5009BEB6D /* Football_API */,
+				630752B2282445A0007E2687 /* Football_APITests */,
 				634A0A18281197B5009BEB6D /* Products */,
 				4E9B27E36AD7829AC8BB29BD /* Pods */,
 				2AD02E5F3DE44B4D1A6F3174 /* Frameworks */,
@@ -101,6 +135,7 @@
 			isa = PBXGroup;
 			children = (
 				634A0A17281197B5009BEB6D /* Football_API.app */,
+				630752B1282445A0007E2687 /* Football_APITests.xctest */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -108,11 +143,11 @@
 		634A0A19281197B5009BEB6D /* Football_API */ = {
 			isa = PBXGroup;
 			children = (
+				63CDFDC728243017004B34C7 /* Services */,
 				634A0A632812D364009BEB6D /* Extension */,
 				634A0A3028119996009BEB6D /* Controller */,
 				634A0A2F28119990009BEB6D /* View */,
 				634A0A2E28119986009BEB6D /* Model */,
-				634A0A31281199B7009BEB6D /* NetworkService.swift */,
 				634A0A1A281197B5009BEB6D /* AppDelegate.swift */,
 				634A0A1C281197B5009BEB6D /* SceneDelegate.swift */,
 				634A0A23281197BB009BEB6D /* Assets.xcassets */,
@@ -160,9 +195,36 @@
 			path = Extension;
 			sourceTree = "<group>";
 		};
+		63CDFDC728243017004B34C7 /* Services */ = {
+			isa = PBXGroup;
+			children = (
+				634A0A31281199B7009BEB6D /* NetworkService.swift */,
+				63CDFDC828243035004B34C7 /* VerificationService.swift */,
+			);
+			path = Services;
+			sourceTree = "<group>";
+		};
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
+		630752B0282445A0007E2687 /* Football_APITests */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 630752B9282445A0007E2687 /* Build configuration list for PBXNativeTarget "Football_APITests" */;
+			buildPhases = (
+				630752AD282445A0007E2687 /* Sources */,
+				630752AE282445A0007E2687 /* Frameworks */,
+				630752AF282445A0007E2687 /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+				630752B6282445A0007E2687 /* PBXTargetDependency */,
+			);
+			name = Football_APITests;
+			productName = Football_APITests;
+			productReference = 630752B1282445A0007E2687 /* Football_APITests.xctest */;
+			productType = "com.apple.product-type.bundle.unit-test";
+		};
 		634A0A16281197B5009BEB6D /* Football_API */ = {
 			isa = PBXNativeTarget;
 			buildConfigurationList = 634A0A2B281197BB009BEB6D /* Build configuration list for PBXNativeTarget "Football_API" */;
@@ -199,6 +261,10 @@
 				LastSwiftUpdateCheck = 1330;
 				LastUpgradeCheck = 1330;
 				TargetAttributes = {
+					630752B0282445A0007E2687 = {
+						CreatedOnToolsVersion = 13.3.1;
+						TestTargetID = 634A0A16281197B5009BEB6D;
+					};
 					634A0A16281197B5009BEB6D = {
 						CreatedOnToolsVersion = 13.3.1;
 					};
@@ -223,11 +289,19 @@
 			projectRoot = "";
 			targets = (
 				634A0A16281197B5009BEB6D /* Football_API */,
+				630752B0282445A0007E2687 /* Football_APITests */,
 			);
 		};
 /* End PBXProject section */
 
 /* Begin PBXResourcesBuildPhase section */
+		630752AF282445A0007E2687 /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 		634A0A15281197B5009BEB6D /* Resources */ = {
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
@@ -285,6 +359,15 @@
 /* End PBXShellScriptBuildPhase section */
 
 /* Begin PBXSourcesBuildPhase section */
+		630752AD282445A0007E2687 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				630752BB282445EA007E2687 /* VerificationServiceTests.swift in Sources */,
+				630752B4282445A0007E2687 /* Football_APITests.swift in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 		634A0A13281197B5009BEB6D /* Sources */ = {
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
@@ -296,6 +379,7 @@
 				634A0A1F281197B5009BEB6D /* ViewController.swift in Sources */,
 				639698CA281F2EDD0001E73D /* ErrorTypes.swift in Sources */,
 				634A0A1B281197B5009BEB6D /* AppDelegate.swift in Sources */,
+				63CDFDC928243035004B34C7 /* VerificationService.swift in Sources */,
 				634A0A1D281197B5009BEB6D /* SceneDelegate.swift in Sources */,
 				634A0A32281199B7009BEB6D /* NetworkService.swift in Sources */,
 				634A0A672812D4E5009BEB6D /* FootballCell.swift in Sources */,
@@ -303,6 +387,14 @@
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXSourcesBuildPhase section */
+
+/* Begin PBXTargetDependency section */
+		630752B6282445A0007E2687 /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = 634A0A16281197B5009BEB6D /* Football_API */;
+			targetProxy = 630752B5282445A0007E2687 /* PBXContainerItemProxy */;
+		};
+/* End PBXTargetDependency section */
 
 /* Begin PBXVariantGroup section */
 		634A0A20281197B5009BEB6D /* Main.storyboard */ = {
@@ -324,6 +416,40 @@
 /* End PBXVariantGroup section */
 
 /* Begin XCBuildConfiguration section */
+		630752B7282445A0007E2687 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				BUNDLE_LOADER = "$(TEST_HOST)";
+				CODE_SIGN_STYLE = Automatic;
+				CURRENT_PROJECT_VERSION = 1;
+				GENERATE_INFOPLIST_FILE = YES;
+				MARKETING_VERSION = 1.0;
+				PRODUCT_BUNDLE_IDENTIFIER = "com.tikitakamobile.Football-APITests";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_EMIT_LOC_STRINGS = NO;
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/Football_API.app/Football_API";
+			};
+			name = Debug;
+		};
+		630752B8282445A0007E2687 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				BUNDLE_LOADER = "$(TEST_HOST)";
+				CODE_SIGN_STYLE = Automatic;
+				CURRENT_PROJECT_VERSION = 1;
+				GENERATE_INFOPLIST_FILE = YES;
+				MARKETING_VERSION = 1.0;
+				PRODUCT_BUNDLE_IDENTIFIER = "com.tikitakamobile.Football-APITests";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_EMIT_LOC_STRINGS = NO;
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/Football_API.app/Football_API";
+			};
+			name = Release;
+		};
 		634A0A29281197BB009BEB6D /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
@@ -497,6 +623,15 @@
 /* End XCBuildConfiguration section */
 
 /* Begin XCConfigurationList section */
+		630752B9282445A0007E2687 /* Build configuration list for PBXNativeTarget "Football_APITests" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				630752B7282445A0007E2687 /* Debug */,
+				630752B8282445A0007E2687 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
 		634A0A12281197B5009BEB6D /* Build configuration list for PBXProject "Football_API" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
