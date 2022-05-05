@@ -1,5 +1,6 @@
 name: iOS Test Workflow
-on:
+on: 
+
   push:
     branches:
       - main
@@ -7,35 +8,13 @@ on:
     branches:
       - main
 jobs:
-  build:
-    name: Build and Test default scheme using iPhone/iPad simulator
-    runs-on: macos-latest
+  Run_workspace_Tests:
+    runs-on: macOS-latest
     steps:
-      - name: Checkout
-        uses: actions/checkout@v2
-      - name: Force Xcode 11
-        run: sudo xcode-select -switch /Applications/Xcode_11.7.app
-      - name: iOS build setup
-        run: >-
-          xcodebuild test -workspace Football_API.xcodeproj/project.xcworkspace
-          -scheme Football_API -destination 'platform=iOS Simulator,name=iPhone
-          11,OS=13.7'
-      - name: testing ... iPhone 11
-        run: >-
-          xcodebuild test -workspace Football_API.xcodeproj/project.xcworkspace
-          -scheme Football_API -destination 'platform=iOS Simulator,name=iPhone
-          11,OS=13.7'
-      - name: testing ... iPhone 11 Pro Max
-        run: >-
-          xcodebuild test -workspace Football_API.xcodeproj/project.xcworkspace
-          -scheme Football_API -destination 'platform=iOS Simulator,name=iPhone 11
-          Pro Max,OS=13.7'
-      - name: testing ... iPad Air
-        run: >-
-          xcodebuild test -workspace Football_API.xcodeproj/project.xcworkspace
-          -scheme Football_API -destination 'platform=iOS Simulator,name=iPad Air
-          (3rd generation),OS=13.7'
-      - name: testing ... iPad Pro 12.9
-        run: >-
-          xcodebuild test -workspace Football_API.xcodeproj/project.xcworkspace
-          -scheme Football_API -destination 'platform=iOS Simulator,name=iPad Pro (12.9-inch) (4th generation),OS=13.7'
+    - uses: actions/checkout@v1
+    - name: List available Xcode versions
+      run: ls /Applications | grep Xcode
+    - name: Select Xcode
+      run: sudo xcode-select -switch /Applications/Xcode_12.2.app && /usr/bin/xcodebuild -version
+    - name: Run unit tests
+      run: xcodebuild test -scheme Football_API -workspace Football_API.xcworkspace -destination 'platform=iOS Simulator,name=iPhone 11,OS=14.2' | xcpretty && exit ${PIPESTATUS[0]}
