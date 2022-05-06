@@ -111,8 +111,4 @@ xcuserdata
 !*.xcworkspace/contents.xcworkspacedata
 /*.gcno
 **/xcshareddata/WorkspaceSettings.xcsettings
-
-## KEYS
-Keys.plist
-
 # End of https://www.toptal.com/developers/gitignore/api/xcode,swift,swiftpackagemanager,cocoapods
