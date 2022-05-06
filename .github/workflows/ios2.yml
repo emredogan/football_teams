@@ -15,4 +15,4 @@ jobs:
     - name: CocoaPod Install
       run: pod install
     - name: Run unit tests
-      run: xcodebuild clean test -scheme Football_API -project Football_API.xcodeproj -destination 'platform=iOS Simulator,name=iPhone 11,OS=15.2' clean build test
+      run: xcodebuild clean test -scheme Football_API -project Football_API.xcworkspace -destination 'platform=iOS Simulator,name=iPhone 11,OS=15.2' clean build test
