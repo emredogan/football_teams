@@ -10,4 +10,4 @@ jobs:
     - name: Select Xcode
       run: sudo xcode-select -switch /Applications/Xcode_13.2.app && /usr/bin/xcodebuild -version
     - name: Run tests
-      run: xcodebuild test -scheme Football_API -project Football_API.xcodeproj -destination 'platform=iOS Simulator,name=iPhone 11,OS=13.0' | xcpretty && exit ${PIPESTATUS[0]}
+      run: xcodebuild test -scheme Football_API -project Football_API.xcodeproj -destination 'platform:iOS Simulator, id:A85A40DC-270E-47AF-9854-4F33F765E356, OS:13.0, name:iPhone 11' | xcpretty && exit ${PIPESTATUS[0]}
