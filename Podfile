@@ -6,7 +6,7 @@ target 'Football_API' do
   use_frameworks!
 
   # Pods for Football_API
-  pod 'Kingfisher', '~> 7.0'
+pod 'Kingfisher'
 pod 'IQKeyboardManager' #iOS8 and later
 pod 'lottie-ios'
 pod 'Alamofire'
