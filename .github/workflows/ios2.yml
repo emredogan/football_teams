@@ -25,6 +25,6 @@ jobs:
         run: pod install
       - name: iOS build setup
         run: >-
-          xcodebuild test -workspace TestApp.xcodeproj/project.xcworkspace
-          -scheme TestApp -destination 'platform=iOS Simulator,name=iPhone
+          xcodebuild test -workspace Football_API.xcodeproj/project.xcworkspace
+          -scheme Football_API -destination 'platform=iOS Simulator,name=iPhone
           SE (3rd generation),OS=15.4'
