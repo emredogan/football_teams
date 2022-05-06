@@ -10,7 +10,6 @@
 		159434981A5316A8A535FBC0 /* Pods_Football_API.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 714DFB1FEE1782F1CBBF5530 /* Pods_Football_API.framework */; };
 		630752B4282445A0007E2687 /* Football_APITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 630752B3282445A0007E2687 /* Football_APITests.swift */; };
 		630752BB282445EA007E2687 /* VerificationServiceTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 630752BA282445EA007E2687 /* VerificationServiceTests.swift */; };
-		631898862821C56A0098AC3A /* Lottie in Frameworks */ = {isa = PBXBuildFile; productRef = 631898852821C56A0098AC3A /* Lottie */; };
 		63189888282252CE0098AC3A /* WelcomeViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 63189887282252CD0098AC3A /* WelcomeViewController.swift */; };
 		634A0A1B281197B5009BEB6D /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 634A0A1A281197B5009BEB6D /* AppDelegate.swift */; };
 		634A0A1D281197B5009BEB6D /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 634A0A1C281197B5009BEB6D /* SceneDelegate.swift */; };
@@ -23,11 +22,7 @@
 		634A0A652812D463009BEB6D /* ImageExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 634A0A642812D463009BEB6D /* ImageExtension.swift */; };
 		634A0A672812D4E5009BEB6D /* FootballCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 634A0A662812D4E5009BEB6D /* FootballCell.swift */; };
 		639698BA281EB7170001E73D /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 639698B9281EB7170001E73D /* GoogleService-Info.plist */; };
-		639698C4281EC6E70001E73D /* FirebaseFirestore in Frameworks */ = {isa = PBXBuildFile; productRef = 639698C3281EC6E70001E73D /* FirebaseFirestore */; };
-		639698C6281EC6E70001E73D /* FirebaseFirestoreSwift-Beta in Frameworks */ = {isa = PBXBuildFile; productRef = 639698C5281EC6E70001E73D /* FirebaseFirestoreSwift-Beta */; };
-		639698C8281EC6E70001E73D /* FirebaseFunctionsSwift-Beta in Frameworks */ = {isa = PBXBuildFile; productRef = 639698C7281EC6E70001E73D /* FirebaseFunctionsSwift-Beta */; };
 		639698CA281F2EDD0001E73D /* ErrorTypes.swift in Sources */ = {isa = PBXBuildFile; fileRef = 639698C9281F2EDD0001E73D /* ErrorTypes.swift */; };
-		639CB086281D3A37006E7575 /* Alamofire in Frameworks */ = {isa = PBXBuildFile; productRef = 639CB085281D3A37006E7575 /* Alamofire */; };
 		639CB088281D5D0E006E7575 /* HTTPHeaderExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 639CB087281D5D0E006E7575 /* HTTPHeaderExtension.swift */; };
 		63CDFDC928243035004B34C7 /* VerificationService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 63CDFDC828243035004B34C7 /* VerificationService.swift */; };
 		63D2F983281E876700990303 /* Keys.plist in Resources */ = {isa = PBXBuildFile; fileRef = 63D2F982281E876700990303 /* Keys.plist */; };
@@ -83,11 +78,6 @@
 			buildActionMask = 2147483647;
 			files = (
 				159434981A5316A8A535FBC0 /* Pods_Football_API.framework in Frameworks */,
-				639698C6281EC6E70001E73D /* FirebaseFirestoreSwift-Beta in Frameworks */,
-				639CB086281D3A37006E7575 /* Alamofire in Frameworks */,
-				639698C4281EC6E70001E73D /* FirebaseFirestore in Frameworks */,
-				639698C8281EC6E70001E73D /* FirebaseFunctionsSwift-Beta in Frameworks */,
-				631898862821C56A0098AC3A /* Lottie in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -241,11 +231,6 @@
 			);
 			name = Football_API;
 			packageProductDependencies = (
-				639CB085281D3A37006E7575 /* Alamofire */,
-				639698C3281EC6E70001E73D /* FirebaseFirestore */,
-				639698C5281EC6E70001E73D /* FirebaseFirestoreSwift-Beta */,
-				639698C7281EC6E70001E73D /* FirebaseFunctionsSwift-Beta */,
-				631898852821C56A0098AC3A /* Lottie */,
 			);
 			productName = Football_API;
 			productReference = 634A0A17281197B5009BEB6D /* Football_API.app */;
@@ -280,9 +265,6 @@
 			);
 			mainGroup = 634A0A0E281197B5009BEB6D;
 			packageReferences = (
-				639CB084281D3A37006E7575 /* XCRemoteSwiftPackageReference "Alamofire" */,
-				639698C2281EC6E70001E73D /* XCRemoteSwiftPackageReference "firebase-ios-sdk" */,
-				631898842821C5690098AC3A /* XCRemoteSwiftPackageReference "lottie-ios" */,
 			);
 			productRefGroup = 634A0A18281197B5009BEB6D /* Products */;
 			projectDirPath = "";
@@ -651,61 +633,6 @@
 			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
-
-/* Begin XCRemoteSwiftPackageReference section */
-		631898842821C5690098AC3A /* XCRemoteSwiftPackageReference "lottie-ios" */ = {
-			isa = XCRemoteSwiftPackageReference;
-			repositoryURL = "https://github.com/airbnb/lottie-ios";
-			requirement = {
-				kind = upToNextMajorVersion;
-				minimumVersion = 3.0.0;
-			};
-		};
-		639698C2281EC6E70001E73D /* XCRemoteSwiftPackageReference "firebase-ios-sdk" */ = {
-			isa = XCRemoteSwiftPackageReference;
-			repositoryURL = "https://github.com/firebase/firebase-ios-sdk.git";
-			requirement = {
-				kind = upToNextMajorVersion;
-				minimumVersion = 8.0.0;
-			};
-		};
-		639CB084281D3A37006E7575 /* XCRemoteSwiftPackageReference "Alamofire" */ = {
-			isa = XCRemoteSwiftPackageReference;
-			repositoryURL = "https://github.com/Alamofire/Alamofire.git";
-			requirement = {
-				kind = upToNextMajorVersion;
-				minimumVersion = 5.0.0;
-			};
-		};
-/* End XCRemoteSwiftPackageReference section */
-
-/* Begin XCSwiftPackageProductDependency section */
-		631898852821C56A0098AC3A /* Lottie */ = {
-			isa = XCSwiftPackageProductDependency;
-			package = 631898842821C5690098AC3A /* XCRemoteSwiftPackageReference "lottie-ios" */;
-			productName = Lottie;
-		};
-		639698C3281EC6E70001E73D /* FirebaseFirestore */ = {
-			isa = XCSwiftPackageProductDependency;
-			package = 639698C2281EC6E70001E73D /* XCRemoteSwiftPackageReference "firebase-ios-sdk" */;
-			productName = FirebaseFirestore;
-		};
-		639698C5281EC6E70001E73D /* FirebaseFirestoreSwift-Beta */ = {
-			isa = XCSwiftPackageProductDependency;
-			package = 639698C2281EC6E70001E73D /* XCRemoteSwiftPackageReference "firebase-ios-sdk" */;
-			productName = "FirebaseFirestoreSwift-Beta";
-		};
-		639698C7281EC6E70001E73D /* FirebaseFunctionsSwift-Beta */ = {
-			isa = XCSwiftPackageProductDependency;
-			package = 639698C2281EC6E70001E73D /* XCRemoteSwiftPackageReference "firebase-ios-sdk" */;
-			productName = "FirebaseFunctionsSwift-Beta";
-		};
-		639CB085281D3A37006E7575 /* Alamofire */ = {
-			isa = XCSwiftPackageProductDependency;
-			package = 639CB084281D3A37006E7575 /* XCRemoteSwiftPackageReference "Alamofire" */;
-			productName = Alamofire;
-		};
-/* End XCSwiftPackageProductDependency section */
 	};
 	rootObject = 634A0A0F281197B5009BEB6D /* Project object */;
 }
