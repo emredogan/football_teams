@@ -5,21 +5,10 @@ on: [push]
 jobs:
   run_tests:
     runs-on: macos-11
-    strategy:
-      matrix:
-        include:
-          - ios: "15.2"
-          - ios: "14.0"
-          - ios: "13.2"
-          - ios: "13.0"
-          - ios: "12.2"
-          - ios: "12.0"
-          - ios: "12.2"
-          
-    name: test iOS (${{ matrix.ios }})
+
     steps:
     - uses: actions/checkout@v1
     - name: Select Xcode
       run: sudo xcode-select -switch /Applications/Xcode_13.2.app && /usr/bin/xcodebuild -version
     - name: Run unit tests
-      run: xcodebuild test -scheme Football_API -project Football_API.xcodeproj -destination 'platform=iOS Simulator,name=iPhone 11,OS=$' | xcpretty && exit ${PIPESTATUS[0]}
+      run: xcodebuild test -scheme Football_API -project Football_API.xcodeproj -destination 'id=DFB14113-4697-4E2D-AD3F-B4FBA4B62969' clean build test
