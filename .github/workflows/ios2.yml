@@ -10,9 +10,7 @@ jobs:
     - uses: actions/checkout@v1
     - name: Select Xcode
       run: sudo xcode-select -switch /Applications/Xcode_13.2.app && /usr/bin/xcodebuild -version
-    - name: CocoaPod Deinstall
-      run: pod deintegrate
     - name: CocoaPod Install
       run: pod install
     - name: Run unit tests
-      run: xcodebuild clean test -scheme Football_API -project Football_API.xcworkspace -destination 'platform=iOS Simulator,name=iPhone 11,OS=15.2' clean build test
+      run: xcodebuild clean test -scheme Football_API -workspace Football_API.xcworkspace -destination 'platform=iOS Simulator,name=iPhone 11,OS=15.2' clean build test
