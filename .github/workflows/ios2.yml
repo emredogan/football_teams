@@ -13,11 +13,13 @@ jobs:
     
     strategy:
         matrix:
-          destination: ['platform=iOS Simulator,OS=13.2.2,name=iPhone 11 Pro Max']
+          destination: ['platform=iOS Simulator,OS=13.3,name=iPhone 11 Pro']
 
     steps:
       - name: Checkout
         uses: actions/checkout@master
+      - name: Simulator
+        run: xcrun instruments -w "iPhone 11 Pro (13.3) [" || true
       - name: Build
         run: |
           xcodebuild clean build -project Football_API.xcodeproj -scheme Football_API -destination "${destination}" CODE_SIGN_IDENTITY="" CODE_SIGNING_REQUIRED=NO ONLY_ACTIVE_ARCH=NO
