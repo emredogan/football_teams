@@ -15,9 +15,6 @@ jobs:
           - ios: "12.2"
           - ios: "12.0"
           - ios: "12.2"
-          - ios: "11.0"
-          - ios: "10.2"
-          - ios: "10.0"
           
     name: test iOS (${{ matrix.ios }})
     steps:
