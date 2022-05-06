@@ -1,32 +1,13 @@
 name: iOS starter workflow
 
-on:
-  push:
-    branches: [ main ]
-  pull_request:
-    branches: [ main ]
+on: [push]
 
 jobs:
-  build:
-    name: Build and Test default scheme using any available iPhone simulator
-    runs-on: macos-latest
-    
-    strategy:
-        matrix:
-          destination: ["platform=iOS Simulator,OS=14.0,name=iPhone 11 Pro"]
-
+  run_tests:
+    runs-on: macos-11
     steps:
-      - name: Checkout
-        uses: actions/checkout@master
-      - name: Simulator
-        run: xcrun instruments -w "iPhone 11 Pro (14.0) [" || true
-      - name: Build
-        run: |
-          xcodebuild clean build -project Football_API.xcodeproj -scheme Football_API -destination "${destination}" CODE_SIGN_IDENTITY="" CODE_SIGNING_REQUIRED=NO ONLY_ACTIVE_ARCH=NO
-        env: 
-         destination: ${{ matrix.destination }}
-      - name: Test
-        run: |
-          xcodebuild clean test -project GHFollowers.xcodeproj -scheme GHFollowersTests -destination "${destination}" CODE_SIGN_IDENTITY="" CODE_SIGNING_REQUIRED=NO ONLY_ACTIVE_ARCH=NO
-        env: 
-         destination: ${{ matrix.destination }}
+    - uses: actions/checkout@v1
+    - name: Select Xcode
+      run: sudo xcode-select -switch /Applications/Xcode_13.0.app && /usr/bin/xcodebuild -version
+    - name: Run tests
+      run: xcodebuild test -scheme MyProjectName -project MyProjectName.xcodeproj -destination 'platform=iOS Simulator,name=iPhone 12,OS=15.0' | xcpretty && exit ${PIPESTATUS[0]}
