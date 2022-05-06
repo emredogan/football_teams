@@ -24,7 +24,5 @@ jobs:
       - name: CocoaPod Install
         run: pod install
       - name: iOS build setup
-        run: >-
-          xcodebuild test -workspace Football_API.xcodeproj/project.xcworkspace
-          -scheme Football_API -destination 'platform=iOS Simulator,name=iPhone
-          11,OS=13.7'
+        run: xcodebuild test -scheme Football_API -workspace Football_API.xcworkspace -destination 'platform=iOS Simulator,name=iPhone 11,OS=14.2' | xcpretty && exit ${PIPESTATUS[0]}
+
