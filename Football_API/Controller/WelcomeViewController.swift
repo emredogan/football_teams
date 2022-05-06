@@ -7,6 +7,7 @@
 
 import UIKit
 import Lottie
+import LocalAuthentication
 
 class WelcomeViewController: UIViewController {
     @IBOutlet weak var welcomeAnimationView: AnimationView!
@@ -16,6 +17,8 @@ class WelcomeViewController: UIViewController {
     @IBOutlet weak var userNameTextView: UITextField!
     
     @IBOutlet weak var passwordTextView: UITextField!
+    
+    @IBOutlet weak var faceIDImage: UIImageView!
     
     
     private let verificationService: VerificationService
@@ -31,13 +34,41 @@ class WelcomeViewController: UIViewController {
         super.init(coder: coder)
     }
     
-    
     override func viewDidLoad() {
         super.viewDidLoad()
         prepareLoginButton()
+        prepareFaceIDButton()
+
         playAnimation(name: "football", shouldLoop: false)
+    }
+
+    
+    @objc func faceIDTapped() {
+        let context = LAContext()
+        var error: NSError? = nil
+        
+        if context.canEvaluatePolicy(.deviceOwnerAuthenticationWithBiometrics, error: &error) {
+            let reason = "Please authorize Face ID"
+            context.evaluatePolicy(.deviceOwnerAuthenticationWithBiometrics, localizedReason: reason) {[weak self] success, error in
+                DispatchQueue.main.async {
+                    guard success, error == nil else {
+                        return
+                    }
+                    
+                    // SHOW OTHER SCREEN
+                    print("SUCCESS")
+                    let viewController = UIStoryboard(name: "Main", bundle: nil).instantiateViewController(withIdentifier: "ViewController") as! ViewController
+                    self?.navigationController?.pushViewController(viewController, animated: true)
+                }
+            }
+        } else {
+            // can't use
+            print("NOT POSSIBLE")
+        }
         
     }
+    
+    
     
     @IBAction func loginButtonClicked(_ sender: UIButton) {
         do {
@@ -47,10 +78,10 @@ class WelcomeViewController: UIViewController {
             if(userName == "EMRE DOGAN" && password == "123456") {
                 let viewController = UIStoryboard(name: "Main", bundle: nil).instantiateViewController(withIdentifier: "ViewController") as! ViewController
                 self.navigationController?.pushViewController(viewController, animated: true)
-
-
+                
+                
             }
-
+            
         } catch VerifyError.emptyValue{
             
             let alert = UIAlertController(title: "Error", message: (VerifyError.emptyValue.errorDesc), preferredStyle: UIAlertController.Style.alert)
@@ -88,6 +119,13 @@ class WelcomeViewController: UIViewController {
         loginButton.layer.borderColor = UIColor.black.cgColor
     }
     
+    private func prepareFaceIDButton() {
+        let tapGestureRecognizerFaceID = UITapGestureRecognizer(target: self, action: #selector(faceIDTapped))
+        
+        faceIDImage.isUserInteractionEnabled = true
+        faceIDImage.addGestureRecognizer(tapGestureRecognizerFaceID)
+    }
+    
     
     func playAnimation(name: String, shouldLoop: Bool) {
         let animation = Animation.named(name)
@@ -100,4 +138,7 @@ class WelcomeViewController: UIViewController {
         }
         welcomeAnimationView.play()
     }
+    
+    
+    
 }
