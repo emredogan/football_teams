@@ -21,8 +21,8 @@ jobs:
           echo $default | cat >default
           echo Using default scheme: $default
 
-      - name: CocoaPods dependencies
-        run: bundle exec pod install
+      - name: CocoaPod Install
+        run: pod install
       - name: Build
         env:
           scheme: ${{ 'default' }}
