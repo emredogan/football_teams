@@ -26,5 +26,5 @@ jobs:
       - name: iOS build setup
         run: >-
           xcodebuild test -workspace Football_API.xcodeproj/project.xcworkspace
-          -scheme Football_API -destination 'platform=iOS Simulator,name=iPhone 11
-          Pro Max,OS=13.7'
+          -scheme Football_API -destination 'platform=iOS Simulator,name=iPhone 13
+          mini,OS=15.4'
