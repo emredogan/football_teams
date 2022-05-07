@@ -11,7 +11,7 @@ import FirebaseFirestore
 
 // We have two possible ways to make network request
 enum RequestService {
-    case AF, native
+    case AF, native, Firebase
 }
 
 typealias CompletionHandlerTeams = (Result<[Team], Error>) -> Void // To make the code more readable we put an alias here.
@@ -20,6 +20,7 @@ class NetworkService {
     private var requestURL = "https://api-football-v1.p.rapidapi.com/v3/standings?season=2020&league=39"
     
     func makeDataRequest(serviceName: RequestService, completion: @escaping CompletionHandlerTeams) {
+        print("Requesting network service by, ", serviceName)
         let headers = grabKeyHeaders()
         
         switch serviceName {
@@ -30,6 +31,10 @@ class NetworkService {
             
         case .native:
             makeNativeDataRequest(headers: headers.toHeader()) { result in
+                self.deliverResult(result: result, completion: completion)
+            }
+        case .Firebase:
+            getDataFromFirebase { result in
                 self.deliverResult(result: result, completion: completion)
             }
         }

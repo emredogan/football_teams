@@ -10,17 +10,17 @@ import UIKit
 import Kingfisher
 import Alamofire
 
-enum ImageService {
-    case native, AF, KF
-}
+
 
 extension UIImageView {
     
-    func imageFromServerURL(_ urlString: String, service: ImageService) {
+    func imageFromServerURL(_ urlString: String, imageService: ImageService) {
+        print("Requesting image service by, ", imageService)
+
         //If imageurl's imagename has space then this line going to work for this
         let imageServerUrl = urlString.addingPercentEncoding(withAllowedCharacters: .urlQueryAllowed) ?? urlString
 
-        switch service {
+        switch imageService {
         case .native:
             
             if let url = URL(string: imageServerUrl) {

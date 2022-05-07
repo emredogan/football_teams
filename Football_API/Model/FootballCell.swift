@@ -16,11 +16,11 @@ class FootballCell: UITableViewCell {
         footballTeamName.text = name
         switch imageService {
         case .native:
-            footballLogo.imageFromServerURL(url, service: .native)
+            footballLogo.imageFromServerURL(url, imageService: TeamsViewController.imageRequestType)
         case .kf:
-            footballLogo.imageFromServerURL(url, service: .KF)
+            footballLogo.imageFromServerURL(url, imageService: TeamsViewController.imageRequestType)
         case .AF:
-            footballLogo.imageFromServerURL(url, service: .AF)
+            footballLogo.imageFromServerURL(url, imageService: TeamsViewController.imageRequestType)
         }
     }
 }
