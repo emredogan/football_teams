@@ -405,6 +405,13 @@
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
 				GENERATE_INFOPLIST_FILE = YES;
+				HEADER_SEARCH_PATHS = (
+					HEADER_SEARCH_PATHS,
+					"=",
+					"\"${SRCROOT}/Pods/Firebase/CoreOnly/Sources\"\nHEADER_SEARCH_PATHS",
+					"=",
+					"\"${SRCROOT}/Pods/Firebase/CoreOnly/Sources\"\n",
+				);
 				MARKETING_VERSION = 1.0;
 				PRODUCT_BUNDLE_IDENTIFIER = "com.tikitakamobile.Football-APITests";
 				PRODUCT_NAME = "$(TARGET_NAME)";
@@ -422,6 +429,13 @@
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
 				GENERATE_INFOPLIST_FILE = YES;
+				HEADER_SEARCH_PATHS = (
+					HEADER_SEARCH_PATHS,
+					"=",
+					"\"${SRCROOT}/Pods/Firebase/CoreOnly/Sources\"\nHEADER_SEARCH_PATHS",
+					"=",
+					"\"${SRCROOT}/Pods/Firebase/CoreOnly/Sources\"\n",
+				);
 				MARKETING_VERSION = 1.0;
 				PRODUCT_BUNDLE_IDENTIFIER = "com.tikitakamobile.Football-APITests";
 				PRODUCT_NAME = "$(TARGET_NAME)";
