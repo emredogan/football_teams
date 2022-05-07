@@ -12,6 +12,8 @@ class Football_APIUITests: XCTestCase {
 
     func testSuccessfulLogin() {
         app.launch()
+        sleep(2)
+
         let eMailTextField = app.textFields["E-mail"]
         eMailTextField.tap()
         eMailTextField.typeText("EMRE DOGAN")

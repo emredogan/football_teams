@@ -10,7 +10,7 @@ import Kingfisher
 import FirebaseFirestore
 import FirebaseFirestoreSwift
 
-class ViewController: UIViewController {
+class TeamsViewController: UIViewController {
     @IBOutlet weak var tableView: UITableView!
     let networkingClient = NetworkService()
     
@@ -22,7 +22,15 @@ class ViewController: UIViewController {
         tableView.dataSource = self
         tableView.delegate = self
         tableView.tableFooterView = UIView()   // To hide the empty cells
+        
+        self.navigationItem.rightBarButtonItem = UIBarButtonItem.init(barButtonSystemItem: UIBarButtonItem.SystemItem.compose, target: self, action: #selector(self.showSettings))
+
+        
         downloadData()
+    }
+    
+    @objc func showSettings() {
+        print("Show settings")
     }
     
     func downloadData() {
@@ -54,7 +62,7 @@ class ViewController: UIViewController {
     }
 }
 
-extension ViewController : UITableViewDelegate, UITableViewDataSource {
+extension TeamsViewController : UITableViewDelegate, UITableViewDataSource {
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         return teams.count
     }

@@ -57,7 +57,7 @@ class WelcomeViewController: UIViewController {
                     
                     // SHOW OTHER SCREEN
                     print("SUCCESS")
-                    let viewController = UIStoryboard(name: "Main", bundle: nil).instantiateViewController(withIdentifier: "ViewController") as! ViewController
+                    let viewController = UIStoryboard(name: "Main", bundle: nil).instantiateViewController(withIdentifier: "ViewController") as! TeamsViewController
                     self?.navigationController?.pushViewController(viewController, animated: true)
                 }
             }
@@ -76,7 +76,7 @@ class WelcomeViewController: UIViewController {
             let password = try verificationService.verifyPassword(passwordTextView.text)
             
             if(userName == "EMRE DOGAN" && password == "123456") {
-                let viewController = UIStoryboard(name: "Main", bundle: nil).instantiateViewController(withIdentifier: "ViewController") as! ViewController
+                let viewController = UIStoryboard(name: "Main", bundle: nil).instantiateViewController(withIdentifier: "ViewController") as! TeamsViewController
                 self.navigationController?.pushViewController(viewController, animated: true)
                 
                 
