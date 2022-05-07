@@ -39,6 +39,16 @@
                ReferencedContainer = "container:Football_API.xcodeproj">
             </BuildableReference>
          </TestableReference>
+         <TestableReference
+            skipped = "NO">
+            <BuildableReference
+               BuildableIdentifier = "primary"
+               BlueprintIdentifier = "632944D12826768D003B7768"
+               BuildableName = "Football_APIUITests.xctest"
+               BlueprintName = "Football_APIUITests"
+               ReferencedContainer = "container:Football_API.xcodeproj">
+            </BuildableReference>
+         </TestableReference>
       </Testables>
    </TestAction>
    <LaunchAction

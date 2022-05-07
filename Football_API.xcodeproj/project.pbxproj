@@ -11,6 +11,8 @@
 		630752B4282445A0007E2687 /* Football_APITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 630752B3282445A0007E2687 /* Football_APITests.swift */; };
 		630752BB282445EA007E2687 /* VerificationServiceTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 630752BA282445EA007E2687 /* VerificationServiceTests.swift */; };
 		63189888282252CE0098AC3A /* WelcomeViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 63189887282252CD0098AC3A /* WelcomeViewController.swift */; };
+		632944D52826768D003B7768 /* Football_APIUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 632944D42826768D003B7768 /* Football_APIUITests.swift */; };
+		632944D72826768D003B7768 /* Football_APIUITestsLaunchTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 632944D62826768D003B7768 /* Football_APIUITestsLaunchTests.swift */; };
 		634A0A1B281197B5009BEB6D /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 634A0A1A281197B5009BEB6D /* AppDelegate.swift */; };
 		634A0A1D281197B5009BEB6D /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 634A0A1C281197B5009BEB6D /* SceneDelegate.swift */; };
 		634A0A1F281197B5009BEB6D /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 634A0A1E281197B5009BEB6D /* ViewController.swift */; };
@@ -36,6 +38,13 @@
 			remoteGlobalIDString = 634A0A16281197B5009BEB6D;
 			remoteInfo = Football_API;
 		};
+		632944D82826768D003B7768 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 634A0A0F281197B5009BEB6D /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = 634A0A16281197B5009BEB6D;
+			remoteInfo = Football_API;
+		};
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
@@ -44,6 +53,9 @@
 		630752B3282445A0007E2687 /* Football_APITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Football_APITests.swift; sourceTree = "<group>"; };
 		630752BA282445EA007E2687 /* VerificationServiceTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VerificationServiceTests.swift; sourceTree = "<group>"; };
 		63189887282252CD0098AC3A /* WelcomeViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WelcomeViewController.swift; sourceTree = "<group>"; };
+		632944D22826768D003B7768 /* Football_APIUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = Football_APIUITests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
+		632944D42826768D003B7768 /* Football_APIUITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Football_APIUITests.swift; sourceTree = "<group>"; };
+		632944D62826768D003B7768 /* Football_APIUITestsLaunchTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Football_APIUITestsLaunchTests.swift; sourceTree = "<group>"; };
 		634A0A17281197B5009BEB6D /* Football_API.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Football_API.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		634A0A1A281197B5009BEB6D /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		634A0A1C281197B5009BEB6D /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
@@ -67,6 +79,13 @@
 
 /* Begin PBXFrameworksBuildPhase section */
 		630752AE282445A0007E2687 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		632944CF2826768D003B7768 /* Frameworks */ = {
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
@@ -110,11 +129,21 @@
 			path = Football_APITests;
 			sourceTree = "<group>";
 		};
+		632944D32826768D003B7768 /* Football_APIUITests */ = {
+			isa = PBXGroup;
+			children = (
+				632944D42826768D003B7768 /* Football_APIUITests.swift */,
+				632944D62826768D003B7768 /* Football_APIUITestsLaunchTests.swift */,
+			);
+			path = Football_APIUITests;
+			sourceTree = "<group>";
+		};
 		634A0A0E281197B5009BEB6D = {
 			isa = PBXGroup;
 			children = (
 				634A0A19281197B5009BEB6D /* Football_API */,
 				630752B2282445A0007E2687 /* Football_APITests */,
+				632944D32826768D003B7768 /* Football_APIUITests */,
 				634A0A18281197B5009BEB6D /* Products */,
 				4E9B27E36AD7829AC8BB29BD /* Pods */,
 				2AD02E5F3DE44B4D1A6F3174 /* Frameworks */,
@@ -126,6 +155,7 @@
 			children = (
 				634A0A17281197B5009BEB6D /* Football_API.app */,
 				630752B1282445A0007E2687 /* Football_APITests.xctest */,
+				632944D22826768D003B7768 /* Football_APIUITests.xctest */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -215,6 +245,24 @@
 			productReference = 630752B1282445A0007E2687 /* Football_APITests.xctest */;
 			productType = "com.apple.product-type.bundle.unit-test";
 		};
+		632944D12826768D003B7768 /* Football_APIUITests */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 632944DA2826768D003B7768 /* Build configuration list for PBXNativeTarget "Football_APIUITests" */;
+			buildPhases = (
+				632944CE2826768D003B7768 /* Sources */,
+				632944CF2826768D003B7768 /* Frameworks */,
+				632944D02826768D003B7768 /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+				632944D92826768D003B7768 /* PBXTargetDependency */,
+			);
+			name = Football_APIUITests;
+			productName = Football_APIUITests;
+			productReference = 632944D22826768D003B7768 /* Football_APIUITests.xctest */;
+			productType = "com.apple.product-type.bundle.ui-testing";
+		};
 		634A0A16281197B5009BEB6D /* Football_API */ = {
 			isa = PBXNativeTarget;
 			buildConfigurationList = 634A0A2B281197BB009BEB6D /* Build configuration list for PBXNativeTarget "Football_API" */;
@@ -250,6 +298,10 @@
 						CreatedOnToolsVersion = 13.3.1;
 						TestTargetID = 634A0A16281197B5009BEB6D;
 					};
+					632944D12826768D003B7768 = {
+						CreatedOnToolsVersion = 13.3.1;
+						TestTargetID = 634A0A16281197B5009BEB6D;
+					};
 					634A0A16281197B5009BEB6D = {
 						CreatedOnToolsVersion = 13.3.1;
 					};
@@ -272,12 +324,20 @@
 			targets = (
 				634A0A16281197B5009BEB6D /* Football_API */,
 				630752B0282445A0007E2687 /* Football_APITests */,
+				632944D12826768D003B7768 /* Football_APIUITests */,
 			);
 		};
 /* End PBXProject section */
 
 /* Begin PBXResourcesBuildPhase section */
 		630752AF282445A0007E2687 /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		632944D02826768D003B7768 /* Resources */ = {
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
@@ -350,6 +410,15 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
+		632944CE2826768D003B7768 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				632944D72826768D003B7768 /* Football_APIUITestsLaunchTests.swift in Sources */,
+				632944D52826768D003B7768 /* Football_APIUITests.swift in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 		634A0A13281197B5009BEB6D /* Sources */ = {
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
@@ -375,6 +444,11 @@
 			isa = PBXTargetDependency;
 			target = 634A0A16281197B5009BEB6D /* Football_API */;
 			targetProxy = 630752B5282445A0007E2687 /* PBXContainerItemProxy */;
+		};
+		632944D92826768D003B7768 /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = 634A0A16281197B5009BEB6D /* Football_API */;
+			targetProxy = 632944D82826768D003B7768 /* PBXContainerItemProxy */;
 		};
 /* End PBXTargetDependency section */
 
@@ -446,6 +520,38 @@
 			};
 			name = Release;
 		};
+		632944DB2826768D003B7768 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				CODE_SIGN_STYLE = Automatic;
+				CURRENT_PROJECT_VERSION = 1;
+				GENERATE_INFOPLIST_FILE = YES;
+				MARKETING_VERSION = 1.0;
+				PRODUCT_BUNDLE_IDENTIFIER = "com.tikitakamobile.Football-APIUITests";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_EMIT_LOC_STRINGS = NO;
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+				TEST_TARGET_NAME = Football_API;
+			};
+			name = Debug;
+		};
+		632944DC2826768D003B7768 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				CODE_SIGN_STYLE = Automatic;
+				CURRENT_PROJECT_VERSION = 1;
+				GENERATE_INFOPLIST_FILE = YES;
+				MARKETING_VERSION = 1.0;
+				PRODUCT_BUNDLE_IDENTIFIER = "com.tikitakamobile.Football-APIUITests";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_EMIT_LOC_STRINGS = NO;
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+				TEST_TARGET_NAME = Football_API;
+			};
+			name = Release;
+		};
 		634A0A29281197BB009BEB6D /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
@@ -496,7 +602,7 @@
 				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
 				GCC_WARN_UNUSED_FUNCTION = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
-				IPHONEOS_DEPLOYMENT_TARGET = 15.0;
+				IPHONEOS_DEPLOYMENT_TARGET = 15.4;
 				MTL_ENABLE_DEBUG_INFO = INCLUDE_SOURCE;
 				MTL_FAST_MATH = YES;
 				ONLY_ACTIVE_ARCH = YES;
@@ -550,7 +656,7 @@
 				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
 				GCC_WARN_UNUSED_FUNCTION = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
-				IPHONEOS_DEPLOYMENT_TARGET = 15.0;
+				IPHONEOS_DEPLOYMENT_TARGET = 15.4;
 				MTL_ENABLE_DEBUG_INFO = NO;
 				MTL_FAST_MATH = YES;
 				SDKROOT = iphoneos;
@@ -624,6 +730,15 @@
 			buildConfigurations = (
 				630752B7282445A0007E2687 /* Debug */,
 				630752B8282445A0007E2687 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		632944DA2826768D003B7768 /* Build configuration list for PBXNativeTarget "Football_APIUITests" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				632944DB2826768D003B7768 /* Debug */,
+				632944DC2826768D003B7768 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
