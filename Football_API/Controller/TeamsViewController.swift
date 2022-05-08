@@ -19,12 +19,16 @@ class TeamsViewController: UIViewController {
     @IBOutlet weak var tableView: UITableView!
     let networkingClient = NetworkService()
     
+    private var isDownloadingData = false
+    
     private var teams = [Team]()
     private let fireDB = Firestore.firestore()
     
     override func viewWillAppear(_ animated: Bool) {
-        downloadData(reqService: networkService)
-        changeNavigationHeader()
+        if(!isDownloadingData) {
+            downloadData(reqService: networkService)
+            changeNavigationHeader()
+        }
     }
     
     override func viewDidLoad() {
@@ -46,12 +50,15 @@ class TeamsViewController: UIViewController {
     }
     
     func downloadData(reqService: RequestService) {
+        isDownloadingData = true
         changeNavigationHeader()
-        networkingClient.makeDataRequest(serviceName: reqService) { result in
+        networkingClient.makeDataRequest(serviceName: reqService) { [weak self] result in
             switch result {
             case .success(let teams):
-                self.handleResult(result: teams)
+                self?.handleResult(result: teams)
+                self?.isDownloadingData = false
             case .failure(let error):
+                self?.isDownloadingData = false
                 // create the alert
                 let alert = UIAlertController(title: "Warning", message: "API call has failed, attempting to retrieve data from Firebase", preferredStyle: UIAlertController.Style.alert)
                 
@@ -59,10 +66,10 @@ class TeamsViewController: UIViewController {
                 alert.addAction(UIAlertAction(title: "OK", style: UIAlertAction.Style.default, handler: nil))
                 
                 // show the alert
-                self.present(alert, animated: true, completion: nil)
-                self.networkService = RequestService.Firebase
-                self.downloadData(reqService: self.networkService)
-                self.changeNavigationHeader()
+                self?.present(alert, animated: true, completion: nil)
+                self?.networkService = RequestService.Firebase
+                self?.downloadData(reqService: self?.networkService ?? RequestService.native)
+                self?.changeNavigationHeader()
             }
         }
     }
