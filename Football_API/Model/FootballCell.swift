@@ -12,19 +12,15 @@ class FootballCell: UITableViewCell {
     @IBOutlet weak var footballLogo: UIImageView!
     @IBOutlet weak var footballTeamName: UILabel!
     
-    func setupCell(name: String, url: String, imageService: Service) {
+    func setupCell(name: String, url: String, imageService: ImageService) {
         footballTeamName.text = name
         switch imageService {
         case .native:
-            footballLogo.imageFromServerURL(url, imageService: TeamsViewController.imageRequestType)
-        case .kf:
-            footballLogo.imageFromServerURL(url, imageService: TeamsViewController.imageRequestType)
+            footballLogo.imageFromServerURL(url, imageService: imageService)
+        case .KF:
+            footballLogo.imageFromServerURL(url, imageService: imageService)
         case .AF:
-            footballLogo.imageFromServerURL(url, imageService: TeamsViewController.imageRequestType)
+            footballLogo.imageFromServerURL(url, imageService: imageService)
         }
     }
-}
-
-enum Service {
-    case native, kf, AF
 }

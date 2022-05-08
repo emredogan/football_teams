@@ -13,14 +13,19 @@ import FirebaseFirestoreSwift
 
 
 class TeamsViewController: UIViewController {
-    public static var imageRequestType = ImageService.native
-    public static var networkService = RequestService.native
-
+    var imageRequestType = ImageService.native
+    var networkService = RequestService.native
+    
     @IBOutlet weak var tableView: UITableView!
     let networkingClient = NetworkService()
     
     private var teams = [Team]()
     private let fireDB = Firestore.firestore()
+    
+    override func viewWillAppear(_ animated: Bool) {
+        downloadData(reqService: networkService)
+        changeNavigationHeader()
+    }
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -33,38 +38,11 @@ class TeamsViewController: UIViewController {
     }
     
     @objc func showSettings() {
-        let ac = UIAlertController(title: "Write the services that you want to use", message: nil, preferredStyle: .alert)
-        ac.addTextField()
-        ac.addTextField()
-        
-        let networkServiceTypeTF = ac.textFields![0]
-        let imageLoadingServiceTypeTF = ac.textFields![1]
-        
-        networkServiceTypeTF.placeholder = "Network service. (native, AF)"
-        imageLoadingServiceTypeTF.placeholder = "Image service. (native, AF, KF)"
-
-        let submitAction = UIAlertAction(title: "Submit", style: .default) { [weak ac] _ in
-            if(networkServiceTypeTF.text!.uppercased() == "AF") {
-                TeamsViewController.networkService = RequestService.AF
-            } else {
-                TeamsViewController.networkService = RequestService.native
-            }
-            
-            if(imageLoadingServiceTypeTF.text!.uppercased() == "AF") {
-                TeamsViewController.imageRequestType = ImageService.AF
-            } else if(imageLoadingServiceTypeTF.text!.uppercased() == "KF") {
-                TeamsViewController.imageRequestType = ImageService.KF
-            } else {
-                TeamsViewController.imageRequestType = ImageService.native
-            }
-            
-            self.teams.removeAll()
-            self.tableView.reloadData()
-            self.downloadData(reqService: TeamsViewController.networkService)
-        }
-
-        ac.addAction(submitAction)
-        present(ac, animated: true)
+        let settingsViewController = UIStoryboard(name: "Main", bundle: nil).instantiateViewController(withIdentifier: "SettingsViewController") as! SettingsViewController
+        settingsViewController.networkDelegate = self
+        settingsViewController.currentNetworkService = networkService
+        settingsViewController.currentImageService = imageRequestType
+        self.navigationController?.pushViewController(settingsViewController, animated: true)
     }
     
     func downloadData(reqService: RequestService) {
@@ -75,22 +53,23 @@ class TeamsViewController: UIViewController {
                 self.handleResult(result: teams)
             case .failure(let error):
                 // create the alert
-                        let alert = UIAlertController(title: "Warning", message: "API call has failed, attempting to retrieve data from Firebase", preferredStyle: UIAlertController.Style.alert)
-
-                        // add an action (button)
-                        alert.addAction(UIAlertAction(title: "OK", style: UIAlertAction.Style.default, handler: nil))
-
-                        // show the alert
-                        self.present(alert, animated: true, completion: nil)
-                TeamsViewController.networkService = RequestService.Firebase
-                self.downloadData(reqService: TeamsViewController.networkService)
+                let alert = UIAlertController(title: "Warning", message: "API call has failed, attempting to retrieve data from Firebase", preferredStyle: UIAlertController.Style.alert)
+                
+                // add an action (button)
+                alert.addAction(UIAlertAction(title: "OK", style: UIAlertAction.Style.default, handler: nil))
+                
+                // show the alert
+                self.present(alert, animated: true, completion: nil)
+                self.networkService = RequestService.Firebase
+                self.downloadData(reqService: self.networkService)
+                self.changeNavigationHeader()
             }
         }
     }
     
     func changeNavigationHeader() {
         DispatchQueue.main.async {
-            self.title = "\(TeamsViewController.networkService),\(TeamsViewController.imageRequestType)"
+            self.title = "\(self.networkService),\(self.imageRequestType)"
         }
     }
     
@@ -111,8 +90,18 @@ extension TeamsViewController : UITableViewDelegate, UITableViewDataSource {
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: "football_cell", for: indexPath) as! FootballCell
         let currentTeam = teams[indexPath.row]
-        cell.setupCell(name: currentTeam.name, url: currentTeam.logo, imageService: .kf)
+        cell.setupCell(name: currentTeam.name, url: currentTeam.logo, imageService: imageRequestType)
         return cell
+    }
+}
+
+extension TeamsViewController : NetworkSettingsDelegate {
+    func didChooseNetwork(network: RequestService) {
+        networkService = network
+    }
+    
+    func didChooseImage(image: ImageService) {
+        imageRequestType = image
     }
 }
 

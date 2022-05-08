@@ -13,7 +13,8 @@
 		63189888282252CE0098AC3A /* WelcomeViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 63189887282252CD0098AC3A /* WelcomeViewController.swift */; };
 		632944D52826768D003B7768 /* Football_APIUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 632944D42826768D003B7768 /* Football_APIUITests.swift */; };
 		632944D72826768D003B7768 /* Football_APIUITestsLaunchTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 632944D62826768D003B7768 /* Football_APIUITestsLaunchTests.swift */; };
-		632944DE2826BB8B003B7768 /* ServiceTypes.swift in Sources */ = {isa = PBXBuildFile; fileRef = 632944DD2826BB8B003B7768 /* ServiceTypes.swift */; };
+		632FBEAB2827B831001C1C8F /* SettingsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 632FBEAA2827B831001C1C8F /* SettingsViewController.swift */; };
+		632FBEAD2827D981001C1C8F /* ServiceTypes.swift in Sources */ = {isa = PBXBuildFile; fileRef = 632FBEAC2827D981001C1C8F /* ServiceTypes.swift */; };
 		634A0A1B281197B5009BEB6D /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 634A0A1A281197B5009BEB6D /* AppDelegate.swift */; };
 		634A0A1D281197B5009BEB6D /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 634A0A1C281197B5009BEB6D /* SceneDelegate.swift */; };
 		634A0A1F281197B5009BEB6D /* TeamsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 634A0A1E281197B5009BEB6D /* TeamsViewController.swift */; };
@@ -57,7 +58,8 @@
 		632944D22826768D003B7768 /* Football_APIUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = Football_APIUITests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		632944D42826768D003B7768 /* Football_APIUITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Football_APIUITests.swift; sourceTree = "<group>"; };
 		632944D62826768D003B7768 /* Football_APIUITestsLaunchTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Football_APIUITestsLaunchTests.swift; sourceTree = "<group>"; };
-		632944DD2826BB8B003B7768 /* ServiceTypes.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ServiceTypes.swift; sourceTree = "<group>"; };
+		632FBEAA2827B831001C1C8F /* SettingsViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingsViewController.swift; sourceTree = "<group>"; };
+		632FBEAC2827D981001C1C8F /* ServiceTypes.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ServiceTypes.swift; sourceTree = "<group>"; };
 		634A0A17281197B5009BEB6D /* Football_API.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Football_API.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		634A0A1A281197B5009BEB6D /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		634A0A1C281197B5009BEB6D /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
@@ -203,6 +205,7 @@
 			children = (
 				634A0A1E281197B5009BEB6D /* TeamsViewController.swift */,
 				63189887282252CD0098AC3A /* WelcomeViewController.swift */,
+				632FBEAA2827B831001C1C8F /* SettingsViewController.swift */,
 			);
 			path = Controller;
 			sourceTree = "<group>";
@@ -213,7 +216,7 @@
 				634A0A642812D463009BEB6D /* ImageExtension.swift */,
 				639CB087281D5D0E006E7575 /* HTTPHeaderExtension.swift */,
 				639698C9281F2EDD0001E73D /* ErrorTypes.swift */,
-				632944DD2826BB8B003B7768 /* ServiceTypes.swift */,
+				632FBEAC2827D981001C1C8F /* ServiceTypes.swift */,
 			);
 			path = Extension;
 			sourceTree = "<group>";
@@ -433,9 +436,10 @@
 				634A0A1F281197B5009BEB6D /* TeamsViewController.swift in Sources */,
 				639698CA281F2EDD0001E73D /* ErrorTypes.swift in Sources */,
 				634A0A1B281197B5009BEB6D /* AppDelegate.swift in Sources */,
-				632944DE2826BB8B003B7768 /* ServiceTypes.swift in Sources */,
 				63CDFDC928243035004B34C7 /* VerificationService.swift in Sources */,
 				634A0A1D281197B5009BEB6D /* SceneDelegate.swift in Sources */,
+				632FBEAB2827B831001C1C8F /* SettingsViewController.swift in Sources */,
+				632FBEAD2827D981001C1C8F /* ServiceTypes.swift in Sources */,
 				634A0A32281199B7009BEB6D /* NetworkService.swift in Sources */,
 				634A0A672812D4E5009BEB6D /* FootballCell.swift in Sources */,
 			);
