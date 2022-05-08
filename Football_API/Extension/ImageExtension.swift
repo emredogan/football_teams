@@ -26,27 +26,34 @@ extension UIImageView {
             if let url = URL(string: imageServerUrl) {
                 URLSession.shared.dataTask(with: url, completionHandler: { (data, response, error) in
                     
-                    if error != nil {
+                    /*if error != nil {
                         DispatchQueue.main.async {
                             // TO - DO
                             self.image = nil
                         }
                         return
-                    }
-                    DispatchQueue.main.async {
-                        if let data = data {
-                            if let downloadedImage = UIImage(data: data) {
+                    }*/
+                    
+                    if let data = data {
+                        if let downloadedImage = UIImage(data: data) {
+                            DispatchQueue.main.async {
                                 self.image = downloadedImage
                             }
                         }
                     }
+                    
                 }).resume()
             }
         case .AF:
             AF.request(imageServerUrl,method: .get).response{ response in
                 switch response.result {
                 case .success(let responseData):
-                    self.image = UIImage(data: responseData!, scale:1)
+                    if let responseData = responseData {
+                        let image = UIImage(data: responseData, scale: 1)
+                        DispatchQueue.main.async {
+                            self.image = image
+                        }
+                    }
                     
                 case .failure(let error):
                     print("error--->",error)
