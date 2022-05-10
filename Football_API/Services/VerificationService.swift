@@ -47,17 +47,28 @@ struct VerificationService {
             throw VerifyError.passwordTooLong
         }
         
+        
         return password
+    }
+    
+    func verifyCredentials(_ password: String?, _ username: String?) throws {
+        if username != WelcomeViewController.validUsername || password != WelcomeViewController.validPassword {
+            throw VerifyError.authFail
+        }
+        
+         
     }
 }
 
-enum VerifyError: LocalizedError {
+enum VerifyError: Error {
     case emptyValue
     case invalidValue
     case nameTooShort
     case nameTooLong
     case passwordTooShort
     case passwordTooLong
+    case authFail
+
     
     var errorDesc: String? {
         switch self {
@@ -75,6 +86,9 @@ enum VerifyError: LocalizedError {
         case .invalidValue:
             return "User name field is invalid"
             
+        case .authFail:
+            return "Wrong user name or password"
+
         }
     }
 }
