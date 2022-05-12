@@ -24,7 +24,7 @@ class SettingsViewController: UIViewController {
     // MARK: - LIFECYCLE METHODS
     override func viewDidLoad() {
         super.viewDidLoad()
-        getCurrentSettings()
+        updateUI(networkServiceType: currentNetworkService, imageServiceType: currentImageService)
     }
     
     // MARK: - HANDLE VIEW ACTIONS
@@ -38,7 +38,44 @@ class SettingsViewController: UIViewController {
     
     func networkTapped() {
         let index = networkSegment.selectedSegmentIndex
-        switch index {
+        decideNetworkService(providedIndex: index)
+    }
+    
+    func imageTapped() {
+        let index = imageSegment.selectedSegmentIndex
+        decideImageService(providedIndex: index)
+    }
+    
+    // MARK: - OTHERS
+    func updateUI(networkServiceType: NetworkRequestService, imageServiceType: ImageService) {
+        switch networkServiceType {
+        case .native:
+            networkImage.image = UIImage(named: "apple")
+            networkSegment.selectedSegmentIndex = 0
+        case .AF:
+            networkImage.image = UIImage(named: "alamofire")
+            networkSegment.selectedSegmentIndex  = 1
+        case .Firebase:
+            networkImage.image = UIImage(named: "firebase")
+            networkSegment.selectedSegmentIndex = 2
+        }
+        
+        switch imageServiceType {
+        case .native:
+            imageServiceImage.image = UIImage(named: "apple")
+            imageSegment.selectedSegmentIndex = 0
+        case .AF:
+            imageServiceImage.image = UIImage(named: "alamofire")
+            imageSegment.selectedSegmentIndex = 1
+        case .KF:
+            imageServiceImage.image = UIImage(named: "kingfisher")
+            imageSegment.selectedSegmentIndex = 2
+        }
+    }
+    
+    func decideNetworkService(providedIndex: Int) {
+        //let index = networkSegment.selectedSegmentIndex
+        switch providedIndex {
         case 0:
             networkImage.image = UIImage(named: "apple")
             networkDelegate.didChooseNetwork(network: NetworkRequestService.native)
@@ -54,9 +91,8 @@ class SettingsViewController: UIViewController {
         }
     }
     
-    func imageTapped() {
-        let index = imageSegment.selectedSegmentIndex
-        switch index {
+    func decideImageService(providedIndex: Int) {
+        switch providedIndex {
         case 0:
             imageServiceImage.image = UIImage(named: "apple")
             networkDelegate.didChooseImage(image: ImageService.native)
@@ -69,33 +105,6 @@ class SettingsViewController: UIViewController {
         default:
             imageServiceImage.image = UIImage(named: "apple")
             networkDelegate.didChooseImage(image: ImageService.native)
-        }
-    }
-    
-    // MARK: - OTHERS
-    func getCurrentSettings() {
-        switch currentNetworkService {
-        case .native:
-            networkImage.image = UIImage(named: "apple")
-            networkSegment.selectedSegmentIndex = 0
-        case .AF:
-            networkImage.image = UIImage(named: "alamofire")
-            networkSegment.selectedSegmentIndex  = 1
-        case .Firebase:
-            networkImage.image = UIImage(named: "firebase")
-            networkSegment.selectedSegmentIndex = 2
-        }
-        
-        switch currentImageService {
-        case .native:
-            imageServiceImage.image = UIImage(named: "apple")
-            imageSegment.selectedSegmentIndex = 0
-        case .AF:
-            imageServiceImage.image = UIImage(named: "alamofire")
-            imageSegment.selectedSegmentIndex = 1
-        case .KF:
-            imageServiceImage.image = UIImage(named: "kingfisher")
-            imageSegment.selectedSegmentIndex = 2
         }
     }
 }
