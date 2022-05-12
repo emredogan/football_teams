@@ -10,7 +10,7 @@ import Alamofire
 import FirebaseFirestore
 
 // We have two possible ways to make network request
-enum RequestService {
+enum NetworkRequestService {
     case AF, native, Firebase
 }
 
@@ -19,7 +19,7 @@ typealias CompletionHandlerTeams = (Result<[Team], Error>) -> Void // To make th
 class NetworkService {
     private var requestURL = "https://api-football-v1.p.rapidapi.com/v3/standings?season=2020&league=39"
     
-    func makeDataRequest(serviceName: RequestService, completion: @escaping CompletionHandlerTeams) {
+    func makeDataRequest(serviceName: NetworkRequestService, completion: @escaping CompletionHandlerTeams) {
         print("Requesting network service by, ", serviceName)
         let headers = grabKeyHeaders()
         

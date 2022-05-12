@@ -98,7 +98,7 @@
                     </view>
                     <navigationItem key="navigationItem" id="8rA-eH-kIo"/>
                     <connections>
-                        <outlet property="tableView" destination="4gf-xZ-rmD" id="pVF-hw-vMG"/>
+                        <outlet property="teamsTableView" destination="4gf-xZ-rmD" id="pVF-hw-vMG"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="dkx-z0-nzr" sceneMemberID="firstResponder"/>
@@ -116,86 +116,100 @@
                             <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" distribution="fillEqually" spacing="25" translatesAutoresizingMaskIntoConstraints="NO" id="A6F-Lq-37B">
                                 <rect key="frame" x="8" y="52" width="398" height="802"/>
                                 <subviews>
-                                    <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" translatesAutoresizingMaskIntoConstraints="NO" id="B7Z-9R-rXc">
-                                        <rect key="frame" x="0.0" y="0.0" width="398" height="113"/>
+                                    <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" distribution="fillProportionally" spacing="20" translatesAutoresizingMaskIntoConstraints="NO" id="fsc-qH-kar">
+                                        <rect key="frame" x="0.0" y="0.0" width="398" height="388.5"/>
                                         <subviews>
-                                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Network Request Service" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Apg-ff-0Vp">
-                                                <rect key="frame" x="0.0" y="0.0" width="398" height="113"/>
-                                                <fontDescription key="fontDescription" name="HelveticaNeue-Bold" family="Helvetica Neue" pointSize="28"/>
-                                                <nil key="textColor"/>
-                                                <nil key="highlightedColor"/>
-                                            </label>
+                                            <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" translatesAutoresizingMaskIntoConstraints="NO" id="B7Z-9R-rXc">
+                                                <rect key="frame" x="0.0" y="0.0" width="398" height="40"/>
+                                                <subviews>
+                                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Network Request Service" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Apg-ff-0Vp">
+                                                        <rect key="frame" x="0.0" y="0.0" width="398" height="40"/>
+                                                        <fontDescription key="fontDescription" name="HelveticaNeue-Bold" family="Helvetica Neue" pointSize="28"/>
+                                                        <nil key="textColor"/>
+                                                        <nil key="highlightedColor"/>
+                                                    </label>
+                                                </subviews>
+                                            </stackView>
+                                            <stackView opaque="NO" contentMode="scaleToFill" distribution="fillEqually" translatesAutoresizingMaskIntoConstraints="NO" id="EaB-Jy-dCf">
+                                                <rect key="frame" x="0.0" y="60" width="398" height="200"/>
+                                                <subviews>
+                                                    <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="apple" translatesAutoresizingMaskIntoConstraints="NO" id="h4k-YX-tr6">
+                                                        <rect key="frame" x="0.0" y="0.0" width="398" height="200"/>
+                                                    </imageView>
+                                                </subviews>
+                                                <constraints>
+                                                    <constraint firstAttribute="height" relation="lessThanOrEqual" constant="200" id="9Of-HG-Kjc"/>
+                                                </constraints>
+                                            </stackView>
+                                            <stackView opaque="NO" contentMode="scaleToFill" alignment="center" translatesAutoresizingMaskIntoConstraints="NO" id="hmZ-M6-sTH">
+                                                <rect key="frame" x="0.0" y="280" width="398" height="108.5"/>
+                                                <subviews>
+                                                    <segmentedControl opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="top" segmentControlStyle="plain" selectedSegmentIndex="0" translatesAutoresizingMaskIntoConstraints="NO" id="f8d-a6-YP0">
+                                                        <rect key="frame" x="0.0" y="29.5" width="398" height="51"/>
+                                                        <constraints>
+                                                            <constraint firstAttribute="height" relation="greaterThanOrEqual" constant="50" id="4Aj-gO-Ll3"/>
+                                                        </constraints>
+                                                        <segments>
+                                                            <segment title="Native"/>
+                                                            <segment title="Alamofire"/>
+                                                            <segment title="Firebase"/>
+                                                        </segments>
+                                                        <connections>
+                                                            <action selector="imageSegmentedControlTapped:" destination="fud-tA-gwa" eventType="valueChanged" id="IFB-d6-xEF"/>
+                                                            <action selector="networkSegmentedControlTapped:" destination="fud-tA-gwa" eventType="valueChanged" id="L2H-U1-GdC"/>
+                                                        </connections>
+                                                    </segmentedControl>
+                                                </subviews>
+                                            </stackView>
                                         </subviews>
                                     </stackView>
-                                    <stackView opaque="NO" contentMode="scaleToFill" distribution="fillEqually" translatesAutoresizingMaskIntoConstraints="NO" id="EaB-Jy-dCf">
-                                        <rect key="frame" x="0.0" y="138" width="398" height="112.5"/>
+                                    <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" distribution="fillProportionally" spacing="20" translatesAutoresizingMaskIntoConstraints="NO" id="3Gq-F2-Lsc">
+                                        <rect key="frame" x="0.0" y="413.5" width="398" height="388.5"/>
                                         <subviews>
-                                            <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="apple" translatesAutoresizingMaskIntoConstraints="NO" id="h4k-YX-tr6">
-                                                <rect key="frame" x="0.0" y="0.0" width="132.5" height="112.5"/>
-                                            </imageView>
-                                            <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="alamofire" translatesAutoresizingMaskIntoConstraints="NO" id="hBH-gc-ttZ">
-                                                <rect key="frame" x="132.5" y="0.0" width="133" height="112.5"/>
-                                            </imageView>
-                                            <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="firebase" translatesAutoresizingMaskIntoConstraints="NO" id="O54-Ou-cL9">
-                                                <rect key="frame" x="265.5" y="0.0" width="132.5" height="112.5"/>
-                                            </imageView>
-                                        </subviews>
-                                    </stackView>
-                                    <stackView opaque="NO" contentMode="scaleToFill" alignment="center" translatesAutoresizingMaskIntoConstraints="NO" id="lQ4-tg-WOD">
-                                        <rect key="frame" x="0.0" y="275.5" width="398" height="113"/>
-                                        <subviews>
-                                            <segmentedControl opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="top" segmentControlStyle="plain" selectedSegmentIndex="0" translatesAutoresizingMaskIntoConstraints="NO" id="gd9-iH-yxU">
-                                                <rect key="frame" x="0.0" y="41" width="398" height="32"/>
-                                                <segments>
-                                                    <segment title="Native"/>
-                                                    <segment title="Alamofire"/>
-                                                    <segment title="Firebase"/>
-                                                </segments>
-                                                <connections>
-                                                    <action selector="networkSegmentedControlTapped:" destination="fud-tA-gwa" eventType="valueChanged" id="w9H-Dk-rT7"/>
-                                                </connections>
-                                            </segmentedControl>
-                                        </subviews>
-                                    </stackView>
-                                    <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" translatesAutoresizingMaskIntoConstraints="NO" id="cuW-lB-sTB">
-                                        <rect key="frame" x="0.0" y="413.5" width="398" height="113"/>
-                                        <subviews>
-                                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Image Request Service" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="vi9-6j-bAI">
-                                                <rect key="frame" x="0.0" y="0.0" width="398" height="113"/>
-                                                <fontDescription key="fontDescription" name="HelveticaNeue-Bold" family="Helvetica Neue" pointSize="28"/>
-                                                <nil key="textColor"/>
-                                                <nil key="highlightedColor"/>
-                                            </label>
-                                        </subviews>
-                                    </stackView>
-                                    <stackView opaque="NO" contentMode="scaleToFill" distribution="fillEqually" translatesAutoresizingMaskIntoConstraints="NO" id="J60-LH-8L8">
-                                        <rect key="frame" x="0.0" y="551.5" width="398" height="112.5"/>
-                                        <subviews>
-                                            <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="apple" translatesAutoresizingMaskIntoConstraints="NO" id="l9w-KR-Tzu">
-                                                <rect key="frame" x="0.0" y="0.0" width="132.5" height="112.5"/>
-                                            </imageView>
-                                            <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="alamofire" translatesAutoresizingMaskIntoConstraints="NO" id="QJm-kZ-9Ep">
-                                                <rect key="frame" x="132.5" y="0.0" width="133" height="112.5"/>
-                                            </imageView>
-                                            <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="kingfisher" translatesAutoresizingMaskIntoConstraints="NO" id="XLH-Za-d20">
-                                                <rect key="frame" x="265.5" y="0.0" width="132.5" height="112.5"/>
-                                            </imageView>
-                                        </subviews>
-                                    </stackView>
-                                    <stackView opaque="NO" contentMode="scaleToFill" alignment="center" translatesAutoresizingMaskIntoConstraints="NO" id="32m-U9-e2L">
-                                        <rect key="frame" x="0.0" y="689" width="398" height="113"/>
-                                        <subviews>
-                                            <segmentedControl opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="top" segmentControlStyle="plain" selectedSegmentIndex="0" translatesAutoresizingMaskIntoConstraints="NO" id="dg4-Ps-gLt">
-                                                <rect key="frame" x="0.0" y="41" width="398" height="32"/>
-                                                <segments>
-                                                    <segment title="Native"/>
-                                                    <segment title="Alamofire"/>
-                                                    <segment title="Kingfisher"/>
-                                                </segments>
-                                                <connections>
-                                                    <action selector="imageSegmentedControlTapped:" destination="fud-tA-gwa" eventType="valueChanged" id="HbM-YJ-fBx"/>
-                                                </connections>
-                                            </segmentedControl>
+                                            <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" translatesAutoresizingMaskIntoConstraints="NO" id="cuW-lB-sTB">
+                                                <rect key="frame" x="0.0" y="0.0" width="398" height="40"/>
+                                                <subviews>
+                                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Image Request Service" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="vi9-6j-bAI">
+                                                        <rect key="frame" x="0.0" y="0.0" width="398" height="40"/>
+                                                        <fontDescription key="fontDescription" name="HelveticaNeue-Bold" family="Helvetica Neue" pointSize="28"/>
+                                                        <nil key="textColor"/>
+                                                        <nil key="highlightedColor"/>
+                                                    </label>
+                                                </subviews>
+                                            </stackView>
+                                            <stackView opaque="NO" contentMode="scaleToFill" distribution="fillEqually" translatesAutoresizingMaskIntoConstraints="NO" id="J60-LH-8L8">
+                                                <rect key="frame" x="0.0" y="60" width="398" height="200"/>
+                                                <subviews>
+                                                    <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="apple" translatesAutoresizingMaskIntoConstraints="NO" id="l9w-KR-Tzu">
+                                                        <rect key="frame" x="0.0" y="0.0" width="398" height="200"/>
+                                                        <constraints>
+                                                            <constraint firstAttribute="height" relation="lessThanOrEqual" constant="200" id="X9p-Rt-akU"/>
+                                                        </constraints>
+                                                    </imageView>
+                                                </subviews>
+                                                <constraints>
+                                                    <constraint firstAttribute="height" relation="lessThanOrEqual" constant="200" id="za4-di-TLB"/>
+                                                </constraints>
+                                            </stackView>
+                                            <stackView opaque="NO" contentMode="scaleToFill" alignment="center" translatesAutoresizingMaskIntoConstraints="NO" id="32m-U9-e2L">
+                                                <rect key="frame" x="0.0" y="280" width="398" height="108.5"/>
+                                                <subviews>
+                                                    <segmentedControl opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="top" segmentControlStyle="plain" selectedSegmentIndex="0" translatesAutoresizingMaskIntoConstraints="NO" id="dg4-Ps-gLt">
+                                                        <rect key="frame" x="0.0" y="29.5" width="398" height="51"/>
+                                                        <constraints>
+                                                            <constraint firstAttribute="height" relation="greaterThanOrEqual" constant="50" id="rzv-oa-7t4"/>
+                                                        </constraints>
+                                                        <segments>
+                                                            <segment title="Native"/>
+                                                            <segment title="Alamofire"/>
+                                                            <segment title="Kingfisher"/>
+                                                        </segments>
+                                                        <connections>
+                                                            <action selector="imageSegmentedControlTapped:" destination="fud-tA-gwa" eventType="valueChanged" id="HbM-YJ-fBx"/>
+                                                        </connections>
+                                                    </segmentedControl>
+                                                </subviews>
+                                            </stackView>
                                         </subviews>
                                     </stackView>
                                 </subviews>
@@ -212,7 +226,9 @@
                     </view>
                     <connections>
                         <outlet property="imageSegment" destination="dg4-Ps-gLt" id="CKN-JE-2xh"/>
-                        <outlet property="networkSegment" destination="gd9-iH-yxU" id="5g0-4u-cjr"/>
+                        <outlet property="imageServiceImage" destination="l9w-KR-Tzu" id="lce-Dp-OgE"/>
+                        <outlet property="networkImage" destination="h4k-YX-tr6" id="2o4-GX-ok2"/>
+                        <outlet property="networkSegment" destination="f8d-a6-YP0" id="syY-AR-NNv"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="vbL-sm-3Jy" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
@@ -234,17 +250,29 @@
                                         <rect key="frame" x="0.0" y="0.0" width="382" height="379"/>
                                         <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                                     </view>
-                                    <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" distribution="fillProportionally" spacing="30" translatesAutoresizingMaskIntoConstraints="NO" id="lyv-us-aog">
+                                    <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" distribution="fillProportionally" spacing="40" translatesAutoresizingMaskIntoConstraints="NO" id="lyv-us-aog">
                                         <rect key="frame" x="0.0" y="379" width="382" height="379"/>
                                         <subviews>
-                                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Sign-in and access to the football database" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="2" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="WJ1-Qf-VTa">
-                                                <rect key="frame" x="0.0" y="0.0" width="382" height="99"/>
-                                                <fontDescription key="fontDescription" name="HelveticaNeue" family="Helvetica Neue" pointSize="22"/>
-                                                <nil key="textColor"/>
-                                                <nil key="highlightedColor"/>
-                                            </label>
-                                            <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" distribution="fillProportionally" spacing="25" translatesAutoresizingMaskIntoConstraints="NO" id="mg5-j3-dZD">
-                                                <rect key="frame" x="0.0" y="129" width="382" height="145"/>
+                                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="CdP-3c-b8G">
+                                                <rect key="frame" x="0.0" y="0.0" width="382" height="79"/>
+                                                <subviews>
+                                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" minimumScaleFactor="1" translatesAutoresizingMaskIntoConstraints="NO" id="WJ1-Qf-VTa">
+                                                        <rect key="frame" x="74.5" y="14" width="233.5" height="51.5"/>
+                                                        <string key="text">Sign-in and access
+to the football database</string>
+                                                        <fontDescription key="fontDescription" name="HelveticaNeue" family="Helvetica Neue" pointSize="22"/>
+                                                        <nil key="textColor"/>
+                                                        <nil key="highlightedColor"/>
+                                                    </label>
+                                                </subviews>
+                                                <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                                                <constraints>
+                                                    <constraint firstItem="WJ1-Qf-VTa" firstAttribute="centerX" secondItem="CdP-3c-b8G" secondAttribute="centerX" id="VIK-oo-TBf"/>
+                                                    <constraint firstItem="WJ1-Qf-VTa" firstAttribute="centerY" secondItem="CdP-3c-b8G" secondAttribute="centerY" id="cAb-ID-XO7"/>
+                                                </constraints>
+                                            </view>
+                                            <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" distribution="fillEqually" spacing="25" translatesAutoresizingMaskIntoConstraints="NO" id="mg5-j3-dZD">
+                                                <rect key="frame" x="0.0" y="119" width="382" height="145"/>
                                                 <subviews>
                                                     <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="E-mail" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="dQ4-lz-ELu">
                                                         <rect key="frame" x="0.0" y="0.0" width="382" height="60"/>
@@ -270,9 +298,6 @@
                                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="kyQ-Cl-gdW">
                                                         <rect key="frame" x="0.0" y="0.0" width="310.5" height="75"/>
                                                         <color key="backgroundColor" systemColor="labelColor"/>
-                                                        <constraints>
-                                                            <constraint firstAttribute="height" constant="75" id="dwr-T9-Htt"/>
-                                                        </constraints>
                                                         <color key="tintColor" red="0.99999600649999998" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                                         <buttonConfiguration key="configuration" style="plain" title="LOGIN">
                                                             <backgroundConfiguration key="background" cornerRadius="20"/>
@@ -287,6 +312,7 @@
                                                     </imageView>
                                                 </subviews>
                                                 <constraints>
+                                                    <constraint firstAttribute="height" relation="lessThanOrEqual" constant="75" id="DB4-7o-6Y6"/>
                                                     <constraint firstItem="kyQ-Cl-gdW" firstAttribute="width" secondItem="oxR-74-HIg" secondAttribute="width" multiplier="6" constant="1" id="Fnv-hX-N8k"/>
                                                 </constraints>
                                             </stackView>
@@ -341,11 +367,8 @@
         <designable name="JHz-Ay-qJX"/>
     </designables>
     <resources>
-        <image name="alamofire" width="280" height="280"/>
         <image name="apple" width="512" height="512"/>
         <image name="faceID" width="300" height="300"/>
-        <image name="firebase" width="512" height="512"/>
-        <image name="kingfisher" width="272" height="272"/>
         <image name="premier" width="1028" height="1028"/>
         <systemColor name="labelColor">
             <color white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
