@@ -10,3 +10,7 @@ import Foundation
 enum ImageService {
     case native, AF, KF
 }
+
+enum NetworkRequestService {
+    case AF, native, Firebase
+}

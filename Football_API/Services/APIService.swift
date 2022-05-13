@@ -9,11 +9,6 @@ import Foundation
 import Alamofire
 import FirebaseFirestore
 
-// MARK: - RE-USABLE DATA TYPES
-enum NetworkRequestService {
-    case AF, native, Firebase
-}
-
 typealias CompletionHandlerTeams = (Result<[Team], Error>) -> Void
 
 class APIService {
@@ -45,7 +40,7 @@ class APIService {
     func makeAFDataRequest(headers: HTTPHeaders, completion: @escaping CompletionHandlerTeams) {
         AF.request(requestURL, method: .get, headers: headers).validate().responseDecodable(of: JsonResult.self) { (response) in
             guard let result: JsonResult = response.value else {
-                completion(.failure(MyErrors.networkError(response.debugDescription)))
+                completion(.failure(NetworkErrors.networkError(response.debugDescription)))
                 return
             }
             let teams = self.processResult(result: result)
@@ -62,14 +57,14 @@ class APIService {
         let session = URLSession.shared
         let dataTask = session.dataTask(with: request as URLRequest, completionHandler: { (data, response, error) -> Void in
             if (error != nil) {
-                completion(.failure(MyErrors.networkError(error!.localizedDescription)))
+                completion(.failure(NetworkErrors.networkError(error!.localizedDescription)))
             } else {
                 do {
                     let result = try JSONDecoder().decode(JsonResult.self, from: data!)
                     let teams = self.processResult(result: result)
                     completion(.success(teams))
                 } catch {
-                    completion(.failure(MyErrors.JsonDecodeError(error.localizedDescription)))
+                    completion(.failure(NetworkErrors.JsonDecodeError(error.localizedDescription)))
                 }
             }
         })
@@ -86,7 +81,7 @@ class APIService {
         db.collection(dbCollectionName)
             .getDocuments() { (querySnapshot, err) in
                 if let err = err {
-                    completion(.failure(MyErrors.FirebaseError(err.localizedDescription)))
+                    completion(.failure(NetworkErrors.FirebaseError(err.localizedDescription)))
                 } else {
                     for document in querySnapshot!.documents {
                         let nameFromDocument = document.data()["name"] as! String
@@ -122,7 +117,7 @@ class APIService {
         case .success(let teams):
             completion(.success(teams))
         case .failure(let error):
-            completion(.failure(MyErrors.networkError(error.localizedDescription)))
+            completion(.failure(NetworkErrors.networkError(error.localizedDescription)))
         }
     }
     

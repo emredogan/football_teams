@@ -8,6 +8,7 @@
 import Foundation
 import Alamofire
 
+// Convert dictionary to HTTPHeader for Alamofire
 extension Dictionary where Key == String, Value == String {
     func toHeader() -> HTTPHeaders {
         var headers: HTTPHeaders = [:]

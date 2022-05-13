@@ -7,7 +7,7 @@
 
 import Foundation
 
-enum MyErrors: Error {
+enum NetworkErrors: Error {
     case networkError(String)
     case JsonDecodeError(String)
     case FirebaseError(String)
