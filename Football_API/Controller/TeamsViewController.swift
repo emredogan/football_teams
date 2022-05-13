@@ -18,7 +18,7 @@ class TeamsViewController: UIViewController {
     // MARK: - VARIABLES
     var imageRequestType = ImageService.native
     var networkService = NetworkRequestService.native
-    private let networkingClient = NetworkService()
+    private let networkingClient = APIService()
     private var isDownloadingData = false
     private var teams = [Team]()
     private let fireDB = Firestore.firestore()

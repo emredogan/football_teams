@@ -8,9 +8,14 @@
 import Foundation
 
 struct VerificationService {
+    let minUserNameLength = 5
+    let maxUserNameLength = 25
+    
+    let minPassLength = 5
+    let maxPassLength = 15
+    
     func verifyUsername(_ username: String?) throws -> String {
         guard let username = username else {
-            print("THROWING ERROR")
             throw VerifyError.invalidValue
         }
         
@@ -18,12 +23,11 @@ struct VerificationService {
             throw VerifyError.emptyValue
         }
         
-        
-        guard username.count > 5 else {
+        guard username.count > minUserNameLength else {
             throw VerifyError.nameTooShort
         }
         
-        guard username.count < 25 else {
+        guard username.count < maxUserNameLength else {
             throw VerifyError.nameTooLong
         }
         
@@ -39,24 +43,25 @@ struct VerificationService {
             throw VerifyError.emptyValue
         }
         
-        guard password.count > 5 else {
+        guard password.count > minPassLength else {
             throw VerifyError.passwordTooShort
         }
         
-        guard password.count < 15 else {
+        guard password.count < maxPassLength else {
             throw VerifyError.passwordTooLong
         }
-        
         
         return password
     }
     
-    func verifyCredentials(_ password: String?, _ username: String?) throws {
-        if username != WelcomeViewController.validUsername || password != WelcomeViewController.validPassword {
+    func verifyCredentials(_ username: String?, _ password: String?) throws {
+        if !isValidPass(username, password) {
             throw VerifyError.authFail
         }
-        
-         
+    }
+    
+    func isValidPass(_ username: String?, _ password: String?) -> Bool {
+        return username == WelcomeViewController.validUsername && password == WelcomeViewController.validPassword
     }
 }
 
@@ -68,7 +73,6 @@ enum VerifyError: Error {
     case passwordTooShort
     case passwordTooLong
     case authFail
-
     
     var errorDesc: String? {
         switch self {
@@ -80,15 +84,12 @@ enum VerifyError: Error {
             return "User name is too short"
         case .passwordTooShort:
             return "Password is too short"
-            
         case .passwordTooLong:
             return "Password is too long"
         case .invalidValue:
             return "User name field is invalid"
-            
         case .authFail:
             return "Wrong user name or password"
-
         }
     }
 }

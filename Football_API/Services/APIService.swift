@@ -9,38 +9,45 @@ import Foundation
 import Alamofire
 import FirebaseFirestore
 
-// We have two possible ways to make network request
+// MARK: - RE-USABLE DATA TYPES
 enum NetworkRequestService {
     case AF, native, Firebase
 }
 
-typealias CompletionHandlerTeams = (Result<[Team], Error>) -> Void // To make the code more readable we put an alias here.
+typealias CompletionHandlerTeams = (Result<[Team], Error>) -> Void
 
-class NetworkService {
+class APIService {
+    // MARK: - VARIABLES
     private var requestURL = "https://api-football-v1.p.rapidapi.com/v3/standings?season=2020&league=39"
     
+    // MARK: - DATA REQUESTS
     func makeDataRequest(serviceName: NetworkRequestService, completion: @escaping CompletionHandlerTeams) {
-        print("Requesting network service by, ", serviceName)
         let headers = grabKeyHeaders()
+        var requestResult:  Result<[Team], Error>? = nil
         
         switch serviceName {
         case .AF:
             makeAFDataRequest(headers: headers.toHeader()) {result in
-                self.deliverResult(result: result, completion: completion)
+                requestResult = result
             }
             
         case .native:
             makeNativeDataRequest(headers: headers.toHeader()) { result in
-                self.deliverResult(result: result, completion: completion)
+                requestResult = result
             }
         case .Firebase:
             getDataFromFirebase { result in
-                self.deliverResult(result: result, completion: completion)
+                requestResult = result
             }
         }
+        
+        if let requestResult = requestResult {
+            self.deliverResult(result: requestResult, completion: completion)
+        }
+
     }
     
-    
+    // MARK: - AF Request
     func makeAFDataRequest(headers: HTTPHeaders, completion: @escaping CompletionHandlerTeams) {
         AF.request(requestURL, method: .get, headers: headers).validate().responseDecodable(of: JsonResult.self) { (response) in
             guard let result: JsonResult = response.value else {
@@ -52,6 +59,7 @@ class NetworkService {
         }
     }
     
+    // MARK: - NATIVE Request
     func makeNativeDataRequest(headers: HTTPHeaders, completion: @escaping CompletionHandlerTeams) {
         var request = URLRequest(url: URL(string: requestURL)!)
         request.headers = headers
@@ -74,10 +82,33 @@ class NetworkService {
         dataTask.resume()
     }
     
-    func processResult(result: JsonResult) ->[Team]  {
+    // MARK: - Firebase Request
+    func getDataFromFirebase(completion: @escaping CompletionHandlerTeams) {
+        let dbCollectionName = "myTeams"
         
+        let db = Firestore.firestore()
         var teams = [Team]()
         
+        db.collection(dbCollectionName)
+            .getDocuments() { (querySnapshot, err) in
+                if let err = err {
+                    completion(.failure(MyErrors.FirebaseError(err.localizedDescription)))
+                } else {
+                    for document in querySnapshot!.documents {
+                        let nameFromDocument = document.data()["name"] as! String
+                        let logoFromDocument = document.data()["logo"] as! String
+                        let team = Team(name: nameFromDocument, logo: logoFromDocument)
+                        teams.append(team)
+                    }
+                    completion(.success(teams))
+                }
+            }
+    }
+    
+    
+    // MARK: - HANDLE RESULT
+    func processResult(result: JsonResult) ->[Team]  {
+        var teams = [Team]()
         let response = result.response
         let league = response[0].league
         let standings = league.standings
@@ -99,9 +130,9 @@ class NetworkService {
         case .failure(let error):
             completion(.failure(MyErrors.networkError(error.localizedDescription)))
         }
-        
     }
     
+    // MARK: - HELPER METHODS
     func grabKeyHeaders() -> [String : String] {
         var keys: NSDictionary?
         var headers = [String: String]()
@@ -127,29 +158,5 @@ class NetworkService {
         return headers
     }
     
-    func getDataFromFirebase(completion: @escaping CompletionHandlerTeams) {
-        print("Getting data from Firebase")
-        let dbCollectionName = "myTeams"
-        
-        let db = Firestore.firestore()
-        var teams = [Team]()
-        
-        db.collection(dbCollectionName)
-            .getDocuments() { (querySnapshot, err) in
-                if let err = err {
-                    completion(.failure(MyErrors.FirebaseError(err.localizedDescription)))
-                } else {
-                    for document in querySnapshot!.documents {
-                        let nameFromDocument = document.data()["name"] as! String
-                        let logoFromDocument = document.data()["logo"] as! String
-                        let team = Team(name: nameFromDocument, logo: logoFromDocument)
-                        teams.append(team)
-                        
-                    }
-                    
-                    completion(.success(teams))
-                    
-                }
-            }
-    }
+    
 }
