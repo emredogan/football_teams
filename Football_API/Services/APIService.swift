@@ -23,28 +23,22 @@ class APIService {
     // MARK: - DATA REQUESTS
     func makeDataRequest(serviceName: NetworkRequestService, completion: @escaping CompletionHandlerTeams) {
         let headers = grabKeyHeaders()
-        var requestResult:  Result<[Team], Error>? = nil
         
         switch serviceName {
         case .AF:
             makeAFDataRequest(headers: headers.toHeader()) {result in
-                requestResult = result
+                self.deliverResult(result: result, completion: completion)
             }
             
         case .native:
             makeNativeDataRequest(headers: headers.toHeader()) { result in
-                requestResult = result
+                self.deliverResult(result: result, completion: completion)
             }
         case .Firebase:
             getDataFromFirebase { result in
-                requestResult = result
+                self.deliverResult(result: result, completion: completion)
             }
         }
-        
-        if let requestResult = requestResult {
-            self.deliverResult(result: requestResult, completion: completion)
-        }
-
     }
     
     // MARK: - AF Request

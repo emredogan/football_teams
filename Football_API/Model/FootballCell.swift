@@ -14,13 +14,6 @@ class FootballCell: UITableViewCell {
     
     func setupCell(name: String, url: String, imageService: ImageService) {
         footballTeamName.text = name
-        switch imageService {
-        case .native:
-            footballLogo.imageFromServerURL(url, imageService: imageService)
-        case .KF:
-            footballLogo.imageFromServerURL(url, imageService: imageService)
-        case .AF:
-            footballLogo.imageFromServerURL(url, imageService: imageService)
-        }
+        footballLogo.imageFromServerURL(url, imageService: imageService)
     }
 }
