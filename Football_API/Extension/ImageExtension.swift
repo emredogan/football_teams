@@ -10,35 +10,22 @@ import UIKit
 import Kingfisher
 import Alamofire
 
-
-
 extension UIImageView {
-    
     func imageFromServerURL(_ urlString: String, imageService: ImageService) {
         print("Requesting image service by, ", imageService)
-
-        //If imageurl's imagename has space then this line going to work for this
+        
+        //Only use url allowed chars. For example get rid of spaces.
         let imageServerUrl = urlString.addingPercentEncoding(withAllowedCharacters: .urlQueryAllowed) ?? urlString
-
+        
         switch imageService {
         case .native:
             
             if let url = URL(string: imageServerUrl) {
                 URLSession.shared.dataTask(with: url, completionHandler: { (data, response, error) in
                     
-                    /*if error != nil {
+                    if let data = data, let downloadedImage = UIImage(data: data) {
                         DispatchQueue.main.async {
-                            // TO - DO
-                            self.image = nil
-                        }
-                        return
-                    }*/
-                    
-                    if let data = data {
-                        if let downloadedImage = UIImage(data: data) {
-                            DispatchQueue.main.async {
-                                self.image = downloadedImage
-                            }
+                            self.image = downloadedImage
                         }
                     }
                     
@@ -48,15 +35,13 @@ extension UIImageView {
             AF.request(imageServerUrl,method: .get).response{ response in
                 switch response.result {
                 case .success(let responseData):
-                    if let responseData = responseData {
-                        let image = UIImage(data: responseData, scale: 1)
+                    if let responseData = responseData, let image = UIImage(data: responseData, scale: 1) {
                         DispatchQueue.main.async {
                             self.image = image
                         }
                     }
-                    
                 case .failure(let error):
-                    print("error--->",error)
+                    print("Error:",error)
                 }
             }
         case .KF:

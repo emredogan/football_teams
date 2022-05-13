@@ -151,6 +151,4 @@ class APIService {
         }
         return headers
     }
-    
-    
 }
