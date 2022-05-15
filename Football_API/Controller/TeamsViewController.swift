@@ -134,11 +134,11 @@ class TeamsViewController: UIViewController {
                 self.popupAlert(message: error?.localizedDescription)
                 return
             }
-            self.teams[indexPath.row].isSubscribed = false
+            self.teams[indexPath.row].isSubscribed = true
             let indexPath = IndexPath(item: indexPath.row, section: 0)
             self.teamsTableView.reloadRows(at: [indexPath], with: .top)
             
-            self.popupAlert(message: "Unsubscribed to team \(teamName)")
+            self.popupAlert(message: "Subscribed to team \(teamName)")
             
         }
     }
@@ -150,11 +150,11 @@ class TeamsViewController: UIViewController {
                 self.popupAlert(message: error?.localizedDescription)
                 return
             }
-            self.teams[indexPath.row].isSubscribed = true
+            self.teams[indexPath.row].isSubscribed = false
             let indexPath = IndexPath(item: indexPath.row, section: 0)
             self.teamsTableView.reloadRows(at: [indexPath], with: .top)
             
-            self.popupAlert(message: "Subscribed to team \(teamName)")
+            self.popupAlert(message: "Unsubscribed to team \(teamName)")
         }
     }
     
@@ -162,9 +162,11 @@ class TeamsViewController: UIViewController {
         let tappedTeam = teams[indexPath.row]
         let teamName = tappedTeam.name
         if (tappedTeam.isSubscribed ?? false) {
-            subscribeToATopicFirebase(teamName, indexPath)
-        } else {
             unsubscribeTopicFirebase(teamName, indexPath)
+
+        } else {
+            subscribeToATopicFirebase(teamName, indexPath)
+
         }
         
     }
