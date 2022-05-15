@@ -16,6 +16,7 @@ class TeamsViewController: UIViewController {
     
     // MARK: - IBOUTLETS
     @IBOutlet weak var teamsTableView: UITableView!
+    @IBOutlet weak var subscribeSegmentedControl: UISegmentedControl!
     
     
     // MARK: - VARIABLES
@@ -24,6 +25,9 @@ class TeamsViewController: UIViewController {
     private let networkingClient = APIService()
     private var isDownloadingData = false
     private var teams = [Team]()
+    private var isFirstTime: Bool = true
+    private var filteredTeams = [Team]()
+    private var isFiltering = false
     private let fireDB = Firestore.firestore()
     
     // MARK: - LIFECYCLE METHODS
@@ -52,6 +56,23 @@ class TeamsViewController: UIViewController {
         }
     }
     
+    
+    @IBAction func subscribeSegmentTapped(_ sender: UISegmentedControl) {
+        if sender.selectedSegmentIndex == 0 {
+            isFiltering = false
+            filteredTeams = teams
+
+            
+        } else {
+            isFiltering = true
+            filteredTeams = teams.filter({ team in
+                team.isSubscribed ?? false
+            })
+        }
+        
+        teamsTableView.reloadData()
+    }
+    
     // MARK: - NETWORK METHODS
     func downloadData(reqService: NetworkRequestService) {
         isDownloadingData = true
@@ -78,6 +99,18 @@ class TeamsViewController: UIViewController {
     }
     
     func handleResult(result: [Team]) {
+        if(isFirstTime) {
+            self.filteredTeams = result
+            isFirstTime = false
+            filteredTeams.sort(by: {$0.name < $1.name})
+            self.teams = result
+            teams.sort(by: {$0.name < $1.name})
+            DispatchQueue.main.async {
+                self.teamsTableView.reloadData()
+            }
+            
+            return
+        }
         self.teams = result
         teams.sort(by: {$0.name < $1.name})
         DispatchQueue.main.async {
@@ -140,13 +173,14 @@ class TeamsViewController: UIViewController {
 // MARK: - EXTENSIONS
 extension TeamsViewController : UITableViewDelegate, UITableViewDataSource {
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return teams.count
+        return isFiltering == true ? filteredTeams.count : teams.count
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: "football_cell", for: indexPath) as! FootballCell
         cell.selectionStyle = .none
-        let currentTeam = teams[indexPath.row]
+        let currentTeam = isFiltering == true ? filteredTeams[indexPath.row] : teams[indexPath.row]
+
         cell.setupCell(team: currentTeam, imageService: imageRequestType)
         return cell
     }

@@ -22,9 +22,12 @@
                                     <segmentedControl opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="top" segmentControlStyle="plain" selectedSegmentIndex="0" translatesAutoresizingMaskIntoConstraints="NO" id="aCC-w0-Dly">
                                         <rect key="frame" x="0.0" y="0.0" width="414" height="32"/>
                                         <segments>
-                                            <segment title="First"/>
-                                            <segment title="Second"/>
+                                            <segment title="All Teams"/>
+                                            <segment title="Subscribed"/>
                                         </segments>
+                                        <connections>
+                                            <action selector="subscribeSegmentTapped:" destination="BYZ-38-t0r" eventType="valueChanged" id="2YS-9E-h0Z"/>
+                                        </connections>
                                     </segmentedControl>
                                     <stackView opaque="NO" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="2mr-dq-rKz">
                                         <rect key="frame" x="0.0" y="51" width="414" height="50"/>
@@ -106,6 +109,7 @@
                     </view>
                     <navigationItem key="navigationItem" id="8rA-eH-kIo"/>
                     <connections>
+                        <outlet property="subscribeSegmentedControl" destination="aCC-w0-Dly" id="exP-PL-zaF"/>
                         <outlet property="teamsTableView" destination="4gf-xZ-rmD" id="pVF-hw-vMG"/>
                     </connections>
                 </viewController>
