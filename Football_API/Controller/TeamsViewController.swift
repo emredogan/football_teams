@@ -61,7 +61,7 @@ class TeamsViewController: UIViewController {
         if sender.selectedSegmentIndex == 0 {
             isFiltering = false
             filteredTeams = teams
-
+            
             
         } else {
             isFiltering = true
@@ -134,7 +134,23 @@ class TeamsViewController: UIViewController {
                 self.popupAlert(message: error?.localizedDescription)
                 return
             }
-            self.teams[indexPath.row].isSubscribed = true
+            
+            if self.isFiltering {
+                self.teams = self.teams.map { (team) -> Team in
+                    var team = team
+                    if team.name == teamName {
+                        team.isSubscribed = true
+                    }
+                    return team
+                }
+            } else {
+                self.teams[indexPath.row].isSubscribed = true
+                
+                
+            }
+            self.filteredTeams = self.teams.filter({ team in
+                team.isSubscribed ?? false
+            })
             let indexPath = IndexPath(item: indexPath.row, section: 0)
             self.teamsTableView.reloadRows(at: [indexPath], with: .top)
             
@@ -150,23 +166,55 @@ class TeamsViewController: UIViewController {
                 self.popupAlert(message: error?.localizedDescription)
                 return
             }
-            self.teams[indexPath.row].isSubscribed = false
+            
+            if self.isFiltering {
+                self.teams = self.teams.map { (team) -> Team in
+                    var team = team
+                    if team.name == teamName {
+                        team.isSubscribed = false
+                    }
+                    return team
+                }
+            } else {
+                self.teams[indexPath.row].isSubscribed = false
+                
+                
+            }
+            
+            self.filteredTeams = self.teams.filter({ team in
+                team.isSubscribed ?? false
+            })
+            
+            
+            
             let indexPath = IndexPath(item: indexPath.row, section: 0)
-            self.teamsTableView.reloadRows(at: [indexPath], with: .top)
+            if self.isFiltering {
+                self.teamsTableView.reloadData()
+            } else {
+                self.teamsTableView.reloadRows(at: [indexPath], with: .top)
+            }
             
             self.popupAlert(message: "Unsubscribed to team \(teamName)")
         }
     }
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-        let tappedTeam = teams[indexPath.row]
+        var tappedTeam = Team(name: "", logo: "")
+        if isFiltering {
+             tappedTeam = filteredTeams[indexPath.row]
+
+        } else {
+             tappedTeam = teams[indexPath.row]
+
+        }
+        //let tappedTeam = teams[indexPath.row]
         let teamName = tappedTeam.name
         if (tappedTeam.isSubscribed ?? false) {
             unsubscribeTopicFirebase(teamName, indexPath)
-
+            
         } else {
             subscribeToATopicFirebase(teamName, indexPath)
-
+            
         }
         
     }
@@ -182,7 +230,7 @@ extension TeamsViewController : UITableViewDelegate, UITableViewDataSource {
         let cell = tableView.dequeueReusableCell(withIdentifier: "football_cell", for: indexPath) as! FootballCell
         cell.selectionStyle = .none
         let currentTeam = isFiltering == true ? filteredTeams[indexPath.row] : teams[indexPath.row]
-
+        
         cell.setupCell(team: currentTeam, imageService: imageRequestType)
         return cell
     }
