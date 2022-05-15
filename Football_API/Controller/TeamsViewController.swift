@@ -9,11 +9,14 @@ import UIKit
 import Kingfisher
 import FirebaseFirestore
 import FirebaseFirestoreSwift
+import FirebaseMessaging
+
 
 class TeamsViewController: UIViewController {
     
     // MARK: - IBOUTLETS
     @IBOutlet weak var teamsTableView: UITableView!
+    
     
     // MARK: - VARIABLES
     var imageRequestType = ImageService.native
@@ -90,6 +93,48 @@ class TeamsViewController: UIViewController {
         settingsViewController.currentImageService = imageRequestType
         self.navigationController?.pushViewController(settingsViewController, animated: true)
     }
+    
+    func subscribeToATopicFirebase(_ teamName: String, _ indexPath: IndexPath) {
+        let trimmedTeamName = teamName.filter {!$0.isWhitespace}
+        Messaging.messaging().unsubscribe(fromTopic: trimmedTeamName) { error in
+            if error != nil {
+                self.popupAlert(message: error?.localizedDescription)
+                return
+            }
+            self.teams[indexPath.row].isSubscribed = false
+            let indexPath = IndexPath(item: indexPath.row, section: 0)
+            self.teamsTableView.reloadRows(at: [indexPath], with: .top)
+            
+            self.popupAlert(message: "Unsubscribed to team \(teamName)")
+            
+        }
+    }
+    
+    func unsubscribeTopicFirebase(_ teamName: String, _ indexPath: IndexPath) {
+        let trimmedTeamName = teamName.filter {!$0.isWhitespace}
+        Messaging.messaging().subscribe(toTopic: trimmedTeamName) { error in
+            if error != nil {
+                self.popupAlert(message: error?.localizedDescription)
+                return
+            }
+            self.teams[indexPath.row].isSubscribed = true
+            let indexPath = IndexPath(item: indexPath.row, section: 0)
+            self.teamsTableView.reloadRows(at: [indexPath], with: .top)
+            
+            self.popupAlert(message: "Subscribed to team \(teamName)")
+        }
+    }
+    
+    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        let tappedTeam = teams[indexPath.row]
+        let teamName = tappedTeam.name
+        if (tappedTeam.isSubscribed ?? false) {
+            subscribeToATopicFirebase(teamName, indexPath)
+        } else {
+            unsubscribeTopicFirebase(teamName, indexPath)
+        }
+        
+    }
 }
 
 // MARK: - EXTENSIONS
@@ -100,8 +145,9 @@ extension TeamsViewController : UITableViewDelegate, UITableViewDataSource {
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: "football_cell", for: indexPath) as! FootballCell
+        cell.selectionStyle = .none
         let currentTeam = teams[indexPath.row]
-        cell.setupCell(name: currentTeam.name, url: currentTeam.logo, imageService: imageRequestType)
+        cell.setupCell(team: currentTeam, imageService: imageRequestType)
         return cell
     }
 }

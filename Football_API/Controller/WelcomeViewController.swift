@@ -73,7 +73,7 @@ class WelcomeViewController: UIViewController {
         do {
             let userName = try verificationService.verifyUsername(userNameTextView.text)
             let password = try verificationService.verifyPassword(passwordTextView.text)
-            try verificationService.verifyCredentials(password, userName)
+            try verificationService.verifyCredentials(userName, password)
             
             if(userName.uppercased() == WelcomeViewController.validUsername && password == WelcomeViewController.validPassword) {
                 self.pushViewController(viewController: TeamsViewController.self)

@@ -29,6 +29,7 @@ struct Standings : Codable {
 struct Team : Codable {
     let name: String
     let logo: String
+    var isSubscribed: Bool?
 }
 
 

@@ -13,6 +13,9 @@ pod 'Alamofire'
 pod 'Firebase'
 pod 'FirebaseFirestore'
 pod 'FirebaseFirestoreSwift'
+pod 'FirebaseCore'
+pod 'FirebaseMessaging'
+
 
 
 

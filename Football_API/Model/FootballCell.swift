@@ -11,9 +11,15 @@ import Alamofire
 class FootballCell: UITableViewCell {
     @IBOutlet weak var footballLogo: UIImageView!
     @IBOutlet weak var footballTeamName: UILabel!
+    @IBOutlet weak var subscribeImage: UIImageView!
     
-    func setupCell(name: String, url: String, imageService: ImageService) {
-        footballTeamName.text = name
-        footballLogo.imageFromServerURL(url, imageService: imageService)
+    func setupCell(team: Team, imageService: ImageService) {
+        footballTeamName.text = team.name
+        footballLogo.imageFromServerURL(team.logo, imageService: imageService)
+        if(team.isSubscribed ?? false) {
+            subscribeImage.image = UIImage(named: "premier")
+        } else {
+            subscribeImage.image = nil
+        }
     }
 }

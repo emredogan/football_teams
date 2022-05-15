@@ -79,6 +79,7 @@
 		639CB087281D5D0E006E7575 /* HTTPHeaderExtension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HTTPHeaderExtension.swift; sourceTree = "<group>"; };
 		63CDFDC828243035004B34C7 /* VerificationService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VerificationService.swift; sourceTree = "<group>"; };
 		63D2F982281E876700990303 /* Keys.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Keys.plist; sourceTree = "<group>"; };
+		63EF55C7282EB2A700530A90 /* Football_API.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = Football_API.entitlements; sourceTree = "<group>"; };
 		714DFB1FEE1782F1CBBF5530 /* Pods_Football_API.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_Football_API.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		D33834ADAC9F2EF2DC444FED /* Pods-Football_API.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Football_API.debug.xcconfig"; path = "Target Support Files/Pods-Football_API/Pods-Football_API.debug.xcconfig"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
@@ -169,6 +170,7 @@
 		634A0A19281197B5009BEB6D /* Football_API */ = {
 			isa = PBXGroup;
 			children = (
+				63EF55C7282EB2A700530A90 /* Football_API.entitlements */,
 				63CDFDC728243017004B34C7 /* Services */,
 				634A0A632812D364009BEB6D /* Extension */,
 				634A0A3028119996009BEB6D /* Controller */,
@@ -684,10 +686,13 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
+				CODE_SIGN_ENTITLEMENTS = Football_API/Football_API.entitlements;
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
+				DEVELOPMENT_TEAM = BH7ATPEKS6;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = Football_API/Info.plist;
+				INFOPLIST_KEY_NSFaceIDUsageDescription = "Please allow to continue with Face ID";
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchStoryboardName = LaunchScreen;
 				INFOPLIST_KEY_UIMainStoryboardFile = Main;
@@ -712,10 +717,13 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
+				CODE_SIGN_ENTITLEMENTS = Football_API/Football_API.entitlements;
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
+				DEVELOPMENT_TEAM = BH7ATPEKS6;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = Football_API/Info.plist;
+				INFOPLIST_KEY_NSFaceIDUsageDescription = "Please allow to continue with Face ID";
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchStoryboardName = LaunchScreen;
 				INFOPLIST_KEY_UIMainStoryboardFile = Main;

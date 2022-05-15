@@ -86,7 +86,7 @@ class APIService {
                     for document in querySnapshot!.documents {
                         let nameFromDocument = document.data()["name"] as! String
                         let logoFromDocument = document.data()["logo"] as! String
-                        let team = Team(name: nameFromDocument, logo: logoFromDocument)
+                        let team = Team(name: nameFromDocument, logo: logoFromDocument, isSubscribed: false)
                         teams.append(team)
                     }
                     completion(.success(teams))
@@ -106,7 +106,7 @@ class APIService {
         for teamInfo in standing {
             let teamName = teamInfo.team.name
             let teamLogoURL = teamInfo.team.logo
-            let team = Team(name: teamName, logo: teamLogoURL)
+            let team = Team(name: teamName, logo: teamLogoURL, isSubscribed: false)
             teams.append(team)
         }
         return teams
