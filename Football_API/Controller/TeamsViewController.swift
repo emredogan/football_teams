@@ -129,7 +129,7 @@ class TeamsViewController: UIViewController {
     
     func subscribeToATopicFirebase(_ teamName: String, _ indexPath: IndexPath) {
         let trimmedTeamName = teamName.filter {!$0.isWhitespace}
-        Messaging.messaging().unsubscribe(fromTopic: trimmedTeamName) { error in
+        Messaging.messaging().subscribe(toTopic: trimmedTeamName) { error in
             if error != nil {
                 self.popupAlert(message: error?.localizedDescription)
                 return
@@ -148,20 +148,29 @@ class TeamsViewController: UIViewController {
                 
                 
             }
+            
             self.filteredTeams = self.teams.filter({ team in
-                team.isSubscribed ?? false
+                team.isSubscribed ?? true
             })
+            
+            
+            
             let indexPath = IndexPath(item: indexPath.row, section: 0)
-            self.teamsTableView.reloadRows(at: [indexPath], with: .top)
+            if self.isFiltering {
+                //self.teamsTableView.reloadData()
+                self.teamsTableView.deleteRows(at: [indexPath], with: .top)
+            } else {
+                self.teamsTableView.reloadRows(at: [indexPath], with: .top)
+            }
             
             self.popupAlert(message: "Subscribed to team \(teamName)")
-            
         }
+        
     }
     
     func unsubscribeTopicFirebase(_ teamName: String, _ indexPath: IndexPath) {
         let trimmedTeamName = teamName.filter {!$0.isWhitespace}
-        Messaging.messaging().subscribe(toTopic: trimmedTeamName) { error in
+        Messaging.messaging().unsubscribe(fromTopic: trimmedTeamName) { error in
             if error != nil {
                 self.popupAlert(message: error?.localizedDescription)
                 return
@@ -180,22 +189,16 @@ class TeamsViewController: UIViewController {
                 
                 
             }
-            
             self.filteredTeams = self.teams.filter({ team in
                 team.isSubscribed ?? false
             })
-            
-            
-            
             let indexPath = IndexPath(item: indexPath.row, section: 0)
-            if self.isFiltering {
-                self.teamsTableView.reloadData()
-            } else {
-                self.teamsTableView.reloadRows(at: [indexPath], with: .top)
-            }
+            self.teamsTableView.reloadRows(at: [indexPath], with: .top)
             
             self.popupAlert(message: "Unsubscribed to team \(teamName)")
+            
         }
+        
     }
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
