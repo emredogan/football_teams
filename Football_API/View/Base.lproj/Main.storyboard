@@ -296,9 +296,6 @@ to the football database</string>
                                                     </textField>
                                                     <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" text="123456" borderStyle="roundedRect" placeholder="Password" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="yZy-si-hlo">
                                                         <rect key="frame" x="0.0" y="85" width="382" height="60"/>
-                                                        <constraints>
-                                                            <constraint firstAttribute="height" constant="60" id="kKQ-Gc-PEe"/>
-                                                        </constraints>
                                                         <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                                         <textInputTraits key="textInputTraits" secureTextEntry="YES" textContentType="password"/>
                                                     </textField>
