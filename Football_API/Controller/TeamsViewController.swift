@@ -18,12 +18,10 @@ class TeamsViewController: UIViewController {
     @IBOutlet weak var teamsTableView: UITableView!
     @IBOutlet weak var subscribeSegmentedControl: UISegmentedControl!
     
-    
-    
     // MARK: - VARIABLES
     var imageRequestType = ImageService.native
     var networkService = NetworkRequestService.native
-    private let networkingClient = APIService()
+    private let apiService = APIService()
     private var isDownloadingData = false
     private var teams = [Team]()
     private var isFirstTime: Bool = true
@@ -78,7 +76,7 @@ class TeamsViewController: UIViewController {
     func downloadData(reqService: NetworkRequestService) {
         isDownloadingData = true
         changeNavigationHeader()
-        networkingClient.makeDataRequest(serviceName: reqService) { [weak self] result in
+        apiService.makeDataRequest(serviceName: reqService) { [weak self] result in
             switch result {
             case .success(let teams):
                 self?.isDownloadingData = false
@@ -100,18 +98,6 @@ class TeamsViewController: UIViewController {
     }
     
     func handleResult(result: [Team]) {
-        if(isFirstTime) {
-            self.filteredTeams = result
-            isFirstTime = false
-            filteredTeams.sort(by: {$0.name < $1.name})
-            self.teams = result
-            teams.sort(by: {$0.name < $1.name})
-            DispatchQueue.main.async {
-                self.teamsTableView.reloadData()
-            }
-            
-            return
-        }
         self.teams = result
         teams.sort(by: {$0.name < $1.name})
         DispatchQueue.main.async {
@@ -128,6 +114,9 @@ class TeamsViewController: UIViewController {
         self.navigationController?.pushViewController(settingsViewController, animated: true)
     }
     
+    
+    // MARK: - FIREBASE SUBSCRIPTION
+
     func subscribeToATopicFirebase(_ teamName: String, _ indexPath: IndexPath) {
         let trimmedTeamName = teamName.filter {!$0.isWhitespace}
         Messaging.messaging().subscribe(toTopic: trimmedTeamName) { error in
@@ -136,38 +125,15 @@ class TeamsViewController: UIViewController {
                 return
             }
             
-            if self.isFiltering {
-                self.teams = self.teams.map { (team) -> Team in
-                    var team = team
-                    if team.name == teamName {
-                        team.isSubscribed = true
-                    }
-                    return team
-                }
-            } else {
-                self.teams[indexPath.row].isSubscribed = true
-                
-                
-            }
+            self.updateTeamsListAfterSubscribe(indexPath)
             
-            self.filteredTeams = self.teams.filter({ team in
-                team.isSubscribed ?? true
-            })
-            
-            
-            
-            let indexPath = IndexPath(item: indexPath.row, section: 0)
-            if self.isFiltering {
-                //self.teamsTableView.reloadData()
-                self.teamsTableView.deleteRows(at: [indexPath], with: .top)
-            } else {
-                self.teamsTableView.reloadRows(at: [indexPath], with: .top)
-            }
-            
+            self.teamsTableView.reloadRows(at: [indexPath], with: .top)
             self.popupAlert(message: "Subscribed to team \(teamName)")
         }
         
     }
+    
+    
     
     func unsubscribeTopicFirebase(_ teamName: String, _ indexPath: IndexPath) {
         let trimmedTeamName = teamName.filter {!$0.isWhitespace}
@@ -177,29 +143,42 @@ class TeamsViewController: UIViewController {
                 return
             }
             
+            self.updateTeamsListAfterUnsubscribe(indexPath)
+            
             if self.isFiltering {
-                self.teams = self.teams.map { (team) -> Team in
-                    var team = team
-                    if team.name == teamName {
-                        team.isSubscribed = false
-                    }
-                    return team
-                }
+                self.teamsTableView.deleteRows(at: [indexPath], with: .top)
             } else {
-                self.teams[indexPath.row].isSubscribed = false
-                
-                
+                self.teamsTableView.reloadRows(at: [indexPath], with: .top)
             }
-            self.filteredTeams = self.teams.filter({ team in
-                team.isSubscribed ?? false
-            })
-            let indexPath = IndexPath(item: indexPath.row, section: 0)
-            self.teamsTableView.reloadRows(at: [indexPath], with: .top)
             
             self.popupAlert(message: "Unsubscribed to team \(teamName)")
-            
         }
         
+    }
+    
+    func updateTeamsListAfterSubscribe(_ indexPath: IndexPath) {
+        self.teams[indexPath.row].isSubscribed = true
+        self.filteredTeams = self.teams.filter({ team in
+            team.isSubscribed ?? false
+        })
+    }
+    
+    func updateTeamsListAfterUnsubscribe(_ indexPath: IndexPath) {
+        if self.isFiltering {
+            self.teams = self.teams.map { (team) -> Team in
+                var team = team
+                if team.name == teamName {
+                    team.isSubscribed = false
+                }
+                return team
+            }
+        } else {
+            self.teams[indexPath.row].isSubscribed = false
+        }
+        
+        self.filteredTeams = self.teams.filter({ team in
+            team.isSubscribed ?? false
+        })
     }
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
@@ -208,10 +187,9 @@ class TeamsViewController: UIViewController {
              tappedTeam = filteredTeams[indexPath.row]
 
         } else {
-             tappedTeam = teams[indexPath.row]
+            tappedTeam = teams[indexPath.row]
 
         }
-        //let tappedTeam = teams[indexPath.row]
         let teamName = tappedTeam.name
         if (tappedTeam.isSubscribed ?? false) {
             unsubscribeTopicFirebase(teamName, indexPath)

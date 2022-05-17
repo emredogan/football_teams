@@ -13,7 +13,7 @@ class SettingsViewController: UIViewController {
     @IBOutlet weak var networkSegment: UISegmentedControl!
     @IBOutlet weak var imageSegment: UISegmentedControl!
     
-    @IBOutlet weak var networkImage: UIImageView! 
+    @IBOutlet weak var networkImage: UIImageView!
     @IBOutlet weak var imageServiceImage: UIImageView!
     
     // MARK: - VARIABLES
@@ -74,7 +74,6 @@ class SettingsViewController: UIViewController {
     }
     
     func decideNetworkService(providedIndex: Int) {
-        //let index = networkSegment.selectedSegmentIndex
         switch providedIndex {
         case 0:
             networkImage.image = UIImage(named: "apple")
