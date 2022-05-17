@@ -54,9 +54,11 @@ struct VerificationService {
         return password
     }
     
-    func verifyCredentials(_ username: String?, _ password: String?) throws {
+    func verifyCredentials(_ username: String?, _ password: String?) throws -> Bool  {
         if !isValidPass(username, password) {
             throw VerifyError.authFail
+        } else {
+            return true
         }
     }
     

@@ -19,6 +19,7 @@ class TeamsViewController: UIViewController {
     @IBOutlet weak var subscribeSegmentedControl: UISegmentedControl!
     
     
+    
     // MARK: - VARIABLES
     var imageRequestType = ImageService.native
     var networkService = NetworkRequestService.native

@@ -17,10 +17,12 @@ class WelcomeViewController: UIViewController {
     @IBOutlet weak var getStartedStackView: UIStackView!
     @IBOutlet weak var userNameTextView: UITextField!
     @IBOutlet weak var passwordTextView: UITextField!
-    @IBOutlet weak var faceIDImage: UIImageView!
+    @IBOutlet weak var bioIDImage: UIImageView!
     
     // MARK: - VARIABLES
     private let verificationService: VerificationService = VerificationService()
+    private let context = LAContext()
+    
     static let validUsername = "EMREDOGAN"
     static let validPassword = "123456"
     
@@ -28,7 +30,7 @@ class WelcomeViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         prepareLoginButton()
-        prepareFaceIDButton()
+        prepareBiometricIDButton()
         playAnimation(name: "football", shouldLoop: false)
     }
     
@@ -39,33 +41,33 @@ class WelcomeViewController: UIViewController {
         loginButton.layer.borderColor = UIColor.black.cgColor
     }
     
-    private func prepareFaceIDButton() {
+    private func prepareBiometricIDButton() {
+        switch(biometricType()) {
+        case .none:
+            bioIDImage.isHidden = true
+        case .face:
+            bioIDImage.image = UIImage(named: "faceID")
+        case .touch:
+            bioIDImage.image = UIImage(named: "touchID")
+        }
+        
         let tapGestureRecognizerFaceID = UITapGestureRecognizer(target: self, action: #selector(faceIDTapped))
         
-        faceIDImage.isUserInteractionEnabled = true
-        faceIDImage.addGestureRecognizer(tapGestureRecognizerFaceID)
+        bioIDImage.isUserInteractionEnabled = true
+        bioIDImage.addGestureRecognizer(tapGestureRecognizerFaceID)
     }
     
     // MARK: - HANDLE VIEW ACTIONS
     @objc func faceIDTapped() {
-        let context = LAContext()
-        var error: NSError? = nil
         
-        // Check if the device can handle the bio functionality
-        if context.canEvaluatePolicy(.deviceOwnerAuthenticationWithBiometrics, error: &error) {
-            let reason = "Please authorize Face ID"
-            context.evaluatePolicy(.deviceOwnerAuthenticationWithBiometrics, localizedReason: reason) {[weak self] success, error in
-                DispatchQueue.main.async {
-                    guard success, error == nil else {
-                        return
-                    }
-                    
-                    // SHOW OTHER SCREEN
-                    self?.pushViewController(viewController: TeamsViewController.self)
+        let reason = "Please authorize Biometrics ID"
+        context.evaluatePolicy(.deviceOwnerAuthenticationWithBiometrics, localizedReason: reason) {[weak self] success, error in
+            DispatchQueue.main.async {
+                guard success, error == nil else {
+                    return
                 }
+                self?.pushViewController(viewController: TeamsViewController.self)
             }
-        } else {
-            self.popupAlert(message: "Not possible to use biometrics")
         }
     }
     
@@ -73,12 +75,13 @@ class WelcomeViewController: UIViewController {
         do {
             let userName = try verificationService.verifyUsername(userNameTextView.text)
             let password = try verificationService.verifyPassword(passwordTextView.text)
-            try verificationService.verifyCredentials(userName, password)
+            let isValid = try verificationService.verifyCredentials(userName, password)
             
-            if(userName.uppercased() == WelcomeViewController.validUsername && password == WelcomeViewController.validPassword) {
+            if isValid {
                 self.pushViewController(viewController: TeamsViewController.self)
             }
-        }catch let error as VerifyError {
+            
+        } catch let error as VerifyError {
             popupAlert(message: error.errorDesc)
         } catch {
             popupAlert(message: "Error while verifying the user")
@@ -96,5 +99,29 @@ class WelcomeViewController: UIViewController {
             welcomeAnimationView.loopMode = .playOnce
         }
         welcomeAnimationView.play()
+    }
+    
+    func biometricType() -> BiometricType {
+        if #available(iOS 11, *) {
+            let _ = context.canEvaluatePolicy(.deviceOwnerAuthenticationWithBiometrics, error: nil)
+            switch(context.biometryType) {
+            case .none:
+                return .none
+            case .touchID:
+                return .touch
+            case .faceID:
+                return .face
+            default:
+                return .none
+            }
+        } else {
+            return context.canEvaluatePolicy(.deviceOwnerAuthenticationWithBiometrics, error: nil) ? .touch : .none
+        }
+    }
+    
+    enum BiometricType {
+        case none
+        case touch
+        case face
     }
 }

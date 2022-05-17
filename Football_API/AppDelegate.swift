@@ -44,7 +44,9 @@ class AppDelegate: UIResponder, UIApplicationDelegate, MessagingDelegate, UNUser
                 return
             }
             print("Success for notification permission")
-            application.registerForRemoteNotifications()
+            DispatchQueue.main.async {
+                application.registerForRemoteNotifications()
+            }
         }
     }
 }
