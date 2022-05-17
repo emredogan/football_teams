@@ -14,9 +14,9 @@ class Football_APIUITests: XCTestCase {
         app.launch()
         sleep(2)
 
-        let eMailTextField = app.textFields["E-mail"]
-        eMailTextField.tap()
-        eMailTextField.typeText("EMRE DOGAN")
+        let emailTextField = app.textFields["E-mail"]
+        emailTextField.tap()
+        emailTextField.typeText("EMREDOGAN")
         dismissKeyboardIfPresent()
         
         let passwordSecureTextField = app.secureTextFields["Password"]
