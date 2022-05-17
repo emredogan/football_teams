@@ -78,20 +78,26 @@ class APIService {
         let db = Firestore.firestore()
         var teams = [Team]()
         
-        db.collection(dbCollectionName)
-            .getDocuments() { (querySnapshot, err) in
-                if let err = err {
-                    completion(.failure(NetworkErrors.FirebaseError(err.localizedDescription)))
-                } else {
-                    for document in querySnapshot!.documents {
-                        let nameFromDocument = document.data()["name"] as! String
-                        let logoFromDocument = document.data()["logo"] as! String
-                        let team = Team(name: nameFromDocument, logo: logoFromDocument, isSubscribed: false)
-                        teams.append(team)
+        db.collection(dbCollectionName).addSnapshotListener { snapshot, error in
+            print("Change in the firebase")
+            db.collection(dbCollectionName)
+                .getDocuments() { (querySnapshot, err) in
+                    if let err = err {
+                        completion(.failure(NetworkErrors.FirebaseError(err.localizedDescription)))
+                    } else {
+                        teams.removeAll()
+                        for document in querySnapshot!.documents {
+                            let nameFromDocument = document.data()["name"] as! String
+                            let logoFromDocument = document.data()["logo"] as! String
+                            let team = Team(name: nameFromDocument, logo: logoFromDocument, isSubscribed: false)
+                            teams.append(team)
+                        }
+                        completion(.success(teams))
                     }
-                    completion(.success(teams))
                 }
-            }
+        }
+        
+        
     }
     
     
