@@ -143,7 +143,7 @@ class TeamsViewController: UIViewController {
                 return
             }
             
-            self.updateTeamsListAfterUnsubscribe(indexPath)
+            self.updateTeamsListAfterUnsubscribe(indexPath, teamName: teamName)
             
             if self.isFiltering {
                 self.teamsTableView.deleteRows(at: [indexPath], with: .top)
@@ -163,7 +163,7 @@ class TeamsViewController: UIViewController {
         })
     }
     
-    func updateTeamsListAfterUnsubscribe(_ indexPath: IndexPath) {
+    func updateTeamsListAfterUnsubscribe(_ indexPath: IndexPath, teamName: String) {
         if self.isFiltering {
             self.teams = self.teams.map { (team) -> Team in
                 var team = team
