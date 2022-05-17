@@ -8,12 +8,10 @@
 
 /* Begin PBXBuildFile section */
 		159434981A5316A8A535FBC0 /* Pods_Football_API.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 714DFB1FEE1782F1CBBF5530 /* Pods_Football_API.framework */; };
-		630752B4282445A0007E2687 /* Football_APITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 630752B3282445A0007E2687 /* Football_APITests.swift */; };
 		630752BB282445EA007E2687 /* VerificationServiceTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 630752BA282445EA007E2687 /* VerificationServiceTests.swift */; };
 		63189888282252CE0098AC3A /* WelcomeViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 63189887282252CD0098AC3A /* WelcomeViewController.swift */; };
 		631F0290282926DE00979B8B /* ViewControllerExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 631F028F282926DE00979B8B /* ViewControllerExtension.swift */; };
 		632944D52826768D003B7768 /* Football_APIUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 632944D42826768D003B7768 /* Football_APIUITests.swift */; };
-		632944D72826768D003B7768 /* Football_APIUITestsLaunchTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 632944D62826768D003B7768 /* Football_APIUITestsLaunchTests.swift */; };
 		632FBEAB2827B831001C1C8F /* SettingsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 632FBEAA2827B831001C1C8F /* SettingsViewController.swift */; };
 		632FBEAD2827D981001C1C8F /* ServiceTypes.swift in Sources */ = {isa = PBXBuildFile; fileRef = 632FBEAC2827D981001C1C8F /* ServiceTypes.swift */; };
 		634A0A1B281197B5009BEB6D /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 634A0A1A281197B5009BEB6D /* AppDelegate.swift */; };
@@ -53,13 +51,11 @@
 /* Begin PBXFileReference section */
 		0B6B049EB8FAEB9BC71C0223 /* Pods-Football_API.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Football_API.release.xcconfig"; path = "Target Support Files/Pods-Football_API/Pods-Football_API.release.xcconfig"; sourceTree = "<group>"; };
 		630752B1282445A0007E2687 /* Football_APITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = Football_APITests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
-		630752B3282445A0007E2687 /* Football_APITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Football_APITests.swift; sourceTree = "<group>"; };
 		630752BA282445EA007E2687 /* VerificationServiceTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VerificationServiceTests.swift; sourceTree = "<group>"; };
 		63189887282252CD0098AC3A /* WelcomeViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WelcomeViewController.swift; sourceTree = "<group>"; };
 		631F028F282926DE00979B8B /* ViewControllerExtension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewControllerExtension.swift; sourceTree = "<group>"; };
 		632944D22826768D003B7768 /* Football_APIUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = Football_APIUITests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		632944D42826768D003B7768 /* Football_APIUITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Football_APIUITests.swift; sourceTree = "<group>"; };
-		632944D62826768D003B7768 /* Football_APIUITestsLaunchTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Football_APIUITestsLaunchTests.swift; sourceTree = "<group>"; };
 		632FBEAA2827B831001C1C8F /* SettingsViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingsViewController.swift; sourceTree = "<group>"; };
 		632FBEAC2827D981001C1C8F /* ServiceTypes.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ServiceTypes.swift; sourceTree = "<group>"; };
 		634A0A17281197B5009BEB6D /* Football_API.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Football_API.app; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -130,7 +126,6 @@
 		630752B2282445A0007E2687 /* Football_APITests */ = {
 			isa = PBXGroup;
 			children = (
-				630752B3282445A0007E2687 /* Football_APITests.swift */,
 				630752BA282445EA007E2687 /* VerificationServiceTests.swift */,
 			);
 			path = Football_APITests;
@@ -140,7 +135,6 @@
 			isa = PBXGroup;
 			children = (
 				632944D42826768D003B7768 /* Football_APIUITests.swift */,
-				632944D62826768D003B7768 /* Football_APIUITestsLaunchTests.swift */,
 			);
 			path = Football_APIUITests;
 			sourceTree = "<group>";
@@ -417,7 +411,6 @@
 			buildActionMask = 2147483647;
 			files = (
 				630752BB282445EA007E2687 /* VerificationServiceTests.swift in Sources */,
-				630752B4282445A0007E2687 /* Football_APITests.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -425,7 +418,6 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				632944D72826768D003B7768 /* Football_APIUITestsLaunchTests.swift in Sources */,
 				632944D52826768D003B7768 /* Football_APIUITests.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
