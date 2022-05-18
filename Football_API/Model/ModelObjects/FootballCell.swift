@@ -13,7 +13,7 @@ class FootballCell: UITableViewCell {
     @IBOutlet weak var footballTeamName: UILabel!
     @IBOutlet weak var subscribeImage: UIImageView!
     
-    func setupCell(team: Team, imageService: ImageService) {
+    func setupCell(team: Team, imageService: ImageRequestService) {
         footballTeamName.text = team.name
         footballLogo.imageFromServerURL(team.logo, imageService: imageService)
         if(team.isSubscribed ?? false) {

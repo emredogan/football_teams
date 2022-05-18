@@ -177,3 +177,9 @@ class APIService {
         return headers
     }
 }
+
+enum NetworkErrors: Error {
+    case networkError(String)
+    case JsonDecodeError(String)
+    case FirebaseError(String)
+}

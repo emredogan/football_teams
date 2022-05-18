@@ -11,7 +11,7 @@ import Kingfisher
 import Alamofire
 
 extension UIImageView {
-    func imageFromServerURL(_ urlString: String, imageService: ImageService) {
+    func imageFromServerURL(_ urlString: String, imageService: ImageRequestService) {
         print("Requesting image service by, ", imageService)
         
         //Only use url allowed chars. For example get rid of spaces.

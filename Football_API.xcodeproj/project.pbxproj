@@ -25,7 +25,6 @@
 		634A0A652812D463009BEB6D /* ImageExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 634A0A642812D463009BEB6D /* ImageExtension.swift */; };
 		634A0A672812D4E5009BEB6D /* FootballCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 634A0A662812D4E5009BEB6D /* FootballCell.swift */; };
 		639698BA281EB7170001E73D /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 639698B9281EB7170001E73D /* GoogleService-Info.plist */; };
-		639698CA281F2EDD0001E73D /* ErrorTypes.swift in Sources */ = {isa = PBXBuildFile; fileRef = 639698C9281F2EDD0001E73D /* ErrorTypes.swift */; };
 		639CB088281D5D0E006E7575 /* HTTPHeaderExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 639CB087281D5D0E006E7575 /* HTTPHeaderExtension.swift */; };
 		63CDFDC928243035004B34C7 /* VerificationService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 63CDFDC828243035004B34C7 /* VerificationService.swift */; };
 		63D2F983281E876700990303 /* Keys.plist in Resources */ = {isa = PBXBuildFile; fileRef = 63D2F982281E876700990303 /* Keys.plist */; };
@@ -71,7 +70,6 @@
 		634A0A642812D463009BEB6D /* ImageExtension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ImageExtension.swift; sourceTree = "<group>"; };
 		634A0A662812D4E5009BEB6D /* FootballCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FootballCell.swift; sourceTree = "<group>"; };
 		639698B9281EB7170001E73D /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
-		639698C9281F2EDD0001E73D /* ErrorTypes.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ErrorTypes.swift; sourceTree = "<group>"; };
 		639CB087281D5D0E006E7575 /* HTTPHeaderExtension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HTTPHeaderExtension.swift; sourceTree = "<group>"; };
 		63CDFDC828243035004B34C7 /* VerificationService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VerificationService.swift; sourceTree = "<group>"; };
 		63D2F982281E876700990303 /* Keys.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Keys.plist; sourceTree = "<group>"; };
@@ -221,7 +219,6 @@
 			children = (
 				634A0A642812D463009BEB6D /* ImageExtension.swift */,
 				639CB087281D5D0E006E7575 /* HTTPHeaderExtension.swift */,
-				639698C9281F2EDD0001E73D /* ErrorTypes.swift */,
 				632FBEAC2827D981001C1C8F /* ServiceTypes.swift */,
 				631F028F282926DE00979B8B /* ViewControllerExtension.swift */,
 			);
@@ -439,7 +436,6 @@
 				63189888282252CE0098AC3A /* WelcomeViewController.swift in Sources */,
 				639CB088281D5D0E006E7575 /* HTTPHeaderExtension.swift in Sources */,
 				634A0A1F281197B5009BEB6D /* TeamsViewController.swift in Sources */,
-				639698CA281F2EDD0001E73D /* ErrorTypes.swift in Sources */,
 				631F0290282926DE00979B8B /* ViewControllerExtension.swift in Sources */,
 				634A0A1B281197B5009BEB6D /* AppDelegate.swift in Sources */,
 				63CDFDC928243035004B34C7 /* VerificationService.swift in Sources */,

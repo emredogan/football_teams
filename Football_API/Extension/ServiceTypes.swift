@@ -7,7 +7,7 @@
 
 import Foundation
 
-enum ImageService {
+enum ImageRequestService {
     case native, AF, KF
 }
 

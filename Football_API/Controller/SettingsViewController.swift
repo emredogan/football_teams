@@ -14,17 +14,17 @@ class SettingsViewController: UIViewController {
     @IBOutlet weak var imageSegment: UISegmentedControl!
     
     @IBOutlet weak var networkImage: UIImageView!
-    @IBOutlet weak var imageServiceImage: UIImageView!
+    @IBOutlet weak var ImageRequestServiceImage: UIImageView!
     
     // MARK: - VARIABLES
     var currentNetworkService = NetworkRequestService.native
-    var currentImageService = ImageService.native
+    var currentImageRequestService = ImageRequestService.native
     var networkDelegate: NetworkSettingsDelegate!
     
     // MARK: - LIFECYCLE METHODS
     override func viewDidLoad() {
         super.viewDidLoad()
-        updateUI(networkServiceType: currentNetworkService, imageServiceType: currentImageService)
+        updateUI(networkServiceType: currentNetworkService, ImageRequestServiceType: currentImageRequestService)
     }
     
     // MARK: - HANDLE VIEW ACTIONS
@@ -43,11 +43,11 @@ class SettingsViewController: UIViewController {
     
     func imageTapped() {
         let index = imageSegment.selectedSegmentIndex
-        decideImageService(providedIndex: index)
+        decideImageRequestService(providedIndex: index)
     }
     
     // MARK: - OTHERS
-    func updateUI(networkServiceType: NetworkRequestService, imageServiceType: ImageService) {
+    func updateUI(networkServiceType: NetworkRequestService, ImageRequestServiceType: ImageRequestService) {
         switch networkServiceType {
         case .native:
             networkImage.image = UIImage(named: "apple")
@@ -60,15 +60,15 @@ class SettingsViewController: UIViewController {
             networkSegment.selectedSegmentIndex = 2
         }
         
-        switch imageServiceType {
+        switch ImageRequestServiceType {
         case .native:
-            imageServiceImage.image = UIImage(named: "apple")
+            ImageRequestServiceImage.image = UIImage(named: "apple")
             imageSegment.selectedSegmentIndex = 0
         case .AF:
-            imageServiceImage.image = UIImage(named: "alamofire")
+            ImageRequestServiceImage.image = UIImage(named: "alamofire")
             imageSegment.selectedSegmentIndex = 1
         case .KF:
-            imageServiceImage.image = UIImage(named: "kingfisher")
+            ImageRequestServiceImage.image = UIImage(named: "kingfisher")
             imageSegment.selectedSegmentIndex = 2
         }
     }
@@ -90,20 +90,20 @@ class SettingsViewController: UIViewController {
         }
     }
     
-    func decideImageService(providedIndex: Int) {
+    func decideImageRequestService(providedIndex: Int) {
         switch providedIndex {
         case 0:
-            imageServiceImage.image = UIImage(named: "apple")
-            networkDelegate.didChooseImage(image: ImageService.native)
+            ImageRequestServiceImage.image = UIImage(named: "apple")
+            networkDelegate.didChooseImage(image: ImageRequestService.native)
         case 1:
-            imageServiceImage.image = UIImage(named: "alamofire")
-            networkDelegate.didChooseImage(image: ImageService.AF)
+            ImageRequestServiceImage.image = UIImage(named: "alamofire")
+            networkDelegate.didChooseImage(image: ImageRequestService.AF)
         case 2:
-            imageServiceImage.image = UIImage(named: "kingfisher")
-            networkDelegate.didChooseImage(image: ImageService.KF)
+            ImageRequestServiceImage.image = UIImage(named: "kingfisher")
+            networkDelegate.didChooseImage(image: ImageRequestService.KF)
         default:
-            imageServiceImage.image = UIImage(named: "apple")
-            networkDelegate.didChooseImage(image: ImageService.native)
+            ImageRequestServiceImage.image = UIImage(named: "apple")
+            networkDelegate.didChooseImage(image: ImageRequestService.native)
         }
     }
 }
@@ -111,5 +111,5 @@ class SettingsViewController: UIViewController {
 // MARK: - PROTOCOLS
 protocol NetworkSettingsDelegate {
     func didChooseNetwork(network: NetworkRequestService)
-    func didChooseImage(image: ImageService)
+    func didChooseImage(image: ImageRequestService)
 }

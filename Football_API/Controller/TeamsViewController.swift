@@ -19,7 +19,7 @@ class TeamsViewController: UIViewController {
     @IBOutlet weak var subscribeSegmentedControl: UISegmentedControl!
     
     // MARK: - VARIABLES
-    var imageRequestType = ImageService.native
+    var imageRequestService = ImageRequestService.native
     var networkService = NetworkRequestService.native
     private let apiService = APIService()
     private var isDownloadingData = false
@@ -67,7 +67,7 @@ class TeamsViewController: UIViewController {
     
     func changeNavigationHeader() {
         DispatchQueue.main.async {
-            self.title = "\(self.networkService),\(self.imageRequestType)"
+            self.title = "\(self.networkService),\(self.imageRequestService)"
         }
     }
     
@@ -126,7 +126,7 @@ class TeamsViewController: UIViewController {
         let settingsViewController = UIStoryboard(name: "Main", bundle: nil).instantiateViewController(withIdentifier: "SettingsViewController") as! SettingsViewController
         settingsViewController.networkDelegate = self
         settingsViewController.currentNetworkService = networkService
-        settingsViewController.currentImageService = imageRequestType
+        settingsViewController.currentImageRequestService = imageRequestService
         self.navigationController?.pushViewController(settingsViewController, animated: true)
     }
     
@@ -228,7 +228,7 @@ extension TeamsViewController : UITableViewDelegate, UITableViewDataSource {
         cell.selectionStyle = .none
         let currentTeam = isFiltering ? subscribedTeams[indexPath.row] : teams[indexPath.row]
         
-        cell.setupCell(team: currentTeam, imageService: imageRequestType)
+        cell.setupCell(team: currentTeam, imageService: imageRequestService)
         return cell
     }
     
@@ -288,8 +288,8 @@ extension TeamsViewController : NetworkSettingsDelegate {
         networkService = network
     }
     
-    func didChooseImage(image: ImageService) {
-        imageRequestType = image
+    func didChooseImage(image: ImageRequestService) {
+        imageRequestService = image
     }
 }
 
