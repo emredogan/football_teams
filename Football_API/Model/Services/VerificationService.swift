@@ -7,14 +7,19 @@
 
 import Foundation
 
-struct VerificationService {
-    let minUserNameLength = 5
-    let maxUserNameLength = 25
+class VerificationService {
+    private init() {}
     
-    let minPassLength = 5
-    let maxPassLength = 15
+    static let minUserNameLength = 5
+    static let maxUserNameLength = 25
     
-    func verifyUsername(_ username: String?) throws -> String {
+    static let minPassLength = 5
+    static let maxPassLength = 15
+    
+    private static let validUsername = "EMREDOGAN"
+    private static let validPassword = "123456"
+    
+    static func verifyUsername(_ username: String?) throws -> String {
         guard let username = username else {
             throw VerifyError.invalidValue
         }
@@ -34,7 +39,7 @@ struct VerificationService {
         return username
     }
     
-    func verifyPassword(_ password: String?) throws -> String {
+    static func verifyPassword(_ password: String?) throws -> String {
         guard let password = password else {
             throw VerifyError.invalidValue
         }
@@ -54,7 +59,7 @@ struct VerificationService {
         return password
     }
     
-    func verifyCredentials(_ username: String?, _ password: String?) throws -> Bool  {
+    static func verifyCredentials(_ username: String?, _ password: String?) throws -> Bool  {
         if !isValidPass(username, password) {
             throw VerifyError.authFail
         } else {
@@ -62,8 +67,8 @@ struct VerificationService {
         }
     }
     
-    func isValidPass(_ username: String?, _ password: String?) -> Bool {
-        return username == WelcomeViewController.validUsername && password == WelcomeViewController.validPassword
+    static func isValidPass(_ username: String?, _ password: String?) -> Bool {
+        return username == validUsername && password == validPassword
     }
 }
 

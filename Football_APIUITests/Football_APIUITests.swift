@@ -12,7 +12,7 @@ class Football_APIUITests: XCTestCase {
 
     func testSuccessfulLogin() {
         app.launch()
-        sleep(2)
+        sleep(2) // Wait for animation to finish
 
         let emailTextField = app.textFields["E-mail"]
         emailTextField.tap()

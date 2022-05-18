@@ -25,7 +25,7 @@ class TeamsViewController: UIViewController {
     private var isDownloadingData = false
     private var teams = [Team]()
     private var isFirstTime: Bool = true
-    private var filteredTeams = [Team]()
+    private var subscribedTeams = [Team]()
     private var isFiltering = false
     private let fireDB = Firestore.firestore()
     
@@ -59,12 +59,12 @@ class TeamsViewController: UIViewController {
     @IBAction func subscribeSegmentTapped(_ sender: UISegmentedControl) {
         if sender.selectedSegmentIndex == 0 {
             isFiltering = false
-            filteredTeams = teams
+            subscribedTeams = teams
             
             
         } else {
             isFiltering = true
-            filteredTeams = teams.filter({ team in
+            subscribedTeams = teams.filter({ team in
                 team.isSubscribed ?? false
             })
         }
@@ -116,21 +116,28 @@ class TeamsViewController: UIViewController {
     
     
     // MARK: - FIREBASE SUBSCRIPTION
-
+    
     func subscribeToATopicFirebase(_ teamName: String, _ indexPath: IndexPath) {
-        let trimmedTeamName = teamName.filter {!$0.isWhitespace}
-        Messaging.messaging().subscribe(toTopic: trimmedTeamName) { error in
-            if error != nil {
-                self.popupAlert(message: error?.localizedDescription)
-                return
-            }
-            
-            self.updateTeamsListAfterSubscribe(indexPath)
-            
-            self.teamsTableView.reloadRows(at: [indexPath], with: .top)
-            self.popupAlert(message: "Subscribed to team \(teamName)")
+        if self.isFiltering {
+            self.popupAlert(message: "Already subscribed to team \(teamName)")
+        } else {
+            let trimmedTeamName = teamName.filter {!$0.isWhitespace}
+            Messaging.messaging().subscribe(toTopic: trimmedTeamName) { error in
+                if error != nil {
+                    self.popupAlert(message: error?.localizedDescription)
+                    return
+                }
+                
+                self.updateTeamsListAfterSubscribe(indexPath, teamName: teamName)
+                
+                self.teamsTableView.reloadRows(at: [indexPath], with: .top)
+                self.popupAlert(message: "Subscribed to team \(teamName)")
         }
         
+            
+            
+            
+        }
     }
     
     
@@ -156,11 +163,24 @@ class TeamsViewController: UIViewController {
         
     }
     
-    func updateTeamsListAfterSubscribe(_ indexPath: IndexPath) {
-        self.teams[indexPath.row].isSubscribed = true
-        self.filteredTeams = self.teams.filter({ team in
-            team.isSubscribed ?? false
-        })
+    func updateTeamsListAfterSubscribe(_ indexPath: IndexPath, teamName: String) {
+        if isFiltering {
+            self.subscribedTeams[indexPath.row].isSubscribed = true
+            self.teams = self.teams.map { (team) -> Team in
+                var team = team
+                if team.name == teamName {
+                    team.isSubscribed = false
+                }
+                return team
+            }
+        } else {
+            self.teams[indexPath.row].isSubscribed = true
+            self.subscribedTeams = self.teams.filter({ team in
+                team.isSubscribed ?? false
+            })
+        }
+        
+        
     }
     
     func updateTeamsListAfterUnsubscribe(_ indexPath: IndexPath, teamName: String) {
@@ -176,46 +196,95 @@ class TeamsViewController: UIViewController {
             self.teams[indexPath.row].isSubscribed = false
         }
         
-        self.filteredTeams = self.teams.filter({ team in
+        self.subscribedTeams = self.teams.filter({ team in
             team.isSubscribed ?? false
         })
     }
     
-    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-        var tappedTeam = Team(name: "", logo: "")
-        if isFiltering {
-             tappedTeam = filteredTeams[indexPath.row]
-
-        } else {
-            tappedTeam = teams[indexPath.row]
-
-        }
-        let teamName = tappedTeam.name
-        if (tappedTeam.isSubscribed ?? false) {
-            unsubscribeTopicFirebase(teamName, indexPath)
-            
-        } else {
-            subscribeToATopicFirebase(teamName, indexPath)
-            
-        }
-        
-    }
+    /*func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+     var tappedTeam : Team?
+     if isFiltering {
+     tappedTeam = subscribedTeams[indexPath.row]
+     
+     } else {
+     tappedTeam = teams[indexPath.row]
+     
+     }
+     if let teamName = tappedTeam?.name {
+     if (tappedTeam?.isSubscribed ?? false) {
+     unsubscribeTopicFirebase(teamName, indexPath)
+     
+     } else {
+     subscribeToATopicFirebase(teamName, indexPath)
+     }
+     }
+     }*/
 }
 
-// MARK: - EXTENSIONS
+// MARK: - TABLE VIEW EXTENSIONS
 extension TeamsViewController : UITableViewDelegate, UITableViewDataSource {
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return isFiltering == true ? filteredTeams.count : teams.count
+        return isFiltering ? subscribedTeams.count : teams.count
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: "football_cell", for: indexPath) as! FootballCell
         cell.selectionStyle = .none
-        let currentTeam = isFiltering == true ? filteredTeams[indexPath.row] : teams[indexPath.row]
+        let currentTeam = isFiltering ? subscribedTeams[indexPath.row] : teams[indexPath.row]
         
         cell.setupCell(team: currentTeam, imageService: imageRequestType)
         return cell
     }
+    
+    func tableView(_ tableView: UITableView, canEditRowAt indexPath: IndexPath) -> Bool {
+        return true
+    }
+    
+    func tableView(_ tableView: UITableView, leadingSwipeActionsConfigurationForRowAt indexPath: IndexPath) -> UISwipeActionsConfiguration? {
+        var tappedTeam : Team?
+        if isFiltering {
+            tappedTeam = subscribedTeams[indexPath.row]
+            
+        } else {
+            tappedTeam = teams[indexPath.row]
+            
+        }
+        
+        
+        let unSubAction = UIContextualAction(style: .normal,
+                                             title: "Unsubscribe") { [weak self] (action, view, completionHandler) in
+            self?.unsubscribeTopicFirebase(tappedTeam?.name ?? "", indexPath)
+            completionHandler(true)
+        }
+        unSubAction.backgroundColor = .systemRed
+        
+        return UISwipeActionsConfiguration(actions: [unSubAction])
+    }
+    
+    func tableView(_ tableView: UITableView, trailingSwipeActionsConfigurationForRowAt indexPath: IndexPath)
+    -> UISwipeActionsConfiguration? {
+        var tappedTeam : Team?
+        if isFiltering {
+            tappedTeam = subscribedTeams[indexPath.row]
+            
+        } else {
+            tappedTeam = teams[indexPath.row]
+            
+        }
+        
+        let subAction = UIContextualAction(style: .normal,
+                                           title: "Subscribe") { [weak self] (action, view, completionHandler) in
+            self?.subscribeToATopicFirebase(tappedTeam?.name ?? "", indexPath)
+            completionHandler(true)
+        }
+        subAction.backgroundColor = .systemBlue
+        
+        
+        
+        return UISwipeActionsConfiguration(actions: [subAction])
+        
+    }
+    
 }
 
 extension TeamsViewController : NetworkSettingsDelegate {

@@ -15,7 +15,6 @@ import IQKeyboardManager
 class AppDelegate: UIResponder, UIApplicationDelegate, MessagingDelegate, UNUserNotificationCenterDelegate {
     
     func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplication.LaunchOptionsKey: Any]?) -> Bool {
-        // Override point for customization after application launch.
         // Library setup
         IQKeyboardManager.shared().isEnabled = true
         FirebaseApp.configure()

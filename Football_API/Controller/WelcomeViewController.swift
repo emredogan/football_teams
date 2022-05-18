@@ -20,17 +20,16 @@ class WelcomeViewController: UIViewController {
     @IBOutlet weak var bioIDImage: UIImageView!
     
     // MARK: - VARIABLES
-    private let verificationService: VerificationService = VerificationService()
     private let context = LAContext()
-    
-    static let validUsername = "EMREDOGAN"
-    static let validPassword = "123456"
     
     // MARK: - LIFECYCLE METHODS
     override func viewDidLoad() {
         super.viewDidLoad()
         prepareLoginButton()
         prepareBiometricIDButton()
+    }
+    
+    override func viewDidAppear(_ animated: Bool) {
         playAnimation(name: "football", shouldLoop: false)
     }
     
@@ -73,9 +72,9 @@ class WelcomeViewController: UIViewController {
     
     @IBAction func loginButtonClicked(_ sender: UIButton) {
         do {
-            let userName = try verificationService.verifyUsername(userNameTextView.text)
-            let password = try verificationService.verifyPassword(passwordTextView.text)
-            let isValid = try verificationService.verifyCredentials(userName, password)
+            let userName = try VerificationService.verifyUsername(userNameTextView.text)
+            let password = try VerificationService.verifyPassword(passwordTextView.text)
+            let isValid = try VerificationService.verifyCredentials(userName, password)
             
             if isValid {
                 self.pushViewController(viewController: TeamsViewController.self)
@@ -103,6 +102,7 @@ class WelcomeViewController: UIViewController {
     
     func biometricType() -> BiometricType {
         if #available(iOS 11, *) {
+            // Biometric type a bakmak icin tetiklenmesi gerekiyor. Kontrol et.
             let _ = context.canEvaluatePolicy(.deviceOwnerAuthenticationWithBiometrics, error: nil)
             switch(context.biometryType) {
             case .none:

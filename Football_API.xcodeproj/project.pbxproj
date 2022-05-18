@@ -131,6 +131,15 @@
 			path = Football_APITests;
 			sourceTree = "<group>";
 		};
+		6309A2EF28358016005DA729 /* ModelObjects */ = {
+			isa = PBXGroup;
+			children = (
+				634A0A352811A3CA009BEB6D /* ResultStructs.swift */,
+				634A0A662812D4E5009BEB6D /* FootballCell.swift */,
+			);
+			path = ModelObjects;
+			sourceTree = "<group>";
+		};
 		632944D32826768D003B7768 /* Football_APIUITests */ = {
 			isa = PBXGroup;
 			children = (
@@ -165,7 +174,6 @@
 			isa = PBXGroup;
 			children = (
 				63EF55C7282EB2A700530A90 /* Football_API.entitlements */,
-				63CDFDC728243017004B34C7 /* Services */,
 				634A0A632812D364009BEB6D /* Extension */,
 				634A0A3028119996009BEB6D /* Controller */,
 				634A0A2F28119990009BEB6D /* View */,
@@ -184,8 +192,8 @@
 		634A0A2E28119986009BEB6D /* Model */ = {
 			isa = PBXGroup;
 			children = (
-				634A0A352811A3CA009BEB6D /* ResultStructs.swift */,
-				634A0A662812D4E5009BEB6D /* FootballCell.swift */,
+				63CDFDC728243017004B34C7 /* Services */,
+				6309A2EF28358016005DA729 /* ModelObjects */,
 			);
 			path = Model;
 			sourceTree = "<group>";

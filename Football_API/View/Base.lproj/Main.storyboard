@@ -266,10 +266,10 @@
                                         <rect key="frame" x="0.0" y="379" width="382" height="379"/>
                                         <subviews>
                                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="CdP-3c-b8G">
-                                                <rect key="frame" x="0.0" y="0.0" width="382" height="117"/>
+                                                <rect key="frame" x="0.0" y="0.0" width="382" height="129.5"/>
                                                 <subviews>
                                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" minimumScaleFactor="1" translatesAutoresizingMaskIntoConstraints="NO" id="WJ1-Qf-VTa">
-                                                        <rect key="frame" x="74.5" y="32.5" width="233.5" height="51.5"/>
+                                                        <rect key="frame" x="74.5" y="39" width="233.5" height="51.5"/>
                                                         <string key="text">Sign-in and access
 to the football database</string>
                                                         <fontDescription key="fontDescription" name="HelveticaNeue" family="Helvetica Neue" pointSize="22"/>
@@ -284,15 +284,15 @@ to the football database</string>
                                                 </constraints>
                                             </view>
                                             <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" distribution="fillEqually" spacing="25" translatesAutoresizingMaskIntoConstraints="NO" id="mg5-j3-dZD">
-                                                <rect key="frame" x="0.0" y="157" width="382" height="107"/>
+                                                <rect key="frame" x="0.0" y="169.5" width="382" height="94.5"/>
                                                 <subviews>
                                                     <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="E-mail" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="dQ4-lz-ELu">
-                                                        <rect key="frame" x="0.0" y="0.0" width="382" height="41"/>
+                                                        <rect key="frame" x="0.0" y="0.0" width="382" height="35"/>
                                                         <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                                         <textInputTraits key="textInputTraits"/>
                                                     </textField>
                                                     <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" text="123456" borderStyle="roundedRect" placeholder="Password" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="yZy-si-hlo">
-                                                        <rect key="frame" x="0.0" y="66" width="382" height="41"/>
+                                                        <rect key="frame" x="0.0" y="60" width="382" height="34.5"/>
                                                         <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                                         <textInputTraits key="textInputTraits" secureTextEntry="YES" textContentType="password"/>
                                                     </textField>

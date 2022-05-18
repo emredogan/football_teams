@@ -13,23 +13,21 @@ class VerificationServiceTests: XCTestCase {
     
     override func setUp() {
         super.setUp()
-        verificationService = VerificationService()
     }
     
     override func tearDown() {
         super.tearDown()
-        verificationService = nil
     }
     
     func test_verify_valid_username() throws {
-        XCTAssertNoThrow( try verificationService.verifyUsername("EMRE DOGAN"))
+        XCTAssertNoThrow( try VerificationService.verifyUsername("EMRE DOGAN"))
     }
     
     func test_verify_invalid_username() throws {
         let expectedError = VerifyError.invalidValue
         var actualError: VerifyError?
 
-        XCTAssertThrowsError(try verificationService.verifyUsername(nil)) { givenError in
+        XCTAssertThrowsError(try VerificationService.verifyUsername(nil)) { givenError in
             actualError = givenError as? VerifyError
         }
         XCTAssertEqual(expectedError, actualError)
@@ -40,7 +38,7 @@ class VerificationServiceTests: XCTestCase {
         let expectedError = VerifyError.nameTooShort
         var actualError: VerifyError?
 
-        XCTAssertThrowsError(try verificationService.verifyUsername("emre")) { givenError in
+        XCTAssertThrowsError(try VerificationService.verifyUsername("emre")) { givenError in
             actualError = givenError as? VerifyError
         }
         XCTAssertEqual(expectedError, actualError)
