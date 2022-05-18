@@ -36,12 +36,6 @@ class TeamsViewController: UIViewController {
         teamsTableView.delegate = self
         downloadData(reqService: .native)
         apiService.isDeveloperFromFirebase { isDev in
-            
-        }
-    }
-    
-    override func viewWillAppear(_ animated: Bool) {
-        apiService.isDeveloperFromFirebase { isDev in
             DispatchQueue.main.async {
                 if isDev {
                     self.setupNavigationItem()
@@ -49,8 +43,11 @@ class TeamsViewController: UIViewController {
                     self.hideNavigationItem()
                 }
             }
-            
         }
+    }
+    
+    override func viewWillAppear(_ animated: Bool) {
+        
         if(!isDownloadingData) {
             downloadData(reqService: networkService)
         }
