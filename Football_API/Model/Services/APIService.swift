@@ -101,6 +101,30 @@ class APIService {
     }
     
     
+    
+    func isDeveloperFromFirebase(completion: @escaping (Bool) -> Void) {
+        let db = Firestore.firestore()
+        
+        db.collection("footballAPI").addSnapshotListener({ snapshot, error in
+            db.collection("footballAPI").document("backupDB").getDocument(as: Dev.self) { (result) in
+                print("Change in the firebase version 2")
+
+                switch result {
+                case .success(let dev):
+                    completion(dev.isDeveloper ?? false)
+                case .failure(let error):
+                    // A `City` value could not be initialized from the DocumentSnapshot.
+                    print("Error decoding city: \(error)")
+                }
+            }
+        })
+            
+        
+        
+        
+    }
+    
+    
     // MARK: - HANDLE RESULT
     func processResult(result: JsonResult) ->[Team]  {
         var teams = [Team]()

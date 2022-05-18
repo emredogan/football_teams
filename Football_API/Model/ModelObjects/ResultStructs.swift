@@ -32,4 +32,8 @@ struct Team : Codable {
     var isSubscribed: Bool?
 }
 
+struct Dev : Codable {
+    var isDeveloper: Bool?
+}
+
 

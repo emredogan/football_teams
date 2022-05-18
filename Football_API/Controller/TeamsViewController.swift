@@ -34,11 +34,23 @@ class TeamsViewController: UIViewController {
         super.viewDidLoad()
         teamsTableView.dataSource = self
         teamsTableView.delegate = self
-        setupNavigationItem()
         downloadData(reqService: .native)
+        apiService.isDeveloperFromFirebase { isDev in
+            
+        }
     }
     
     override func viewWillAppear(_ animated: Bool) {
+        apiService.isDeveloperFromFirebase { isDev in
+            DispatchQueue.main.async {
+                if isDev {
+                    self.setupNavigationItem()
+                } else {
+                    self.hideNavigationItem()
+                }
+            }
+            
+        }
         if(!isDownloadingData) {
             downloadData(reqService: networkService)
         }
@@ -48,6 +60,13 @@ class TeamsViewController: UIViewController {
     func setupNavigationItem() {
         self.navigationItem.rightBarButtonItem = UIBarButtonItem.init(barButtonSystemItem: UIBarButtonItem.SystemItem.compose, target: self, action: #selector(self.showSettings))
     }
+    
+    func hideNavigationItem() {
+        self.navigationItem.rightBarButtonItem = nil
+
+    }
+    
+    
     
     func changeNavigationHeader() {
         DispatchQueue.main.async {
@@ -116,7 +135,6 @@ class TeamsViewController: UIViewController {
     
     
     // MARK: - FIREBASE SUBSCRIPTION
-    
     func subscribeToATopicFirebase(_ teamName: String, _ indexPath: IndexPath) {
         if self.isFiltering {
             self.popupAlert(message: "Already subscribed to team \(teamName)")
@@ -132,8 +150,8 @@ class TeamsViewController: UIViewController {
                 
                 self.teamsTableView.reloadRows(at: [indexPath], with: .top)
                 self.popupAlert(message: "Subscribed to team \(teamName)")
-        }
-        
+            }
+            
             
             
             
@@ -200,25 +218,6 @@ class TeamsViewController: UIViewController {
             team.isSubscribed ?? false
         })
     }
-    
-    /*func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-     var tappedTeam : Team?
-     if isFiltering {
-     tappedTeam = subscribedTeams[indexPath.row]
-     
-     } else {
-     tappedTeam = teams[indexPath.row]
-     
-     }
-     if let teamName = tappedTeam?.name {
-     if (tappedTeam?.isSubscribed ?? false) {
-     unsubscribeTopicFirebase(teamName, indexPath)
-     
-     } else {
-     subscribeToATopicFirebase(teamName, indexPath)
-     }
-     }
-     }*/
 }
 
 // MARK: - TABLE VIEW EXTENSIONS
