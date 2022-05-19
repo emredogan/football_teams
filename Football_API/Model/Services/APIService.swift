@@ -73,9 +73,8 @@ class APIService {
     
     // MARK: - Firebase Request
     func getDataFromFirebase(completion: @escaping CompletionHandlerTeams) {
-        let dbCollectionName = "myTeams"
-        
         let db = Firestore.firestore()
+        let dbCollectionName = "myTeams"
         var teams = [Team]()
         
         db.collection(dbCollectionName).addSnapshotListener { snapshot, error in
@@ -96,11 +95,7 @@ class APIService {
                     }
                 }
         }
-        
-        
     }
-    
-    
     
     func isDeveloperFromFirebase(completion: @escaping (Bool) -> Void) {
         let db = Firestore.firestore()
@@ -116,14 +111,9 @@ class APIService {
                 }
             }
         })
-            
-        
-        
-        
     }
     
-    
-    // MARK: - HANDLE RESULT
+    // MARK: - MAP RESULT
     func mapResult(result: JsonResult) ->[Team]  {
         var teams = [Team]()
         let response = result.response

@@ -34,7 +34,7 @@ class WelcomeViewController: UIViewController {
     }
     
     // MARK: - PREPARE USER INTERFACE
-    func prepareLoginButton() {
+    private func prepareLoginButton() {
         loginButton.layer.cornerRadius = 15
         loginButton.layer.borderWidth = 1
         loginButton.layer.borderColor = UIColor.black.cgColor
@@ -58,7 +58,6 @@ class WelcomeViewController: UIViewController {
     
     // MARK: - HANDLE VIEW ACTIONS
     @objc func faceIDTapped() {
-        
         let reason = "Please authorize Biometrics ID"
         context.evaluatePolicy(.deviceOwnerAuthenticationWithBiometrics, localizedReason: reason) {[weak self] success, error in
             DispatchQueue.main.async {
@@ -88,7 +87,7 @@ class WelcomeViewController: UIViewController {
     }
     
     // MARK: APP FUNCTIONALITY
-    func playAnimation(name: String, shouldLoop: Bool) {
+    private func playAnimation(name: String, shouldLoop: Bool) {
         let animation = Animation.named(name)
         welcomeAnimationView.isHidden = false
         welcomeAnimationView.animation = animation
@@ -100,22 +99,26 @@ class WelcomeViewController: UIViewController {
         welcomeAnimationView.play()
     }
     
-    func biometricType() -> BiometricType {
+    private func biometricType() -> BiometricType {
         if #available(iOS 11, *) {
-            // Biometric type a bakmak icin tetiklenmesi gerekiyor. Kontrol et.
-            let _ = context.canEvaluatePolicy(.deviceOwnerAuthenticationWithBiometrics, error: nil)
-            switch(context.biometryType) {
-            case .none:
-                return .none
-            case .touchID:
-                return .touch
-            case .faceID:
-                return .face
-            default:
+            let canBiometric = context.canEvaluatePolicy(.deviceOwnerAuthenticationWithBiometrics, error: nil)
+            if (canBiometric) {
+                switch(context.biometryType) {
+                case .none:
+                    return .none
+                case .touchID:
+                    return .touch
+                case .faceID:
+                    return .face
+                default:
+                    return .none
+                }
+            } else {
                 return .none
             }
+            
         } else {
-            return context.canEvaluatePolicy(.deviceOwnerAuthenticationWithBiometrics, error: nil) ? .touch : .none
+            return .none
         }
     }
     

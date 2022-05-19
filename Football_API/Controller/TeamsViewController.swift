@@ -11,7 +11,6 @@ import FirebaseFirestore
 import FirebaseFirestoreSwift
 import FirebaseMessaging
 
-
 class TeamsViewController: UIViewController {
     
     // MARK: - IBOUTLETS
@@ -19,15 +18,20 @@ class TeamsViewController: UIViewController {
     @IBOutlet weak var subscribeSegmentedControl: UISegmentedControl!
     
     // MARK: - VARIABLES
+    
+    // Services
     var imageRequestService = ImageRequestService.native
     var networkService = NetworkRequestService.native
     private let apiService = APIService()
-    private var isDownloadingData = false
+    
+    // Database
     private var teams = [Team]()
-    private var isFirstTime: Bool = true
     private var subscribedTeams = [Team]()
+
+    // Others
+    private var isDownloadingData = false
+    private var isFirstTime: Bool = true
     private var isFiltering = false
-    private let fireDB = Firestore.firestore()
     
     // MARK: - LIFECYCLE METHODS
     override func viewDidLoad() {
@@ -47,7 +51,6 @@ class TeamsViewController: UIViewController {
     }
     
     override func viewWillAppear(_ animated: Bool) {
-        
         if(!isDownloadingData) {
             downloadData(reqService: networkService)
         }
@@ -60,10 +63,7 @@ class TeamsViewController: UIViewController {
     
     func hideNavigationItem() {
         self.navigationItem.rightBarButtonItem = nil
-
     }
-    
-    
     
     func changeNavigationHeader() {
         DispatchQueue.main.async {
@@ -71,20 +71,16 @@ class TeamsViewController: UIViewController {
         }
     }
     
-    
     @IBAction func subscribeSegmentTapped(_ sender: UISegmentedControl) {
         if sender.selectedSegmentIndex == 0 {
             isFiltering = false
             subscribedTeams = teams
-            
-            
         } else {
             isFiltering = true
             subscribedTeams = teams.filter({ team in
                 team.isSubscribed ?? false
             })
         }
-        
         teamsTableView.reloadData()
     }
     
@@ -160,43 +156,31 @@ class TeamsViewController: UIViewController {
                     }
                 }
             }
-            
         }
     }
     
     func updateTeamsListAfterSubscribe(_ indexPath: IndexPath, teamName: String) {
-        if isFiltering {
-            self.subscribedTeams[indexPath.row].isSubscribed = true
-            // Update mainlist from filtered list
-            self.teams = self.teams.map { (team) -> Team in
-                var team = team
-                if team.name == teamName {
-                    team.isSubscribed = false
-                }
-                return team
-            }
-            self.teamsTableView.deleteRows(at: [indexPath], with: .top)
-        } else {
-            self.teams[indexPath.row].isSubscribed = true
-            // Update filtered from main list
-            self.subscribedTeams = self.teams.filter({ team in
-                team.isSubscribed ?? false
-            })
-            self.teamsTableView.reloadRows(at: [indexPath], with: .top)
-        }
-        
+        self.teams[indexPath.row].isSubscribed = true
+        // Update filtered from main list
+        self.subscribedTeams = self.teams.filter({ team in
+            team.isSubscribed ?? false
+        })
+        self.teamsTableView.reloadRows(at: [indexPath], with: .top)
     }
     
     func updateTeamsListAfterUnsubscribe(_ indexPath: IndexPath, teamName: String) {
         if self.isFiltering {
             // Update mainlist from filtered list
             self.teams = self.teams.map { (team) -> Team in
-                var team = team
+                var team = team // make team var to able to change it below.
                 if team.name == teamName {
                     team.isSubscribed = false
                 }
                 return team
             }
+            self.subscribedTeams = self.teams.filter({ team in
+                team.isSubscribed ?? false
+            })
             self.teamsTableView.deleteRows(at: [indexPath], with: .top)
 
         } else {
@@ -230,50 +214,36 @@ extension TeamsViewController : UITableViewDelegate, UITableViewDataSource {
     }
     
     func tableView(_ tableView: UITableView, leadingSwipeActionsConfigurationForRowAt indexPath: IndexPath) -> UISwipeActionsConfiguration? {
-        var tappedTeam : Team?
-        if isFiltering {
-            tappedTeam = subscribedTeams[indexPath.row]
-            
-        } else {
-            tappedTeam = teams[indexPath.row]
-            
-        }
-        
-        
+        let tappedTeam = returnTappedTeam(indexPath: indexPath)
         let unSubAction = UIContextualAction(style: .normal,
                                              title: "Unsubscribe") { [weak self] (action, view, completionHandler) in
             self?.unsubscribeTopicFirebase(tappedTeam, indexPath)
             completionHandler(true)
         }
         unSubAction.backgroundColor = .systemRed
-        
         return UISwipeActionsConfiguration(actions: [unSubAction])
     }
     
     func tableView(_ tableView: UITableView, trailingSwipeActionsConfigurationForRowAt indexPath: IndexPath)
     -> UISwipeActionsConfiguration? {
-        var tappedTeam : Team?
-        if isFiltering {
-            tappedTeam = subscribedTeams[indexPath.row]
-            
-        } else {
-            tappedTeam = teams[indexPath.row]
-            
-        }
-        
+        let tappedTeam = returnTappedTeam(indexPath: indexPath)
         let subAction = UIContextualAction(style: .normal,
                                            title: "Subscribe") { [weak self] (action, view, completionHandler) in
             self?.subscribeToATopicFirebase(tappedTeam, indexPath)
             completionHandler(true)
         }
         subAction.backgroundColor = .systemBlue
-        
-        
-        
         return UISwipeActionsConfiguration(actions: [subAction])
-        
     }
     
+    func returnTappedTeam(indexPath: IndexPath) -> Team? {
+        if isFiltering {
+            return subscribedTeams[indexPath.row]
+            
+        } else {
+            return teams[indexPath.row]
+        }
+    }
 }
 
 extension TeamsViewController : NetworkSettingsDelegate {

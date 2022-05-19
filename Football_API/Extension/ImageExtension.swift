@@ -19,7 +19,6 @@ extension UIImageView {
         
         switch imageService {
         case .native:
-            
             if let url = URL(string: imageServerUrl) {
                 URLSession.shared.dataTask(with: url, completionHandler: { (data, response, error) in
                     
@@ -28,7 +27,6 @@ extension UIImageView {
                             self.image = downloadedImage
                         }
                     }
-                    
                 }).resume()
             }
         case .AF:
@@ -48,5 +46,4 @@ extension UIImageView {
             self.kf.setImage(with: URL(string: imageServerUrl))
         }
     }
-    
 }

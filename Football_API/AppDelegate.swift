@@ -15,11 +15,11 @@ import IQKeyboardManager
 class AppDelegate: UIResponder, UIApplicationDelegate, MessagingDelegate, UNUserNotificationCenterDelegate {
     
     func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplication.LaunchOptionsKey: Any]?) -> Bool {
-        // Library setup
+        // Initial library setup
         IQKeyboardManager.shared().isEnabled = true
         FirebaseApp.configure()
         
-        // Delegate
+        // Notification Delegate
         Messaging.messaging().delegate = self
         UNUserNotificationCenter.current().delegate = self
 
@@ -27,7 +27,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate, MessagingDelegate, UNUser
         return true
     }
     
-    
+    // Make sure that the device is registered for Push Notification
     func messaging(_ messaging: Messaging, didReceiveRegistrationToken fcmToken: String?) {
         messaging.token { token, _ in
             guard let token = token else {
