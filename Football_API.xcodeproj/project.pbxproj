@@ -14,6 +14,7 @@
 		632944D52826768D003B7768 /* Football_APIUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 632944D42826768D003B7768 /* Football_APIUITests.swift */; };
 		632FBEAB2827B831001C1C8F /* SettingsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 632FBEAA2827B831001C1C8F /* SettingsViewController.swift */; };
 		632FBEAD2827D981001C1C8F /* ServiceTypes.swift in Sources */ = {isa = PBXBuildFile; fileRef = 632FBEAC2827D981001C1C8F /* ServiceTypes.swift */; };
+		6339EC0D283671D6000349B0 /* FirebaseService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6339EC0C283671D6000349B0 /* FirebaseService.swift */; };
 		634A0A1B281197B5009BEB6D /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 634A0A1A281197B5009BEB6D /* AppDelegate.swift */; };
 		634A0A1D281197B5009BEB6D /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 634A0A1C281197B5009BEB6D /* SceneDelegate.swift */; };
 		634A0A1F281197B5009BEB6D /* TeamsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 634A0A1E281197B5009BEB6D /* TeamsViewController.swift */; };
@@ -57,6 +58,7 @@
 		632944D42826768D003B7768 /* Football_APIUITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Football_APIUITests.swift; sourceTree = "<group>"; };
 		632FBEAA2827B831001C1C8F /* SettingsViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingsViewController.swift; sourceTree = "<group>"; };
 		632FBEAC2827D981001C1C8F /* ServiceTypes.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ServiceTypes.swift; sourceTree = "<group>"; };
+		6339EC0C283671D6000349B0 /* FirebaseService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FirebaseService.swift; sourceTree = "<group>"; };
 		634A0A17281197B5009BEB6D /* Football_API.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Football_API.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		634A0A1A281197B5009BEB6D /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		634A0A1C281197B5009BEB6D /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
@@ -230,6 +232,7 @@
 			children = (
 				634A0A31281199B7009BEB6D /* APIService.swift */,
 				63CDFDC828243035004B34C7 /* VerificationService.swift */,
+				6339EC0C283671D6000349B0 /* FirebaseService.swift */,
 			);
 			path = Services;
 			sourceTree = "<group>";
@@ -435,6 +438,7 @@
 				634A0A652812D463009BEB6D /* ImageExtension.swift in Sources */,
 				63189888282252CE0098AC3A /* WelcomeViewController.swift in Sources */,
 				639CB088281D5D0E006E7575 /* HTTPHeaderExtension.swift in Sources */,
+				6339EC0D283671D6000349B0 /* FirebaseService.swift in Sources */,
 				634A0A1F281197B5009BEB6D /* TeamsViewController.swift in Sources */,
 				631F0290282926DE00979B8B /* ViewControllerExtension.swift in Sources */,
 				634A0A1B281197B5009BEB6D /* AppDelegate.swift in Sources */,
