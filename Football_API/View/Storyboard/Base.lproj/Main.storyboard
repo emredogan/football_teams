@@ -266,10 +266,10 @@
                                         <rect key="frame" x="0.0" y="379" width="382" height="379"/>
                                         <subviews>
                                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="CdP-3c-b8G">
-                                                <rect key="frame" x="0.0" y="0.0" width="382" height="130"/>
+                                                <rect key="frame" x="0.0" y="0.0" width="382" height="157"/>
                                                 <subviews>
                                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" minimumScaleFactor="1" translatesAutoresizingMaskIntoConstraints="NO" id="WJ1-Qf-VTa">
-                                                        <rect key="frame" x="74.5" y="39.5" width="233.5" height="51.5"/>
+                                                        <rect key="frame" x="74.5" y="53" width="233.5" height="51.5"/>
                                                         <string key="text">Sign-in and access
 to the football database</string>
                                                         <fontDescription key="fontDescription" name="HelveticaNeue" family="Helvetica Neue" pointSize="22"/>
@@ -284,25 +284,25 @@ to the football database</string>
                                                 </constraints>
                                             </view>
                                             <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" distribution="fillEqually" spacing="25" translatesAutoresizingMaskIntoConstraints="NO" id="mg5-j3-dZD">
-                                                <rect key="frame" x="0.0" y="170" width="382" height="94"/>
+                                                <rect key="frame" x="0.0" y="197" width="382" height="83.5"/>
                                                 <subviews>
                                                     <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="E-mail" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="dQ4-lz-ELu">
-                                                        <rect key="frame" x="0.0" y="0.0" width="382" height="34.5"/>
+                                                        <rect key="frame" x="0.0" y="0.0" width="382" height="29"/>
                                                         <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                                         <textInputTraits key="textInputTraits"/>
                                                     </textField>
                                                     <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" text="123456" borderStyle="roundedRect" placeholder="Password" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="yZy-si-hlo">
-                                                        <rect key="frame" x="0.0" y="59.5" width="382" height="34.5"/>
+                                                        <rect key="frame" x="0.0" y="54" width="382" height="29.5"/>
                                                         <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                                         <textInputTraits key="textInputTraits" secureTextEntry="YES" textContentType="password"/>
                                                     </textField>
                                                 </subviews>
                                             </stackView>
                                             <stackView opaque="NO" contentMode="scaleToFill" distribution="fillProportionally" spacing="20" translatesAutoresizingMaskIntoConstraints="NO" id="pQm-al-9iD">
-                                                <rect key="frame" x="0.0" y="304" width="382" height="75"/>
+                                                <rect key="frame" x="0.0" y="320.5" width="382" height="58.5"/>
                                                 <subviews>
                                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="kyQ-Cl-gdW">
-                                                        <rect key="frame" x="0.0" y="0.0" width="310.5" height="75"/>
+                                                        <rect key="frame" x="0.0" y="0.0" width="310.5" height="58.5"/>
                                                         <color key="backgroundColor" systemColor="labelColor"/>
                                                         <color key="tintColor" red="0.99999600649999998" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                                         <buttonConfiguration key="configuration" style="plain" title="LOGIN">
@@ -314,7 +314,7 @@ to the football database</string>
                                                         </connections>
                                                     </button>
                                                     <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="faceID" translatesAutoresizingMaskIntoConstraints="NO" id="oxR-74-HIg">
-                                                        <rect key="frame" x="330.5" y="0.0" width="51.5" height="75"/>
+                                                        <rect key="frame" x="330.5" y="0.0" width="51.5" height="58.5"/>
                                                     </imageView>
                                                 </subviews>
                                                 <constraints>

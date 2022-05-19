@@ -43,7 +43,7 @@ class APIService {
                 completion(.failure(NetworkErrors.networkError(response.debugDescription)))
                 return
             }
-            let teams = self.processResult(result: result)
+            let teams = self.mapResult(result: result)
             completion(.success(teams))
         }
     }
@@ -61,7 +61,7 @@ class APIService {
             } else {
                 do {
                     let result = try JSONDecoder().decode(JsonResult.self, from: data!)
-                    let teams = self.processResult(result: result)
+                    let teams = self.mapResult(result: result)
                     completion(.success(teams))
                 } catch {
                     completion(.failure(NetworkErrors.JsonDecodeError(error.localizedDescription)))
@@ -107,8 +107,6 @@ class APIService {
         
         db.collection("footballAPI").addSnapshotListener({ snapshot, error in
             db.collection("footballAPI").document("backupDB").getDocument(as: Dev.self) { (result) in
-                print("Change in the firebase version 2")
-
                 switch result {
                 case .success(let dev):
                     completion(dev.isDeveloper ?? false)
@@ -126,7 +124,7 @@ class APIService {
     
     
     // MARK: - HANDLE RESULT
-    func processResult(result: JsonResult) ->[Team]  {
+    func mapResult(result: JsonResult) ->[Team]  {
         var teams = [Team]()
         let response = result.response
         let league = response[0].league
