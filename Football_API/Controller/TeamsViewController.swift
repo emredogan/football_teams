@@ -132,49 +132,55 @@ class TeamsViewController: UIViewController {
     
     
     // MARK: - FIREBASE SUBSCRIPTION
-    func subscribeToATopicFirebase(_ teamName: String, _ indexPath: IndexPath) {
-        if self.isFiltering {
-            self.popupAlert(message: "Already subscribed to team \(teamName)")
-        } else {
-            let trimmedTeamName = teamName.filter {!$0.isWhitespace}
-            Messaging.messaging().subscribe(toTopic: trimmedTeamName) { error in
-                if error != nil {
-                    self.popupAlert(message: error?.localizedDescription)
-                    return
+    func subscribeToATopicFirebase(_ team: Team?, _ indexPath: IndexPath) {
+        if let team = team {
+            if team.isSubscribed ?? false {
+                self.popupAlert(message: "Already subscribed to team \(team.name)")
+            } else {
+                let trimmedTeamName = team.name.filter {!$0.isWhitespace}
+                Messaging.messaging().subscribe(toTopic: trimmedTeamName) { error in
+                    if error != nil {
+                        self.popupAlert(message: error?.localizedDescription)
+                        return
+                    }
+                    self.updateTeamsListAfterSubscribe(indexPath, teamName: team.name)
+                    self.teamsTableView.reloadRows(at: [indexPath], with: .top)
+                    self.popupAlert(message: "Subscribed to team \(team.name)")
                 }
-                
-                self.updateTeamsListAfterSubscribe(indexPath, teamName: teamName)
-                
-                self.teamsTableView.reloadRows(at: [indexPath], with: .top)
-                self.popupAlert(message: "Subscribed to team \(teamName)")
             }
-            
-            
-            
-            
         }
     }
     
     
     
-    func unsubscribeTopicFirebase(_ teamName: String, _ indexPath: IndexPath) {
-        let trimmedTeamName = teamName.filter {!$0.isWhitespace}
-        Messaging.messaging().unsubscribe(fromTopic: trimmedTeamName) { error in
-            if error != nil {
-                self.popupAlert(message: error?.localizedDescription)
-                return
-            }
-            
-            self.updateTeamsListAfterUnsubscribe(indexPath, teamName: teamName)
-            
-            if self.isFiltering {
-                self.teamsTableView.deleteRows(at: [indexPath], with: .top)
+    func unsubscribeTopicFirebase(_ team: Team?, _ indexPath: IndexPath) {
+        
+        if let team = team {
+            if !(team.isSubscribed ?? true) {
+                self.popupAlert(message: "Already unsubscribed to team \(team.name)")
             } else {
-                self.teamsTableView.reloadRows(at: [indexPath], with: .top)
+                let trimmedTeamName = team.name.filter {!$0.isWhitespace}
+                Messaging.messaging().unsubscribe(fromTopic: trimmedTeamName) { error in
+                    if error != nil {
+                        self.popupAlert(message: error?.localizedDescription)
+                        return
+                    }
+                    
+                    self.updateTeamsListAfterUnsubscribe(indexPath, teamName: team.name)
+                    
+                    if self.isFiltering {
+                        self.teamsTableView.deleteRows(at: [indexPath], with: .top)
+                    } else {
+                        self.teamsTableView.reloadRows(at: [indexPath], with: .top)
+                    }
+                    
+                    self.popupAlert(message: "Unsubscribed to team \(team.name)")
+                }
             }
             
-            self.popupAlert(message: "Unsubscribed to team \(teamName)")
         }
+        
+        
         
     }
     
@@ -249,7 +255,7 @@ extension TeamsViewController : UITableViewDelegate, UITableViewDataSource {
         
         let unSubAction = UIContextualAction(style: .normal,
                                              title: "Unsubscribe") { [weak self] (action, view, completionHandler) in
-            self?.unsubscribeTopicFirebase(tappedTeam?.name ?? "", indexPath)
+            self?.unsubscribeTopicFirebase(tappedTeam, indexPath)
             completionHandler(true)
         }
         unSubAction.backgroundColor = .systemRed
@@ -270,7 +276,7 @@ extension TeamsViewController : UITableViewDelegate, UITableViewDataSource {
         
         let subAction = UIContextualAction(style: .normal,
                                            title: "Subscribe") { [weak self] (action, view, completionHandler) in
-            self?.subscribeToATopicFirebase(tappedTeam?.name ?? "", indexPath)
+            self?.subscribeToATopicFirebase(tappedTeam, indexPath)
             completionHandler(true)
         }
         subAction.backgroundColor = .systemBlue
